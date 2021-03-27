@@ -48,7 +48,7 @@ saveToGallery(key) async {
     Uint8List sourceBytes = sourceByteData.buffer.asUint8List();
     if (Platform.isIOS) {
       var status = await Permission.photos.status;
-      if (status.isUndetermined) {
+      if (status.isBlank!) {
         Map<Permission, PermissionStatus> statuses = await [
           Permission.photos,
         ].request();
@@ -70,7 +70,7 @@ Get.snackbar('faild','');
       }
     } else if (Platform.isAndroid) {
       var status = await Permission.storage.status;
-      if (status.isUndetermined) {
+      if (status.isBlank!) {
         Map<Permission, PermissionStatus> statuses = await [
           Permission.storage,
         ].request();
