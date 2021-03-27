@@ -54,7 +54,7 @@ saveToGallery(key) async {
         ].request();
         saveToGallery(key);
       }
-      if (status.isGranted) {
+      if (status.isGranted || status.isLimited) {
         final result = await ImageGallerySaver.saveImage(sourceBytes,
             quality: 60, name: "hello");
         if (result!=null) {
