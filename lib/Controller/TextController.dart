@@ -37,6 +37,12 @@ class TextStyleController extends GetxController {
     update();
   }
 
+  setShadowColor(Color value) {
+    var shadow = Shadow(color: value, offset: Offset(2, -2), blurRadius: 3);
+    _style = _style.copyWith(shadows: [shadow]);
+    update();
+  }
+
   setFontFamily(String value) {
     _style = _style.copyWith(fontFamily: value);
     update();

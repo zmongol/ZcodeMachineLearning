@@ -306,7 +306,7 @@ class _EditImagePageState extends State<EditImagePage> {
                             fontWeight: FontWeight.bold),
                       ),
                       onPressed: () {
-                        ctr.setTextShadow();
+                        ColorPicker().shadow();
                       }),
                 ),
               ),
