@@ -98,55 +98,54 @@ class _EditImagePageState extends State<EditImagePage> {
                                     fontSize: 14,
                                     color: ctr.style.color,
                                   )))),
-                      if (!editAble)
-                        Positioned(
-                          top: dy,
-                          left: dx,
-                          child: GetBuilder<StyleController>(
-                            builder: (styleCtr) => GestureDetector(
-                              onPanDown: (DragDownDetails e) {
-                                print("用户手指按下：${e.globalPosition}");
-                              },
-                              onPanEnd: (DragEndDetails e) {
-                                print(e.velocity);
-                              },
-                              onPanUpdate: (DragUpdateDetails d) {
-                                if (editAble == false) {
-                                  editAble = true;
-                                }
+                      Positioned(
+                        top: dy,
+                        left: dx,
+                        child: GetBuilder<StyleController>(
+                          builder: (styleCtr) => GestureDetector(
+                            onPanDown: (DragDownDetails e) {
+                              print("用户手指按下：${e.globalPosition}");
+                            },
+                            onPanEnd: (DragEndDetails e) {
+                              print(e.velocity);
+                            },
+                            onPanUpdate: (DragUpdateDetails d) {
+                              if (editAble == false) {
+                                editAble = true;
+                              }
+                              setState(() {
+                                dx += d.delta.dx;
+                                dy += d.delta.dy;
+                              });
+                              print('onPanUpdate dx:$dx');
+                              print('onPanUpdate dy:$dy');
+                            },
+                            child: DragToResizBox(
+                              width: styleCtr.width.value,
+                              height: styleCtr.height.value,
+                              editable: editAble,
+                              onWidthChange: (v) {
                                 setState(() {
-                                  dx += d.delta.dx;
-                                  dy += d.delta.dy;
+                                  styleCtr.width.value += v;
                                 });
-                                print('onPanUpdate dx:$dx');
-                                print('onPanUpdate dy:$dy');
                               },
-                              child: DragToResizBox(
+                              onHeightChange: (v) {
+                                setState(() {
+                                  styleCtr.height.value += v;
+                                });
+                              },
+                              child: Container(
                                 width: styleCtr.width.value,
                                 height: styleCtr.height.value,
-                                editable: editAble,
-                                onWidthChange: (v) {
-                                  setState(() {
-                                    styleCtr.width.value += v;
-                                  });
-                                },
-                                onHeightChange: (v) {
-                                  setState(() {
-                                    styleCtr.height.value += v;
-                                  });
-                                },
-                                child: Container(
-                                  width: styleCtr.width.value,
-                                  height: styleCtr.height.value,
-                                  padding: const EdgeInsets.all(4),
-                                  color: styleCtr.backgroundColor,
-                                  child: GetBuilder<TextStyleController>(
-                                    builder: (ctr) => AutoSizeText(widget.text,
-                                        minFontSize: 10,
-                                        maxFontSize: 99,
-                                        style: ctr.style.copyWith(
-                                          fontSize: 48,
-                                        )),
+                                padding: const EdgeInsets.all(4),
+                                color: styleCtr.backgroundColor,
+                                child: GetBuilder<TextStyleController>(
+                                  builder: (ctr) => AutoSizeText(widget.text,
+                                    minFontSize: 10,
+                                    maxFontSize: 99,
+                                    style: ctr.style.copyWith(
+                                      fontSize: 48,
+                                    )),
                                   ),
                                 ),
                               ),
@@ -156,62 +155,7 @@ class _EditImagePageState extends State<EditImagePage> {
                     ],
                   ),
                 ),
-              ),
-              if (editAble)
-                Positioned(
-                  top: dy,
-                  left: dx,
-                  child: GetBuilder<StyleController>(
-                    builder: (styleCtr) => GestureDetector(
-                      onPanDown: (DragDownDetails e) {
-                        print("用户手指按下：${e.globalPosition}");
-                      },
-                      onPanEnd: (DragEndDetails e) {
-                        print(e.velocity);
-                      },
-                      onPanUpdate: (DragUpdateDetails d) {
-                        if (editAble == false) {
-                          editAble = true;
-                        }
-                        setState(() {
-                          dx += d.delta.dx;
-                          dy += d.delta.dy;
-                        });
-                        print('onPanUpdate dx:$dx');
-                        print('onPanUpdate dy:$dy');
-                      },
-                      child: DragToResizBox(
-                        width: styleCtr.width.value,
-                        height: styleCtr.height.value,
-                        editable: editAble,
-                        onWidthChange: (v) {
-                          setState(() {
-                            styleCtr.width.value += v;
-                          });
-                        },
-                        onHeightChange: (v) {
-                          setState(() {
-                            styleCtr.height.value += v;
-                          });
-                        },
-                        child: Container(
-                          width: styleCtr.width.value,
-                          height: styleCtr.height.value,
-                          padding: const EdgeInsets.all(4),
-                          color: styleCtr.backgroundColor,
-                          child: GetBuilder<TextStyleController>(
-                            builder: (ctr) => AutoSizeText(widget.text,
-                                minFontSize: 10,
-                                maxFontSize: 99,
-                                style: ctr.style.copyWith(
-                                  fontSize: 99,
-                                )),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+              ),   
             ],
           ),
         ),
