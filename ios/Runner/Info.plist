@@ -22,6 +22,10 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Access to Photo for exporting the photo message</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Access to Photo for importing the photo message</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -41,9 +45,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>ᡬᡬᢞᡭᢇ ᡬᡬᡪᡧ ᡸᡪᢙᡪᡱᡱᡪᢑᡪᡪᡪᡳ</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>ᡬᡬᢞᡭᢇ ᡬᡬᡪᡧ ᡸᡪᢙᡪᡱᡱᡪᢑᡪᡪᡪᡳ</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Access to share the photo message</string>
 </dict>
 </plist>
