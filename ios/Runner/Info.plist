@@ -19,9 +19,11 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Access to share the photo message</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Access to Photo for exporting the photo message</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -45,7 +47,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSLocalNetworkUsageDescription</key>
-	<string>Access to share the photo message</string>
 </dict>
 </plist>
