@@ -89,8 +89,8 @@ class _SharePageState extends State<SharePage> {
                       Container(
                         width: styleCtr.width.value,
                         height: styleCtr.height.value,
-                        padding: const EdgeInsets.all(4),
                         color: styleCtr.backgroundColor,
+                        alignment: Alignment.center,
                         child: GetBuilder<TextStyleController>(
                           builder: (ctr) => Center(
                             child: AutoSizeText(widget.text,
