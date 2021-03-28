@@ -49,6 +49,26 @@ class ColorPicker {
     ));
   }
 
+  void borderColor() {
+    Get.dialog(AlertDialog(
+      titlePadding: const EdgeInsets.all(0.0),
+      contentPadding: const EdgeInsets.all(0.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25.0),
+      ),
+      content: SingleChildScrollView(
+        child: MaterialPicker(
+          pickerColor: Get.find<TextStyleController>().style.shadows![0].color,
+          onColorChanged: (Color color) {
+            Get.find<TextStyleController>().setBorderColor(color);
+            Get.back();
+          },
+          enableLabel: true,
+        ),
+      ),
+    ));
+  }
+
   void background() {
     Get.dialog(AlertDialog(
       titlePadding: const EdgeInsets.all(0.0),

@@ -95,9 +95,9 @@ class _SharePageState extends State<SharePage> {
                           builder: (ctr) => Center(
                             child: AutoSizeText(widget.text,
                                 minFontSize: 10,
-                                maxFontSize: 99,
+                                maxFontSize: 200,
                                 style: ctr.style.copyWith(
-                                  fontSize: 99,
+                                  fontSize: 200,
                                 )),
 
                             //MongolText(
@@ -184,6 +184,66 @@ class _SharePageState extends State<SharePage> {
                     onPressed: () {
                       ColorPicker().background();
                     }),
+              ),
+              MongolTooltip(
+                message: 'ᡥᡭᡬᢔᡭᡬᡨ ᡭᡧ ᢔᡪᢋᡭᢙᡪᢝ',
+                textStyle: TextStyle(fontSize: 18, color: Colors.white),
+                showDuration: Duration(seconds: 3),
+                waitDuration: Duration(milliseconds: 500),
+                child: GetBuilder<TextStyleController>(
+                  builder: (ctr) => IconButton(
+                      icon: Text(
+                        'T',
+                        style: TextStyle(
+                            color: ctr.textShadowAble
+                                ? Colors.indigo
+                                : Colors.black,
+                            fontSize: 20,
+                            fontFamily: 'segoeui',
+                            shadows: [
+                              Shadow(
+                                  color: ctr.textShadowAble
+                                      ? Colors.indigo.withOpacity(0.7)
+                                      : Colors.black.withOpacity(0.7),
+                                  offset: Offset(2, 2),
+                                  blurRadius: 3)
+                            ],
+                            fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: () {
+                        ColorPicker().shadow();
+                      }),
+                ),
+              ),
+              MongolTooltip(
+                message: 'ᢋᡭᡬᢞᡬᢜᡪᢑᡪᢋᡭ',
+                textStyle: TextStyle(fontSize: 18, color: Colors.white),
+                showDuration: Duration(seconds: 3),
+                waitDuration: Duration(milliseconds: 500),
+                child: GetBuilder<TextStyleController>(
+                  builder: (ctr) => IconButton(
+                      icon: Text(
+                        'B',
+                        style: TextStyle(
+                            color: ctr.textShadowAble
+                                ? Colors.indigo
+                                : Colors.black,
+                            fontSize: 20,
+                            fontFamily: 'segoeui',
+                            shadows: [
+                              Shadow(
+                                  color: ctr.textShadowAble
+                                      ? Colors.indigo.withOpacity(0.7)
+                                      : Colors.black.withOpacity(0.7),
+                                  offset: Offset(2, 2),
+                                  blurRadius: 3)
+                            ],
+                            fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: () {
+                        ColorPicker().borderColor();
+                      }),
+                ),
               ),
             ],
           ),
