@@ -39,7 +39,48 @@ class TextStyleController extends GetxController {
 
   setShadowColor(Color value) {
     var shadow = Shadow(color: value, offset: Offset(2, -2), blurRadius: 3);
-    _style = _style.copyWith(shadows: [shadow]);
+    List<Shadow> currentShadows = [];
+    if (_style.shadows != null) {
+      currentShadows = _style.shadows!
+          .where((element) => element.offset.dx.abs() == 3)
+          .toList();
+    }
+    currentShadows.add(shadow);
+    _style = _style.copyWith(shadows: currentShadows);
+    update();
+  }
+
+  setBorderColor(Color value) {
+    List<Shadow> shadows = [
+      Shadow(
+          // bottomLeft
+          offset: Offset(-3, -3),
+          color: value,
+          blurRadius: 2),
+      Shadow(
+          // bottomRight
+          offset: Offset(3, -3),
+          color: value,
+          blurRadius: 2),
+      Shadow(
+          // topRight
+          offset: Offset(3, 3),
+          color: value,
+          blurRadius: 2),
+      Shadow(
+          // topLeft
+          offset: Offset(-3, 3),
+          color: value,
+          blurRadius: 2),
+    ];
+    if (_style.shadows != null) {
+      _style.shadows!.forEach((element) {
+        if (element.offset.dx.abs() == 2) {
+          shadows.add(element);
+        }
+      });
+    }
+    _style = _style.copyWith(shadows: shadows);
     update();
   }
 
