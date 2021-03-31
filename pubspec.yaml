@@ -107,7 +107,31 @@ flutter:
 
     - family: z52hawangtig
       fonts:
-        - asset: assets/fonts/z52hawangtig.otf
+        - asset: assets/fonts/z52hawangtig.ttf
+
+    - family: z52ordostig
+      fonts:
+        - asset: assets/fonts/z52ordostig.otf
+    - family: z52sayatig
+      fonts:
+        - asset: assets/fonts/z52sayatig.ttf
+    - family: z52sanstig
+      fonts:
+        - asset: assets/fonts/z52sanstig.otf
+    - family: z52holsnujugtig
+      fonts:
+        - asset: assets/fonts/z52holsnujugtig.otf
+    - family: z52uljitig
+      fonts:
+        - asset: assets/fonts/z52uljitig.ttf
+    - family: z52togtig
+      fonts:
+        - asset: assets/fonts/z52togtig.ttf
+    - family: z52qimedtig
+      fonts:
+        - asset: assets/fonts/z52qimedtig.otf
+
+
     - family: z52qingmingtig
       fonts:
         - asset: assets/fonts/z52qingmingtig.otf
