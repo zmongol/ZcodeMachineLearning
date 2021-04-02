@@ -30,6 +30,7 @@ class _SharePageState extends State<SharePage> {
   double lineWidth = 0.0;
   get canvasWidth => lines * lineWidth;
   get canvasHeight => lineHeight;
+  Color borderColor = Colors.transparent;
 
   @override
   void initState() {
@@ -92,18 +93,36 @@ class _SharePageState extends State<SharePage> {
                         color: styleCtr.backgroundColor,
                         alignment: Alignment.center,
                         child: GetBuilder<TextStyleController>(
-                          builder: (ctr) => Center(
-                            child: AutoSizeText(widget.text,
-                                minFontSize: 10,
-                                maxFontSize: 200,
-                                style: ctr.style.copyWith(
-                                  fontSize: 200,
-                                )),
-
-                            //MongolText(
-                            //widget.text,
-                            //style: ctr.style,
-                          ),
+                          builder: (ctr) {
+                            return Container(
+                              padding: EdgeInsets.only(top: 16),
+                              child: Stack(
+                                children: <Widget>[
+                                  // Stroked text as border.
+                                  AutoSizeText(
+                                    widget.text,
+                                    key: Key('border_text'),
+                                    minFontSize: 10,
+                                    maxFontSize: 200,
+                                    style: ctr.style.copyWith(
+                                      fontSize: 200,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 8
+                                        ..color = borderColor,
+                                    ),
+                                  ),
+                                  // Solid text as fill.
+                                  AutoSizeText(
+                                      widget.text,
+                                      minFontSize: 10,
+                                      maxFontSize: 200,
+                                      style: ctr.style.copyWith(fontSize: 200,)
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
                         ),
                       ),
                       Positioned(
@@ -240,8 +259,13 @@ class _SharePageState extends State<SharePage> {
                             ],
                             fontWeight: FontWeight.bold),
                       ),
-                      onPressed: () {
-                        ColorPicker().borderColor();
+                      onPressed: () async {
+                        var newBorderColor = await ColorPicker().borderColor(borderColor);
+                        if (newBorderColor != null) {
+                          setState(() {
+                            borderColor = newBorderColor;
+                          });
+                        }
                       }),
                 ),
               ),

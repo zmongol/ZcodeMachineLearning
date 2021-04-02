@@ -49,8 +49,8 @@ class ColorPicker {
     ));
   }
 
-  void borderColor() {
-    Get.dialog(AlertDialog(
+  borderColor(Color originalColor) async {
+    final newBorderColor = await Get.dialog(AlertDialog(
       titlePadding: const EdgeInsets.all(0.0),
       contentPadding: const EdgeInsets.all(0.0),
       shape: RoundedRectangleBorder(
@@ -58,15 +58,15 @@ class ColorPicker {
       ),
       content: SingleChildScrollView(
         child: MaterialPicker(
-          pickerColor: Get.find<TextStyleController>().style.shadows![0].color,
+          pickerColor: originalColor,
           onColorChanged: (Color color) {
-            Get.find<TextStyleController>().setBorderColor(color);
-            Get.back();
+            Get.back(result: color);
           },
           enableLabel: true,
         ),
       ),
     ));
+    return newBorderColor;
   }
 
   void background() {
