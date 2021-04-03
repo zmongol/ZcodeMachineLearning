@@ -156,7 +156,7 @@ class _EditImagePageState extends State<EditImagePage> {
                                               fontSize: 200,
                                               foreground: Paint()
                                                 ..style = PaintingStyle.stroke
-                                                ..strokeWidth = 8
+                                                ..strokeWidth = 10
                                                 ..color = borderColor,
                                             ),
                                           ),

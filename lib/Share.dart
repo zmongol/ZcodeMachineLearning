@@ -108,7 +108,7 @@ class _SharePageState extends State<SharePage> {
                                       fontSize: 200,
                                       foreground: Paint()
                                         ..style = PaintingStyle.stroke
-                                        ..strokeWidth = 8
+                                        ..strokeWidth = 10
                                         ..color = borderColor,
                                     ),
                                   ),
