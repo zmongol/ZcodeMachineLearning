@@ -30,7 +30,7 @@ class _EditImagePageState extends State<EditImagePage> {
   double dx = 16.0;
   double dy = 16.0;
   bool editAble = true;
-  Color borderColor = Colors.transparent;
+
   @override
   void initState() {
     // List<String> wordList = widget.text.split(' ');
@@ -140,38 +140,32 @@ class _EditImagePageState extends State<EditImagePage> {
                                 height: styleCtr.height.value,
                                 color: styleCtr.backgroundColor,
                                 alignment: Alignment.center,
-                                child: GetBuilder<TextStyleController>(
-                                  builder: (ctr) {
-                                    return Container(
-                                      padding: EdgeInsets.only(top: 16),
-                                      child: Stack(
-                                        children: <Widget>[
-                                          // Stroked text as border.
-                                          AutoSizeText(
+                                child: Stack(
+                                  children: [
+                                    GetBuilder<TextStyleController>(tag: 'border_style', builder: (borderCtrl) {
+                                      return Container(
+                                        padding: EdgeInsets.only(top: 16),
+                                        child: AutoSizeText(
+                                          widget.text,
+                                          minFontSize: 20,
+                                          maxFontSize: 200,
+                                          style: borderCtrl.borderStyle.copyWith(fontSize: 200),
+                                        ),
+                                      );
+                                    }),
+                                    GetBuilder<TextStyleController>(builder: (ctr) {
+                                      return Container(
+                                        padding: EdgeInsets.only(top: 16),
+                                        child: AutoSizeText(
                                             widget.text,
-                                            key: Key('border_text'),
-                                            minFontSize: 10,
+                                            minFontSize: 20,
                                             maxFontSize: 200,
-                                            style: ctr.style.copyWith(
-                                              fontSize: 200,
-                                              foreground: Paint()
-                                                ..style = PaintingStyle.stroke
-                                                ..strokeWidth = 10
-                                                ..color = borderColor,
-                                            ),
-                                          ),
-                                          // Solid text as fill.
-                                          AutoSizeText(
-                                              widget.text,
-                                              minFontSize: 10,
-                                              maxFontSize: 200,
-                                              style: ctr.style.copyWith(fontSize: 200,)
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  }
-                                  ),
+                                            style: ctr.style.copyWith(fontSize: 200,)
+                                        ),
+                                      );
+                                    }),
+                                  ],
+                                ),
                                 ),
                               ),
                             ),
@@ -304,13 +298,8 @@ class _EditImagePageState extends State<EditImagePage> {
                             ],
                             fontWeight: FontWeight.bold),
                       ),
-                      onPressed: () async {
-                        var newBorderColor = await ColorPicker().borderColor(borderColor);
-                        if (newBorderColor != null) {
-                          setState(() {
-                            borderColor = newBorderColor;
-                          });
-                        }
+                      onPressed: () {
+                        ColorPicker().borderColor();
                       }),
                 ),
               ),

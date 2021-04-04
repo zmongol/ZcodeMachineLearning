@@ -70,6 +70,8 @@ class FontsPicker {
                     onTap: () {
                       Get.find<TextStyleController>()
                           .setFontFamily(MongolFonts.fontList[i][0]);
+                      Get.find<TextStyleController>(tag: 'border_style')
+                          .setFontFamily(MongolFonts.fontList[i][0]);
                       Get.back();
                     },
                     child: MongolText(

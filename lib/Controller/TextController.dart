@@ -12,22 +12,41 @@ class TextStyleController extends GetxController {
       shadows: [
         Shadow(offset: Offset.zero, color: Colors.transparent, blurRadius: 0)
       ]);
+
+  TextStyle _borderStyle = TextStyle(
+      fontSize: 26,
+      fontFamily: MongolFonts.haratig,
+      shadows: [
+        Shadow(offset: Offset.zero, color: Colors.transparent, blurRadius: 0)
+      ],
+      foreground: Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 10
+        ..color = Colors.transparent
+  );
+
   TextStyle get style => _style;
+  TextStyle get borderStyle => _borderStyle;
+
   bool textShadowAble = false;
+
   setFontSize(double value) {
     _style = _style.copyWith(fontSize: value);
+    _borderStyle = _borderStyle.copyWith(fontSize: value);
     print('update fontsize ${style.fontSize}');
     update();
   }
 
   increaseFontSize() {
     _style = _style.copyWith(fontSize: style.fontSize! + 2);
+    _borderStyle = _borderStyle.copyWith(fontSize: style.fontSize! + 2);
     print('update fontsize ${style.fontSize}');
     update();
   }
 
   decreaseFontSize() {
     _style = _style.copyWith(fontSize: style.fontSize! - 2);
+    _borderStyle = _borderStyle.copyWith(fontSize: style.fontSize! - 2);
     print('update fontsize ${style.fontSize}');
     update();
   }
@@ -40,21 +59,23 @@ class TextStyleController extends GetxController {
   setShadowColor(Color value) {
     var shadow = Shadow(color: value, offset: Offset(2, -2), blurRadius: 3);
     _style = _style.copyWith(shadows: [shadow]);
+    _borderStyle = _borderStyle.copyWith(shadows: [shadow]);
     update();
   }
 
   setBorderColor(Color value) {
-   _style = _style.copyWith(
+   _borderStyle = _borderStyle.copyWith(
       foreground: Paint()
         ..style = PaintingStyle.stroke
-        ..strokeWidth = 8
-        ..color = Colors.red,
+        ..strokeWidth = 10
+        ..color = value,
     );
    update();
   }
 
   setFontFamily(String value) {
     _style = _style.copyWith(fontFamily: value);
+    _borderStyle = _borderStyle.copyWith(fontFamily: value);
     update();
   }
 
@@ -67,8 +88,18 @@ class TextStyleController extends GetxController {
             offset: Offset(2, -2),
             blurRadius: 2)
       ]);
+
+      _borderStyle = _borderStyle.copyWith(shadows: [
+        Shadow(
+            color: Colors.black.withOpacity(0.5),
+            offset: Offset(2, -2),
+            blurRadius: 2)
+      ]);
     } else {
       _style = _style.copyWith(shadows: [
+        Shadow(color: Colors.transparent, offset: Offset.zero, blurRadius: 0)
+      ]);
+      _borderStyle = _borderStyle.copyWith(shadows: [
         Shadow(color: Colors.transparent, offset: Offset.zero, blurRadius: 0)
       ]);
     }

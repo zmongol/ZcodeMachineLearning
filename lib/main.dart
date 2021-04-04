@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:zmongol/Component/AutoSizeText/auto_size_text.dart';
 import 'package:zmongol/Controller/StyleController.dart';
 import 'package:zmongol/Controller/TextController.dart';
 
@@ -28,6 +29,7 @@ void main() {
   Get.put<StyleController>(StyleController());
 
   Get.put<TextStyleController>(TextStyleController());
+  Get.put<TextStyleController>(TextStyleController(), tag: 'border_style');
   runApp(MyApp());
 }
 
