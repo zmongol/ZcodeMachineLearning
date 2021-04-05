@@ -21,7 +21,7 @@ class TextStyleController extends GetxController {
       ],
       foreground: Paint()
         ..style = PaintingStyle.stroke
-        ..strokeWidth = 10
+        ..strokeWidth = 8
         ..color = Colors.transparent
   );
 
@@ -67,7 +67,7 @@ class TextStyleController extends GetxController {
    _borderStyle = _borderStyle.copyWith(
       foreground: Paint()
         ..style = PaintingStyle.stroke
-        ..strokeWidth = 10
+        ..strokeWidth = 8
         ..color = value,
     );
    update();
