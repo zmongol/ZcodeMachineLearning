@@ -13,6 +13,7 @@ import 'package:zmongol/Controller/KeyboardController.dart';
 import 'package:zmongol/Controller/StyleController.dart';
 import 'package:zmongol/EditImagePage.dart';
 
+import 'Component/MongolFonts.dart';
 import 'Controller/TextController.dart';
 import 'Keyboard/MongolKeyboard.dart';
 import 'Share.dart';
@@ -67,7 +68,10 @@ class _EditorPageState extends State<EditorPage> {
         children: [
           Scaffold(
             appBar: AppBar(
-              title: Text('Z ᢌᡭᡪᢊᡱᡱᡭᢐ'),
+              title: Text(
+                'Z ᢌᡭᡪᢊᡱᡱᡭᢐ',
+                style: TextStyle(fontFamily: MongolFonts.haratig),
+                ),
               centerTitle: true,
               backgroundColor: Colors.indigo,
               actions: [
@@ -82,18 +86,18 @@ class _EditorPageState extends State<EditorPage> {
                                 title: MongolText('ᡥᡪᡪᢊᡪᡪᡪᢞᡪᡪᡳ',
                                     // title: Text('Alert',
                                     style: TextStyle(
-                                        color: Colors.red, fontSize: 32)),
+                                        color: Colors.red, fontSize: 32, fontFamily: MongolFonts.haratig)),
                                 content: MongolText('ᡴᡭᡬᢋᡭᡧ ᡫ ᡥᡪᢞᢚᡬᡪᡪᡳ ᡭᡳ ᡓ',
                                     // content: Text('Confirm Delete?',
                                     style: TextStyle(
-                                        color: Colors.black, fontSize: 20)),
+                                        color: Colors.black, fontSize: 20, fontFamily: MongolFonts.haratig)),
                                 actions: <Widget>[
                                   TextButton(
                                     child: MongolText(
                                       'ᡴᡭᢚᡪᡰᡨ',
                                       // 'cancel',
                                       style: TextStyle(
-                                          color: Colors.black, fontSize: 20),
+                                          color: Colors.black, fontSize: 20, fontFamily: MongolFonts.haratig),
                                     ),
                                     onPressed: () {
                                       Get.back();
@@ -104,7 +108,7 @@ class _EditorPageState extends State<EditorPage> {
                                       'ᡥᡪᢞᢚᡬᡰᡨ',
                                       // 'delete',
                                       style: TextStyle(
-                                          color: Colors.red, fontSize: 20),
+                                          color: Colors.red, fontSize: 20, fontFamily: MongolFonts.haratig),
                                     ),
                                     onPressed: () {
                                       ctr.delelteAll();
@@ -219,7 +223,7 @@ class _EditorPageState extends State<EditorPage> {
                                                 TextInputAction.newline,
                                             //keyboardType: TextInputType.multiline,
                                             style: TextStyle(
-                                                fontSize: ctr.style.fontSize),
+                                                fontSize: ctr.style.fontSize, fontFamily: MongolFonts.haratig),
                                             //像平常一样设置键盘输入类型一样将Step1编写的inputType传递进去
                                           );
                                         },

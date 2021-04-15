@@ -11,6 +11,7 @@ import 'package:zmongol/Controller/TextController.dart';
 
 import 'Component/ColorPicker.dart';
 import 'Component/FontPicker.dart';
+import 'Component/MongolFonts.dart';
 import 'Component/MongolToolTip.dart';
 import 'Utils/ImageUtil.dart';
 
@@ -48,7 +49,8 @@ class _EditImagePageState extends State<EditImagePage> {
       child: Scaffold(
         backgroundColor: Colors.grey.shade500,
         appBar: AppBar(
-          title: Text('ᢜᡪᡪᢊᢛᡭᢑᡪᡪᡪᡳ'),
+          backgroundColor: Colors.indigo,
+          title: Text('ᢜᡪᡪᢊᢛᡭᢑᡪᡪᡪᡳ', style: TextStyle(fontFamily: MongolFonts.haratig)),
           centerTitle: true,
           actions: editAble
               ? [
@@ -213,7 +215,7 @@ class _EditImagePageState extends State<EditImagePage> {
               // ),
               MongolTooltip(
                 message: 'ᡥᡭᡬᢔᡭᡬᡨ ᡭᡧ ᢘᡬᡬᡨ ',
-                textStyle: TextStyle(fontSize: 18, color: Colors.white),
+                textStyle: TextStyle(fontSize: 18, color: Colors.white, fontFamily: MongolFonts.haratig),
                 showDuration: Duration(seconds: 3),
                 waitDuration: Duration(milliseconds: 500),
                 child: IconButton(
@@ -224,7 +226,7 @@ class _EditImagePageState extends State<EditImagePage> {
               ),
               MongolTooltip(
                   message: 'ᡥᡭᡬᢔᡭᡬᡨ ᡭᡧ ᡥᡭᡬᡪᢊᢊᡪᡨ  ',
-                  textStyle: TextStyle(fontSize: 18, color: Colors.white),
+                  textStyle: TextStyle(fontSize: 18, color: Colors.white, fontFamily: MongolFonts.haratig),
                   showDuration: Duration(seconds: 3),
                   waitDuration: Duration(milliseconds: 500),
                   child: IconButton(
@@ -234,7 +236,7 @@ class _EditImagePageState extends State<EditImagePage> {
                       })),
               MongolTooltip(
                 message: 'ᢘᡪᢑᢊᡪᢚᡧ ᡬᡬᡧ ᡥᡭᡬᡪᢊᢊᡪᡨ ',
-                textStyle: TextStyle(fontSize: 18, color: Colors.white),
+                textStyle: TextStyle(fontSize: 18, color: Colors.white, fontFamily: MongolFonts.haratig),
                 showDuration: Duration(seconds: 3),
                 waitDuration: Duration(milliseconds: 500),
                 child: IconButton(
@@ -245,7 +247,7 @@ class _EditImagePageState extends State<EditImagePage> {
               ),
               MongolTooltip(
                 message: 'ᡥᡭᡬᢔᡭᡬᡨ ᡭᡧ ᢔᡪᢋᡭᢙᡪᢝ',
-                textStyle: TextStyle(fontSize: 18, color: Colors.white),
+                textStyle: TextStyle(fontSize: 18, color: Colors.white, fontFamily: MongolFonts.haratig),
                 showDuration: Duration(seconds: 3),
                 waitDuration: Duration(milliseconds: 500),
                 child: GetBuilder<TextStyleController>(
@@ -275,7 +277,7 @@ class _EditImagePageState extends State<EditImagePage> {
               ),
               MongolTooltip(
                 message: 'ᢋᡭᡬᢞᡬᢜᡪᢑᡪᢋᡭ',
-                textStyle: TextStyle(fontSize: 18, color: Colors.white),
+                textStyle: TextStyle(fontSize: 18, color: Colors.white, fontFamily: MongolFonts.haratig),
                 showDuration: Duration(seconds: 3),
                 waitDuration: Duration(milliseconds: 500),
                 child: GetBuilder<TextStyleController>(

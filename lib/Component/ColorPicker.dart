@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 import 'package:zmongol/Controller/StyleController.dart';
 import 'package:zmongol/Controller/TextController.dart';
 
+import 'MongolFonts.dart';
+
 class ColorPicker {
   void font() {
     Get.dialog(AlertDialog(
@@ -324,7 +326,8 @@ class _MaterialPickerState extends State<MaterialPicker> {
                                     'Transparent  ',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.bold, 
+                                      fontFamily: MongolFonts.haratig
                                     ),
                                   )
                                 : Text(
@@ -340,6 +343,7 @@ class _MaterialPickerState extends State<MaterialPicker> {
                                           ? Colors.white
                                           : Colors.black,
                                       fontWeight: FontWeight.bold,
+                                      fontFamily: MongolFonts.haratig
                                     ),
                                   ),
                           )
