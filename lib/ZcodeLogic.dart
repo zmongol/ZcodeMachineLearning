@@ -461,7 +461,7 @@ class ZCode {
         }
       }
       // solving a, e after n, m, l, y, r
-      if (x == "n" || x == "m" || x == "" || x == "y" || x == "r") {
+      if (x == "n" || x == "m" || x == "l" || x == "y" || x == "r") {
         String y = lastStr;
         if (y == "a" || y == "e") {
           //resultLast = wordMap[y][11];
