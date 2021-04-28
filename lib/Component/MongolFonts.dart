@@ -21,6 +21,7 @@ class MongolFonts {
   static final String z52togtig = 'z52togtig';
   static final String z52tsagaantig = 'z52tsagaantig';
   static final String z52uljitig = 'z52uljitig';
+  static final String z52brahmisanstig = 'z52brahmisanstig';
 
 
   static final List fontList = [
@@ -45,6 +46,7 @@ class MongolFonts {
     [z52qingmingtig, ' ᢚᡬᡪᡬᡨ ᢌᡬᡪᡬᡨ ᢘᡬᡬᡨ'],
     [z52solibotig, ' ᢔᡭᢑᡳᡬᡫᡨ  ᢘᡬᡬᡨ'],
     [z52sonintig, ' ᢔᡭᡱᡬᡧ ᢘᡬᡬᡨ'],
+    [z52brahmisanstig, ' ᡳᢞᡪᡪᡪᢎᡫ ᢘᡬᡬᡨ'],
 
   ];
 }

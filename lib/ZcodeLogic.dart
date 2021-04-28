@@ -647,7 +647,7 @@ class ZCode {
         }
 
         //m, L, y, r before a, e
-        if (x == "m" || x == "" || x == "y" || x == "r") {
+        if (x == "m" || x == "l" || x == "y" || x == "r") {
           String y = str.substring(i + 1, i + 2);
           if (y == "a" || y == "e") {
             if (i == str.length - 2) {

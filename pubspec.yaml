@@ -144,6 +144,12 @@ flutter:
     - family: z52tsagaantig
       fonts:
         - asset: assets/fonts/z52tsagaantig.otf
+
+    - family: z52brahmisanstig
+      fonts:
+        - asset: assets/fonts/z52brahmisanstig.ttf
+
+
     - family: Z52HaraTigMirror
       fonts:
         - asset: assets/fonts/z52HaraTigMirror1.ttf
