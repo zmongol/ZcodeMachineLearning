@@ -104,51 +104,58 @@ flutter:
     - family: z52egulentig
       fonts:
         - asset: assets/fonts/z52egulentig.otf
-
     - family: z52hawangtig
       fonts:
         - asset: assets/fonts/z52hawangtig.ttf
-
+    - family: z52holsnujugtig
+      fonts:
+        - asset: assets/fonts/z52holsnujugtig.otf
+    - family: z52horqtsagaantig
+      fonts:
+        - asset: assets/fonts/z52horqtsagaantig.ttf
+    - family: z52munggunujugtig
+      fonts:
+        - asset: assets/fonts/z52munggunujugtig.ttf
+    - family: z52ononsansseriftig
+      fonts:
+        - asset: assets/fonts/z52ononsansseriftig.ttf
     - family: z52ordostig
       fonts:
         - asset: assets/fonts/z52ordostig.otf
+    - family: z52qimedtig
+      fonts:
+        - asset: assets/fonts/z52qimedtig.otf
+    - family: z52qingmingtig
+      fonts:
+        - asset: assets/fonts/z52qingmingtig.otf
     - family: z52saitig
       fonts:
         - asset: assets/fonts/z52saitig.otf
     - family: z52sanstig
       fonts:
         - asset: assets/fonts/z52sanstig.otf
-    - family: z52holsnujugtig
+    - family: z52sanstigbold
       fonts:
-        - asset: assets/fonts/z52holsnujugtig.otf
-    - family: z52uljitig
-      fonts:
-        - asset: assets/fonts/z52uljitig.ttf
-    - family: z52togtig
-      fonts:
-        - asset: assets/fonts/z52togtig.ttf
-    - family: z52qimedtig
-      fonts:
-        - asset: assets/fonts/z52qimedtig.otf
-
-
-    - family: z52qingmingtig
-      fonts:
-        - asset: assets/fonts/z52qingmingtig.otf
+        - asset: assets/fonts/z52sanstigbold.otf
     - family: z52solibotig
       fonts:
         - asset: assets/fonts/z52solibotig.otf
     - family: z52sonintig
       fonts:
         - asset: assets/fonts/z52sonintig.otf
+    - family: z52togtig
+      fonts:
+        - asset: assets/fonts/z52togtig.ttf
     - family: z52tsagaantig
       fonts:
         - asset: assets/fonts/z52tsagaantig.otf
+    - family: z52uljitig
+      fonts:
+        - asset: assets/fonts/z52uljitig.ttf
 
     - family: z52brahmisanstig
       fonts:
         - asset: assets/fonts/z52brahmisanstig.ttf
-
 
     - family: Z52HaraTigMirror
       fonts:

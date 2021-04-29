@@ -46,7 +46,6 @@ class MongolFonts {
     [z52qingmingtig, ' ᢚᡬᡪᡬᡨ ᢌᡬᡪᡬᡨ ᢘᡬᡬᡨ'],
     [z52solibotig, ' ᢔᡭᢑᡳᡬᡫᡨ  ᢘᡬᡬᡨ'],
     [z52sonintig, ' ᢔᡭᡱᡬᡧ ᢘᡬᡬᡨ'],
-    [z52brahmisanstig, ' ᡳᢞᡪᡪᡪᢎᡫ ᢘᡬᡬᡨ'],
 
   ];
 }
