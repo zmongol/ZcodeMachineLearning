@@ -57,10 +57,6 @@ class _EditorPageState extends State<EditorPage> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-    // print('size : ${MediaQuery.of(context).size}');
-
     return SafeArea(
       bottom: true,
       child: Stack(

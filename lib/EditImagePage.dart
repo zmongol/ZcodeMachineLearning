@@ -4,11 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import 'package:zmongol/Component/AutoSizeText/auto_size_text.dart';
-import 'package:zmongol/Component/DragToResizeBox.dart';
 import 'package:zmongol/Component/CustomizableText.dart';
 import 'package:zmongol/Component/MongolTextBox.dart';
-import 'package:zmongol/Controller/StyleController.dart';
 import 'package:zmongol/Controller/TextController.dart';
 
 import 'Component/ColorPicker.dart';

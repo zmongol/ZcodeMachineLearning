@@ -5,14 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:zmongol/Component/AutoSizeText/auto_size_text.dart';
 import 'package:zmongol/Controller/StyleController.dart';
 import 'package:zmongol/Controller/TextController.dart';
 import 'package:zmongol/StartPage.dart';
 
 import 'Component/MongolFonts.dart';
 import 'Controller/KeyboardController.dart';
-import 'EditorPage.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
