@@ -40,8 +40,8 @@ class _MongolTextBoxState extends State<MongolTextBox> {
             builder: (styleCtr) => GestureDetector(
               onPanUpdate: (DragUpdateDetails d) {
                 widget.onTextBoxTapped(widget.customizableText.id);
-                if (widget.customizableText.editAble == false) {
-                  widget.customizableText.editAble = true;
+                if (widget.customizableText.editable == false) {
+                  widget.customizableText.editable = true;
                 }
                 setState(() {
                   widget.customizableText.dx += d.delta.dx;
@@ -53,7 +53,7 @@ class _MongolTextBoxState extends State<MongolTextBox> {
               child: DragToResizeBox(
                 width: styleCtr.width.value,
                 height: styleCtr.height.value,
-                editable: widget.customizableText.editAble,
+                editable: widget.customizableText.editable,
                 onWidthChange: (v) {
                   setState(() {
                     styleCtr.width.value += v;

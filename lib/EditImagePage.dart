@@ -29,7 +29,7 @@ class _EditImagePageState extends State<EditImagePage> {
   double rotation = 0;
   double dx = 16.0;
   double dy = 16.0;
-  bool editAble = true;
+  bool editable = true;
   List<CustomizableText> mongolTextBoxes = [];
   int maxNumberOfTextBoxes = 10;
   String selectedBoxId = '';
@@ -57,13 +57,13 @@ class _EditImagePageState extends State<EditImagePage> {
 
     mongolTextBoxes.forEach((element) {
       if (element.id != selectedBoxId) {
-        element.editAble = false;
+        element.editable = false;
       } else {
-        element.editAble = true;
+        element.editable = true;
       }
       final textBoxView = MongolTextBox(element, onTextBoxTapped: (id) {
         setState(() {
-          editAble = true;
+          editable = true;
           selectedBoxId = id;
         });
       });
@@ -91,7 +91,7 @@ class _EditImagePageState extends State<EditImagePage> {
           backgroundColor: Colors.indigo,
           title: Text('ᢜᡪᡪᢊᢛᡭᢑᡪᡪᡪᡳ', style: TextStyle(fontFamily: MongolFonts.haratig)),
           centerTitle: true,
-          actions: editAble ? [
+          actions: editable ? [
             mongolTextBoxes.length < maxNumberOfTextBoxes ? IconButton(
                 icon: Icon(
                   Icons.add,
@@ -100,7 +100,7 @@ class _EditImagePageState extends State<EditImagePage> {
                 onPressed: () async {
                   Get.to(EditorPage(editWithImage: true))?.then((value) {
                     setState(() {
-                      final newMongolTextBox = CustomizableText(id: DateTime.now().toString(), text: value, editAble: true);
+                      final newMongolTextBox = CustomizableText(id: DateTime.now().toString(), text: value, editable: true);
                       selectedBoxId = newMongolTextBox.id;
                       mongolTextBoxes.add(newMongolTextBox);
                     });
@@ -114,7 +114,7 @@ class _EditImagePageState extends State<EditImagePage> {
                 onPressed: () {
                   setState(() {
                     selectedBoxId = '';
-                    editAble = false;
+                    editable = false;
                   });
                 })
           ]

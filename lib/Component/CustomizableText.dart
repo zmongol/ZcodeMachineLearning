@@ -2,14 +2,14 @@
 class CustomizableText {
   String id;
   String text;
-  bool editAble;
+  bool editable;
   double dx;
   double dy;
 
   CustomizableText({
     required this.id,
     required this.text,
-    required this.editAble,
+    required this.editable,
     this.dx = 16.0,
     this.dy = 16.0
   });
