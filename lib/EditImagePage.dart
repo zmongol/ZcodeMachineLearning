@@ -13,11 +13,11 @@ import 'Component/ColorPicker.dart';
 import 'Component/FontPicker.dart';
 import 'Component/MongolFonts.dart';
 import 'Component/MongolToolTip.dart';
+import 'EditorPage.dart';
 import 'Utils/ImageUtil.dart';
 
 class EditImagePage extends StatefulWidget {
-  EditImagePage(this.text, this.image);
-  final String text;
+  EditImagePage(this.image);
   final File image;
 
   @override
@@ -31,6 +31,102 @@ class _EditImagePageState extends State<EditImagePage> {
   double dx = 16.0;
   double dy = 16.0;
   bool editAble = true;
+  List<String> texts = [];
+
+  textBoxes() {
+    if (texts.isEmpty) {
+      return Container();
+    }
+    return Stack(
+      children: [
+        Positioned(
+            bottom: 8,
+            right: 8,
+            child: GetBuilder<TextStyleController>(
+                builder: (ctr) => Text(
+                    'Z',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: ctr.style.color,
+                    )
+                )
+            )
+        ),
+        Positioned(
+          top: dy,
+          left: dx,
+          child: GetBuilder<StyleController>(
+            builder: (styleCtr) => GestureDetector(
+              onPanDown: (DragDownDetails e) {
+                print("用户手指按下：${e.globalPosition}");
+              },
+              onPanEnd: (DragEndDetails e) {
+                print(e.velocity);
+              },
+              onPanUpdate: (DragUpdateDetails d) {
+                if (editAble == false) {
+                  editAble = true;
+                }
+                setState(() {
+                  dx += d.delta.dx;
+                  dy += d.delta.dy;
+                });
+                print('onPanUpdate dx:$dx');
+                print('onPanUpdate dy:$dy');
+              },
+              child: DragToResizBox(
+                width: styleCtr.width.value,
+                height: styleCtr.height.value,
+                editable: editAble,
+                onWidthChange: (v) {
+                  setState(() {
+                    styleCtr.width.value += v;
+                  });
+                },
+                onHeightChange: (v) {
+                  setState(() {
+                    styleCtr.height.value += v;
+                  });
+                },
+                child: Container(
+                  width: styleCtr.width.value,
+                  height: styleCtr.height.value,
+                  color: styleCtr.backgroundColor,
+                  alignment: Alignment.center,
+                  child: Stack(
+                    children: [
+                      GetBuilder<TextStyleController>(tag: 'border_style', builder: (borderCtrl) {
+                        return Container(
+                          padding: EdgeInsets.only(top: 16),
+                          child: AutoSizeText(
+                            texts.first,
+                            minFontSize: 20,
+                            maxFontSize: 200,
+                            style: borderCtrl.borderStyle.copyWith(fontSize: 200),
+                          ),
+                        );
+                      }),
+                      GetBuilder<TextStyleController>(builder: (ctr) {
+                        return Container(
+                          padding: EdgeInsets.only(top: 16),
+                          child: AutoSizeText(
+                              texts.first,
+                              minFontSize: 20,
+                              maxFontSize: 200,
+                              style: ctr.style.copyWith(fontSize: 200,)
+                          ),
+                        );
+                      }),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 
   @override
   void initState() {
@@ -52,19 +148,31 @@ class _EditImagePageState extends State<EditImagePage> {
           backgroundColor: Colors.indigo,
           title: Text('ᢜᡪᡪᢊᢛᡭᢑᡪᡪᡪᡳ', style: TextStyle(fontFamily: MongolFonts.haratig)),
           centerTitle: true,
-          actions: editAble
-              ? [
-                  IconButton(
-                      icon: Icon(
-                        Icons.done,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          editAble = false;
-                        });
-                      })
-                ]
+          actions: editAble ? [
+            texts.isEmpty ? IconButton(
+                icon: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+                onPressed: () async {
+                  Get.to(EditorPage(editWithImage: true))?.then((value) {
+                    texts.add(value);
+                    setState(() {
+
+                    });
+                  });
+                }) : Container(),
+            IconButton(
+                icon: Icon(
+                  Icons.done,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  setState(() {
+                    editAble = false;
+                  });
+                })
+          ]
               : [
                   IconButton(
                       icon: Icon(Icons.save),
@@ -92,87 +200,7 @@ class _EditImagePageState extends State<EditImagePage> {
                         widget.image,
                         fit: BoxFit.fill,
                       ),
-                      Positioned(
-                          bottom: 8,
-                          right: 8,
-                          child: GetBuilder<TextStyleController>(
-                              builder: (ctr) => Text('Z',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: ctr.style.color,
-                                  )))),
-                      Positioned(
-                        top: dy,
-                        left: dx,
-                        child: GetBuilder<StyleController>(
-                          builder: (styleCtr) => GestureDetector(
-                            onPanDown: (DragDownDetails e) {
-                              print("用户手指按下：${e.globalPosition}");
-                            },
-                            onPanEnd: (DragEndDetails e) {
-                              print(e.velocity);
-                            },
-                            onPanUpdate: (DragUpdateDetails d) {
-                              if (editAble == false) {
-                                editAble = true;
-                              }
-                              setState(() {
-                                dx += d.delta.dx;
-                                dy += d.delta.dy;
-                              });
-                              print('onPanUpdate dx:$dx');
-                              print('onPanUpdate dy:$dy');
-                            },
-                            child: DragToResizBox(
-                              width: styleCtr.width.value,
-                              height: styleCtr.height.value,
-                              editable: editAble,
-                              onWidthChange: (v) {
-                                setState(() {
-                                  styleCtr.width.value += v;
-                                });
-                              },
-                              onHeightChange: (v) {
-                                setState(() {
-                                  styleCtr.height.value += v;
-                                });
-                              },
-                              child: Container(
-                                width: styleCtr.width.value,
-                                height: styleCtr.height.value,
-                                color: styleCtr.backgroundColor,
-                                alignment: Alignment.center,
-                                child: Stack(
-                                  children: [
-                                    GetBuilder<TextStyleController>(tag: 'border_style', builder: (borderCtrl) {
-                                      return Container(
-                                        padding: EdgeInsets.only(top: 16),
-                                        child: AutoSizeText(
-                                          widget.text,
-                                          minFontSize: 20,
-                                          maxFontSize: 200,
-                                          style: borderCtrl.borderStyle.copyWith(fontSize: 200),
-                                        ),
-                                      );
-                                    }),
-                                    GetBuilder<TextStyleController>(builder: (ctr) {
-                                      return Container(
-                                        padding: EdgeInsets.only(top: 16),
-                                        child: AutoSizeText(
-                                            widget.text,
-                                            minFontSize: 20,
-                                            maxFontSize: 200,
-                                            style: ctr.style.copyWith(fontSize: 200,)
-                                        ),
-                                      );
-                                    }),
-                                  ],
-                                ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                      textBoxes()
                     ],
                   ),
                 ),
@@ -187,32 +215,6 @@ class _EditImagePageState extends State<EditImagePage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              // MongolTooltip(
-              //   message: 'ᡥᡭᡬᢔᡭᡬᡨ ᡭᡧ ᢜᡪᢊᡪᡨ ᡳᡪᢉᡨ  ',
-              //   textStyle: TextStyle(fontSize: 18, color: Colors.white),
-              //   showDuration: Duration(seconds: 3),
-              //   waitDuration: Duration(milliseconds: 500),
-              //   child: IconButton(
-              //       icon: Stack(
-              //         children: [
-              //           Padding(
-              //             padding: const EdgeInsets.only(right: 8),
-              //             child: Text('A',
-              //                 style: TextStyle(
-              //                     fontSize: 20, fontWeight: FontWeight.w600)),
-              //           ),
-              //           Positioned(
-              //               right: 0,
-              //               bottom: 0,
-              //               child: Text('a',
-              //                   style: TextStyle(
-              //                       fontSize: 16, fontWeight: FontWeight.w600)))
-              //         ],
-              //       ),
-              //       onPressed: () {
-              //         FontsPicker().fontSize();
-              //       }),
-              // ),
               MongolTooltip(
                 message: 'ᡥᡭᡬᢔᡭᡬᡨ ᡭᡧ ᢘᡬᡬᡨ ',
                 textStyle: TextStyle(fontSize: 18, color: Colors.white, fontFamily: MongolFonts.haratig),

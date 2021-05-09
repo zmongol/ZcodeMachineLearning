@@ -8,6 +8,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:zmongol/Component/AutoSizeText/auto_size_text.dart';
 import 'package:zmongol/Controller/StyleController.dart';
 import 'package:zmongol/Controller/TextController.dart';
+import 'package:zmongol/StartPage.dart';
 
 import 'Component/MongolFonts.dart';
 import 'Controller/KeyboardController.dart';
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
             visualDensity: VisualDensity.adaptivePlatformDensity,
             fontFamily: MongolFonts.haratig),
         // home: TextEditPage(title: 'zcode'),
-        home: EditorPage(),
+        home: StartPage(),
       ),
     );
   }
