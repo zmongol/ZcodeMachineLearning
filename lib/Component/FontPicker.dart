@@ -53,7 +53,7 @@ class FontsPicker {
     ));
   }
 
-  fontFamily() {
+  fontFamily(String id) {
     Get.bottomSheet(Container(
       color: Colors.white,
       height: 260,
@@ -68,9 +68,9 @@ class FontsPicker {
                   padding: const EdgeInsets.only(top: 16.0),
                   child: InkWell(
                     onTap: () {
-                      Get.find<TextStyleController>()
+                      Get.find<TextStyleController>(tag: id)
                           .setFontFamily(MongolFonts.fontList[i][0]);
-                      Get.find<TextStyleController>(tag: 'border_style')
+                      Get.find<TextStyleController>(tag: 'border_style_$id')
                           .setFontFamily(MongolFonts.fontList[i][0]);
                       Get.back();
                     },
