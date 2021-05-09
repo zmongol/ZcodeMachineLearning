@@ -46,8 +46,8 @@ dependencies:
     git:
       url: https://github.com/hui-z/image_gallery_saver.git
       ref: f0f594d315066c91c868a13b8518763d645a0934
-  permission_handler: 6.1.1
-  permission_handler_platform_interface: 3.1.1
+  permission_handler: ^7.1.0
+  permission_handler_platform_interface: ^3.3.0
   path: ^1.8.0
 
   image_picker: ^0.7.2
