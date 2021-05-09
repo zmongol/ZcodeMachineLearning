@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DragToResizBox extends StatelessWidget {
-  DragToResizBox({
+class DragToResizeBox extends StatelessWidget {
+  DragToResizeBox({
     required this.width,
     required this.height,
     required this.child,

@@ -61,7 +61,7 @@ class _SharePageState extends State<SharePage> {
         ),
         body: Center(
           child: GetBuilder<StyleController>(
-            builder: (styleCtr) => DragToResizBox(
+            builder: (styleCtr) => DragToResizeBox(
               width: styleCtr.width.value,
               height: styleCtr.height.value,
               editable: true,

@@ -50,7 +50,7 @@ class _MongolTextBoxState extends State<MongolTextBox> {
                 // print('onPanUpdate dx:$dx');
                 // print('onPanUpdate dy:$dy');
               },
-              child: DragToResizBox(
+              child: DragToResizeBox(
                 width: styleCtr.width.value,
                 height: styleCtr.height.value,
                 editable: widget.customizableText.editAble,
