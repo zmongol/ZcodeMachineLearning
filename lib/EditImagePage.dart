@@ -12,6 +12,7 @@ import 'Component/ColorPicker.dart';
 import 'Component/FontPicker.dart';
 import 'Component/MongolFonts.dart';
 import 'Component/MongolToolTip.dart';
+import 'Controller/StyleController.dart';
 import 'EditorPage.dart';
 import 'Utils/ImageUtil.dart';
 
@@ -61,10 +62,18 @@ class _EditImagePageState extends State<EditImagePage> {
       } else {
         element.editable = true;
       }
-      final textBoxView = MongolTextBox(element, onTextBoxTapped: (id) {
+      final textBoxView = MongolTextBox(element, onTextBoxTapped: () {
         setState(() {
           editable = true;
-          selectedBoxId = id;
+          selectedBoxId = element.id;
+        });
+      }, onTextBoxDeleted: () {
+        setState(() {
+          selectedBoxId = '';
+          mongolTextBoxes.removeWhere((customizableText) => customizableText.id == element.id);
+          Get.delete<TextStyleController>(tag: element.id);
+          Get.delete<TextStyleController>(tag: 'border_style_'+ element.id);
+          Get.delete<StyleController>(tag: element.id);
         });
       });
       widgets.add(textBoxView);

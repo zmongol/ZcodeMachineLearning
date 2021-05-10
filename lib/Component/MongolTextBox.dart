@@ -7,13 +7,12 @@ import 'package:zmongol/Component/DragToResizeBox.dart';
 import 'package:zmongol/Controller/StyleController.dart';
 import 'DragToResizeBox.dart';
 
-typedef void OnTextBoxTapped(String textBoxId);
-
 class MongolTextBox extends StatefulWidget {
   final CustomizableText customizableText;
-  final OnTextBoxTapped onTextBoxTapped;
+  final Function onTextBoxTapped;
+  final Function onTextBoxDeleted;
 
-  const MongolTextBox(this.customizableText, {required this.onTextBoxTapped});
+  const MongolTextBox(this.customizableText, {required this.onTextBoxTapped, required this.onTextBoxDeleted});
 
   @override
   _MongolTextBoxState createState() => _MongolTextBoxState();
@@ -39,7 +38,7 @@ class _MongolTextBoxState extends State<MongolTextBox> {
             tag: widget.customizableText.id,
             builder: (styleCtr) => GestureDetector(
               onPanUpdate: (DragUpdateDetails d) {
-                widget.onTextBoxTapped(widget.customizableText.id);
+                widget.onTextBoxTapped();
                 if (widget.customizableText.editable == false) {
                   widget.customizableText.editable = true;
                 }
@@ -54,6 +53,9 @@ class _MongolTextBoxState extends State<MongolTextBox> {
                 width: styleCtr.width.value,
                 height: styleCtr.height.value,
                 editable: widget.customizableText.editable,
+                //NOTE: disable deletable option as there is an error of styling text when deleting
+                deletable: false,
+                onTextBoxDeleted: widget.onTextBoxDeleted,
                 onWidthChange: (v) {
                   setState(() {
                     styleCtr.width.value += v;

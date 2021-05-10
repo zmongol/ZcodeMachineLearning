@@ -65,6 +65,7 @@ class _SharePageState extends State<SharePage> {
               width: styleCtr.width.value,
               height: styleCtr.height.value,
               editable: true,
+              deletable: false,
               onWidthChange: (v) {
                 setState(() {
                   styleCtr.width.value += v;

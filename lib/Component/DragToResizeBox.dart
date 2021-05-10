@@ -8,6 +8,8 @@ class DragToResizeBox extends StatelessWidget {
     required this.onWidthChange,
     required this.onHeightChange,
     required this.editable,
+    required this.deletable,
+    this.onTextBoxDeleted
   });
   final double width;
   final double height;
@@ -17,6 +19,8 @@ class DragToResizeBox extends StatelessWidget {
   final Function onHeightChange;
 
   final bool editable;
+  final bool deletable;
+  final Function? onTextBoxDeleted;
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +35,9 @@ class DragToResizeBox extends StatelessWidget {
           ),
           Positioned(
               child: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Container(
-              decoration: BoxDecoration(
+                padding: const EdgeInsets.all(4.0),
+                child: Container(
+                  decoration: BoxDecoration(
                   border: editable
                       ? Border.all(width: 1, color: Colors.white)
                       : null),
@@ -49,19 +53,38 @@ class DragToResizeBox extends StatelessWidget {
                       onHeightChange(d.delta.dy);
                     },
                     child: Container(
-                      width: 20,
-                      height: 20,
+                      width: 32,
+                      height: 32,
                       color: Colors.white,
                       child: RotatedBox(
                         quarterTurns: 1,
                         child: Icon(
                           Icons.open_in_full_outlined,
-                          size: 10,
+                          size: 16,
                           color: Colors.grey.shade400,
                         ),
                       ),
                     ),
                   ))
+              : SizedBox(),
+          deletable && editable
+              ? Positioned(
+              right: 0,
+              top: 0,
+              child: GestureDetector(
+                onTap: () {
+                  onTextBoxDeleted!();
+                },
+                child: Container(
+                    width: 32,
+                    height: 32,
+                    color: Colors.white,
+                    child: Icon(
+                      Icons.delete, size: 16,
+                      color: Colors.red[800],
+                    )
+                ),
+              ))
               : SizedBox()
         ],
       ),
