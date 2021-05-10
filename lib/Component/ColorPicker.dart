@@ -11,7 +11,7 @@ import 'package:zmongol/Controller/TextController.dart';
 import 'MongolFonts.dart';
 
 class ColorPicker {
-  void font() {
+  void font(String id) {
     Get.dialog(AlertDialog(
       titlePadding: const EdgeInsets.all(0.0),
       contentPadding: const EdgeInsets.all(0.0),
@@ -22,7 +22,7 @@ class ColorPicker {
         child: MaterialPicker(
           pickerColor: Get.find<TextStyleController>().style.color!,
           onColorChanged: (Color color) {
-            Get.find<TextStyleController>().setColor(color);
+            Get.find<TextStyleController>(tag: id).setColor(color);
             Get.back();
           },
           enableLabel: true,
@@ -31,7 +31,7 @@ class ColorPicker {
     ));
   }
 
-  void shadow() {
+  void shadow(String id) {
     Get.dialog(AlertDialog(
       titlePadding: const EdgeInsets.all(0.0),
       contentPadding: const EdgeInsets.all(0.0),
@@ -42,7 +42,7 @@ class ColorPicker {
         child: MaterialPicker(
           pickerColor: Get.find<TextStyleController>().style.shadows![0].color,
           onColorChanged: (Color color) {
-            Get.find<TextStyleController>().setShadowColor(color);
+            Get.find<TextStyleController>(tag: id).setShadowColor(color);
             Get.back();
           },
           enableLabel: true,
@@ -51,7 +51,13 @@ class ColorPicker {
     ));
   }
 
-  borderColor() {
+  borderColor(String id) {
+    final TextStyleController textStyleController;
+    if (id.isEmpty) {
+      textStyleController = Get.find<TextStyleController>(tag: 'border_style');
+    } else {
+      textStyleController = Get.find<TextStyleController>(tag: 'border_style_$id');
+    }
    Get.dialog(AlertDialog(
       titlePadding: const EdgeInsets.all(0.0),
       contentPadding: const EdgeInsets.all(0.0),
@@ -60,9 +66,9 @@ class ColorPicker {
       ),
       content: SingleChildScrollView(
         child: MaterialPicker(
-          pickerColor: Get.find<TextStyleController>(tag: 'border_style').borderStyle.foreground!.color,
+          pickerColor: textStyleController.borderStyle.foreground!.color,
           onColorChanged: (Color color) {
-            Get.find<TextStyleController>(tag: 'border_style').setBorderColor(color);
+            textStyleController.setBorderColor(color);
             Get.back();
           },
           enableLabel: true,
@@ -71,7 +77,7 @@ class ColorPicker {
     ));
   }
 
-  void background() {
+  void background(String id) {
     Get.dialog(AlertDialog(
       titlePadding: const EdgeInsets.all(0.0),
       contentPadding: const EdgeInsets.all(0.0),
@@ -82,7 +88,7 @@ class ColorPicker {
         child: MaterialPicker(
           pickerColor: Get.find<StyleController>().backgroundColor,
           onColorChanged: (Color color) {
-            Get.find<StyleController>().setBackgroundColor(color);
+            Get.find<StyleController>(tag: id).setBackgroundColor(color);
             Get.back();
           },
           enableLabel: true,

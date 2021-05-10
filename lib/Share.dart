@@ -24,13 +24,6 @@ class SharePage extends StatefulWidget {
 }
 
 class _SharePageState extends State<SharePage> {
-  // MongolTextPainter _textPainter;
-  int wordCount = 0;
-  int lines = 0;
-  double lineHeight = 0.0;
-  double lineWidth = 0.0;
-  get canvasWidth => lines * lineWidth;
-  get canvasHeight => lineHeight;
 
   @override
   void initState() {
@@ -68,10 +61,11 @@ class _SharePageState extends State<SharePage> {
         ),
         body: Center(
           child: GetBuilder<StyleController>(
-            builder: (styleCtr) => DragToResizBox(
+            builder: (styleCtr) => DragToResizeBox(
               width: styleCtr.width.value,
               height: styleCtr.height.value,
               editable: true,
+              deletable: false,
               onWidthChange: (v) {
                 setState(() {
                   styleCtr.width.value += v;
@@ -175,7 +169,7 @@ class _SharePageState extends State<SharePage> {
                 child: IconButton(
                     icon: Icon(Icons.text_fields),
                     onPressed: () {
-                      FontsPicker().fontFamily();
+                      FontsPicker().fontFamily('');
                     }),
               ),
               MongolTooltip(
@@ -186,7 +180,7 @@ class _SharePageState extends State<SharePage> {
                   child: IconButton(
                       icon: Icon(Icons.color_lens_outlined),
                       onPressed: () {
-                        ColorPicker().font();
+                        ColorPicker().font('');
                       })),
               MongolTooltip(
                 message: 'ᢘᡪᢑᢊᡪᢚᡧ ᡬᡬᡧ ᡥᡭᡬᡪᢊᢊᡪᡨ ',
@@ -196,7 +190,7 @@ class _SharePageState extends State<SharePage> {
                 child: IconButton(
                     icon: Icon(Icons.format_color_fill),
                     onPressed: () {
-                      ColorPicker().background();
+                      ColorPicker().background('');
                     }),
               ),
               MongolTooltip(
@@ -225,7 +219,7 @@ class _SharePageState extends State<SharePage> {
                             fontWeight: FontWeight.bold),
                       ),
                       onPressed: () {
-                        ColorPicker().shadow();
+                        ColorPicker().shadow('');
                       }),
                 ),
               ),
@@ -255,7 +249,7 @@ class _SharePageState extends State<SharePage> {
                             fontWeight: FontWeight.bold),
                       ),
                       onPressed: () {
-                        ColorPicker().borderColor();
+                        ColorPicker().borderColor('');
                       }),
                 ),
               ),

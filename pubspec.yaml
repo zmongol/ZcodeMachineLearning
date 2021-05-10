@@ -32,7 +32,7 @@ dependencies:
   mongol:
     git:
       url: https://github.com/suragch/mongol.git
-  get: ^4.1.1
+  get: ^4.1.4
   flutter_icons: any
   flutter_screenutil: 5.0.0-nullsafety.11
   sqflite: ^2.0.0+3

@@ -4,20 +4,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import 'package:zmongol/Component/AutoSizeText/auto_size_text.dart';
-import 'package:zmongol/Component/DragToResizeBox.dart';
-import 'package:zmongol/Controller/StyleController.dart';
+import 'package:zmongol/Component/CustomizableText.dart';
+import 'package:zmongol/Component/MongolTextBox.dart';
 import 'package:zmongol/Controller/TextController.dart';
 
 import 'Component/ColorPicker.dart';
 import 'Component/FontPicker.dart';
 import 'Component/MongolFonts.dart';
 import 'Component/MongolToolTip.dart';
+import 'Controller/StyleController.dart';
+import 'EditorPage.dart';
 import 'Utils/ImageUtil.dart';
 
 class EditImagePage extends StatefulWidget {
-  EditImagePage(this.text, this.image);
-  final String text;
+  EditImagePage(this.image);
   final File image;
 
   @override
@@ -25,24 +25,72 @@ class EditImagePage extends StatefulWidget {
 }
 
 class _EditImagePageState extends State<EditImagePage> {
-  Offset _lastOffset = Offset(0, 0);
+  GlobalKey repaintWidgetKey = GlobalKey();
   double scale = 1.0;
   double rotation = 0;
   double dx = 16.0;
   double dy = 16.0;
-  bool editAble = true;
+  bool editable = true;
+  List<CustomizableText> mongolTextBoxes = [];
+  int maxNumberOfTextBoxes = 10;
+  String selectedBoxId = '';
+
+  textBoxesView() {
+    if (mongolTextBoxes.isEmpty) {
+      return Container();
+    }
+    List<Widget> widgets = [];
+    widgets.add(
+        Positioned(
+            bottom: 8,
+            right: 8,
+            child: GetBuilder<TextStyleController>(
+                builder: (ctr) => Text(
+                    'Z',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: ctr.style.color,
+                    )
+                )
+            )
+        )
+    );
+
+    mongolTextBoxes.forEach((element) {
+      if (element.id != selectedBoxId) {
+        element.editable = false;
+      } else {
+        element.editable = true;
+      }
+      final textBoxView = MongolTextBox(element, onTextBoxTapped: () {
+        setState(() {
+          editable = true;
+          selectedBoxId = element.id;
+        });
+      }, onTextBoxDeleted: () {
+        setState(() {
+          selectedBoxId = '';
+          mongolTextBoxes.removeWhere((customizableText) => customizableText.id == element.id);
+          Get.delete<TextStyleController>(tag: element.id);
+          Get.delete<TextStyleController>(tag: 'border_style_'+ element.id);
+          Get.delete<StyleController>(tag: element.id);
+        });
+      });
+      widgets.add(textBoxView);
+    });
+    return Stack(
+      children: widgets,
+    );
+  }
 
   @override
   void initState() {
-    // List<String> wordList = widget.text.split(' ');
-    // wordList = wordList.where((element) => element.isNotEmpty);
-    // wordCount = wordList.length;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    GlobalKey repaintWidgetKey = GlobalKey(); // 绘图key值
+
 
     return SafeArea(
       bottom: true,
@@ -52,19 +100,33 @@ class _EditImagePageState extends State<EditImagePage> {
           backgroundColor: Colors.indigo,
           title: Text('ᢜᡪᡪᢊᢛᡭᢑᡪᡪᡪᡳ', style: TextStyle(fontFamily: MongolFonts.haratig)),
           centerTitle: true,
-          actions: editAble
-              ? [
-                  IconButton(
-                      icon: Icon(
-                        Icons.done,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          editAble = false;
-                        });
-                      })
-                ]
+          actions: editable ? [
+            mongolTextBoxes.length < maxNumberOfTextBoxes ? IconButton(
+                icon: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+                onPressed: () async {
+                  Get.to(EditorPage(editWithImage: true))?.then((value) {
+                    setState(() {
+                      final newMongolTextBox = CustomizableText(id: DateTime.now().toString(), text: value, editable: true);
+                      selectedBoxId = newMongolTextBox.id;
+                      mongolTextBoxes.add(newMongolTextBox);
+                    });
+                  });
+                }) : Container(),
+            IconButton(
+                icon: Icon(
+                  Icons.done,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  setState(() {
+                    selectedBoxId = '';
+                    editable = false;
+                  });
+                })
+          ]
               : [
                   IconButton(
                       icon: Icon(Icons.save),
@@ -85,94 +147,14 @@ class _EditImagePageState extends State<EditImagePage> {
             children: [
               Container(
                 child: RepaintBoundary(
-                  key: editAble ? null : repaintWidgetKey,
+                  key: repaintWidgetKey,
                   child: Stack(
                     children: [
                       Image.file(
                         widget.image,
                         fit: BoxFit.fill,
                       ),
-                      Positioned(
-                          bottom: 8,
-                          right: 8,
-                          child: GetBuilder<TextStyleController>(
-                              builder: (ctr) => Text('Z',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: ctr.style.color,
-                                  )))),
-                      Positioned(
-                        top: dy,
-                        left: dx,
-                        child: GetBuilder<StyleController>(
-                          builder: (styleCtr) => GestureDetector(
-                            onPanDown: (DragDownDetails e) {
-                              print("用户手指按下：${e.globalPosition}");
-                            },
-                            onPanEnd: (DragEndDetails e) {
-                              print(e.velocity);
-                            },
-                            onPanUpdate: (DragUpdateDetails d) {
-                              if (editAble == false) {
-                                editAble = true;
-                              }
-                              setState(() {
-                                dx += d.delta.dx;
-                                dy += d.delta.dy;
-                              });
-                              print('onPanUpdate dx:$dx');
-                              print('onPanUpdate dy:$dy');
-                            },
-                            child: DragToResizBox(
-                              width: styleCtr.width.value,
-                              height: styleCtr.height.value,
-                              editable: editAble,
-                              onWidthChange: (v) {
-                                setState(() {
-                                  styleCtr.width.value += v;
-                                });
-                              },
-                              onHeightChange: (v) {
-                                setState(() {
-                                  styleCtr.height.value += v;
-                                });
-                              },
-                              child: Container(
-                                width: styleCtr.width.value,
-                                height: styleCtr.height.value,
-                                color: styleCtr.backgroundColor,
-                                alignment: Alignment.center,
-                                child: Stack(
-                                  children: [
-                                    GetBuilder<TextStyleController>(tag: 'border_style', builder: (borderCtrl) {
-                                      return Container(
-                                        padding: EdgeInsets.only(top: 16),
-                                        child: AutoSizeText(
-                                          widget.text,
-                                          minFontSize: 20,
-                                          maxFontSize: 200,
-                                          style: borderCtrl.borderStyle.copyWith(fontSize: 200),
-                                        ),
-                                      );
-                                    }),
-                                    GetBuilder<TextStyleController>(builder: (ctr) {
-                                      return Container(
-                                        padding: EdgeInsets.only(top: 16),
-                                        child: AutoSizeText(
-                                            widget.text,
-                                            minFontSize: 20,
-                                            maxFontSize: 200,
-                                            style: ctr.style.copyWith(fontSize: 200,)
-                                        ),
-                                      );
-                                    }),
-                                  ],
-                                ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                      textBoxesView()
                     ],
                   ),
                 ),
@@ -187,32 +169,6 @@ class _EditImagePageState extends State<EditImagePage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              // MongolTooltip(
-              //   message: 'ᡥᡭᡬᢔᡭᡬᡨ ᡭᡧ ᢜᡪᢊᡪᡨ ᡳᡪᢉᡨ  ',
-              //   textStyle: TextStyle(fontSize: 18, color: Colors.white),
-              //   showDuration: Duration(seconds: 3),
-              //   waitDuration: Duration(milliseconds: 500),
-              //   child: IconButton(
-              //       icon: Stack(
-              //         children: [
-              //           Padding(
-              //             padding: const EdgeInsets.only(right: 8),
-              //             child: Text('A',
-              //                 style: TextStyle(
-              //                     fontSize: 20, fontWeight: FontWeight.w600)),
-              //           ),
-              //           Positioned(
-              //               right: 0,
-              //               bottom: 0,
-              //               child: Text('a',
-              //                   style: TextStyle(
-              //                       fontSize: 16, fontWeight: FontWeight.w600)))
-              //         ],
-              //       ),
-              //       onPressed: () {
-              //         FontsPicker().fontSize();
-              //       }),
-              // ),
               MongolTooltip(
                 message: 'ᡥᡭᡬᢔᡭᡬᡨ ᡭᡧ ᢘᡬᡬᡨ ',
                 textStyle: TextStyle(fontSize: 18, color: Colors.white, fontFamily: MongolFonts.haratig),
@@ -221,7 +177,7 @@ class _EditImagePageState extends State<EditImagePage> {
                 child: IconButton(
                     icon: Icon(Icons.text_fields),
                     onPressed: () {
-                      FontsPicker().fontFamily();
+                      FontsPicker().fontFamily(selectedBoxId);
                     }),
               ),
               MongolTooltip(
@@ -232,7 +188,7 @@ class _EditImagePageState extends State<EditImagePage> {
                   child: IconButton(
                       icon: Icon(Icons.color_lens_outlined),
                       onPressed: () {
-                        ColorPicker().font();
+                        ColorPicker().font(selectedBoxId);
                       })),
               MongolTooltip(
                 message: 'ᢘᡪᢑᢊᡪᢚᡧ ᡬᡬᡧ ᡥᡭᡬᡪᢊᢊᡪᡨ ',
@@ -242,7 +198,7 @@ class _EditImagePageState extends State<EditImagePage> {
                 child: IconButton(
                     icon: Icon(Icons.format_color_fill),
                     onPressed: () {
-                      ColorPicker().background();
+                      ColorPicker().background(selectedBoxId);
                     }),
               ),
               MongolTooltip(
@@ -271,7 +227,7 @@ class _EditImagePageState extends State<EditImagePage> {
                             fontWeight: FontWeight.bold),
                       ),
                       onPressed: () {
-                        ColorPicker().shadow();
+                        ColorPicker().shadow(selectedBoxId);
                       }),
                 ),
               ),
@@ -301,7 +257,7 @@ class _EditImagePageState extends State<EditImagePage> {
                             fontWeight: FontWeight.bold),
                       ),
                       onPressed: () {
-                        ColorPicker().borderColor();
+                        ColorPicker().borderColor(selectedBoxId);
                       }),
                 ),
               ),
