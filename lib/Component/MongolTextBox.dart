@@ -7,102 +7,85 @@ import 'package:zmongol/Component/DragToResizeBox.dart';
 import 'package:zmongol/Controller/StyleController.dart';
 import 'DragToResizeBox.dart';
 
-class MongolTextBox extends StatefulWidget {
+class MongolTextBox extends StatelessWidget {
   final CustomizableText customizableText;
   final Function onTextBoxTapped;
   final Function onTextBoxDeleted;
 
-  const MongolTextBox(this.customizableText, {required this.onTextBoxTapped, required this.onTextBoxDeleted});
+  MongolTextBox(this.customizableText,
+      {required this.onTextBoxTapped, required this.onTextBoxDeleted});
 
-  @override
-  _MongolTextBoxState createState() => _MongolTextBoxState();
-}
-
-class _MongolTextBoxState extends State<MongolTextBox> {
-
-  @override
-  void initState() {
-    Get.put<TextStyleController>(TextStyleController(), tag: widget.customizableText.id);
-    Get.put<TextStyleController>(TextStyleController(), tag: 'border_style_'+ widget.customizableText.id);
-    Get.put<StyleController>(StyleController(), tag: widget.customizableText.id);
-    super.initState();
-  }
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned(
-          top: widget.customizableText.dy,
-          left: widget.customizableText.dx,
-          child: GetBuilder<StyleController>(
-            tag: widget.customizableText.id,
-            builder: (styleCtr) => GestureDetector(
-              onPanUpdate: (DragUpdateDetails d) {
-                widget.onTextBoxTapped();
-                if (widget.customizableText.editable == false) {
-                  widget.customizableText.editable = true;
-                }
-                setState(() {
-                  widget.customizableText.dx += d.delta.dx;
-                  widget.customizableText.dy += d.delta.dy;
-                });
-                // print('onPanUpdate dx:$dx');
-                // print('onPanUpdate dy:$dy');
+    final textController = Get.put<TextStyleController>(TextStyleController(),
+        tag: customizableText.id);
+    final boderController = Get.put<TextStyleController>(TextStyleController(),
+        tag: 'border_style_' + customizableText.id);
+    final styleController =
+        Get.put<StyleController>(StyleController(), tag: customizableText.id);
+    return Stack(children: [
+      Positioned(
+        top: customizableText.dy,
+        left: customizableText.dx,
+        child: Obx(
+          () => GestureDetector(
+            onPanUpdate: (DragUpdateDetails d) {
+              onTextBoxTapped();
+              if (customizableText.editable == false) {
+                customizableText.editable = true;
+              }
+              customizableText.dx += d.delta.dx;
+              customizableText.dy += d.delta.dy;
+              // print('onPanUpdate dx:$dx');
+              // print('onPanUpdate dy:$dy');
+            },
+            child: DragToResizeBox(
+              width: styleController.width.value,
+              height: styleController.height.value,
+              editable: customizableText.editable,
+              //NOTE: disable deletable option as there is an error of styling text when deleting
+              deletable: true,
+              // deletable: false,
+              onTextBoxDeleted: onTextBoxDeleted,
+              onWidthChange: (v) {
+                styleController.width.value += v;
               },
-              child: DragToResizeBox(
-                width: styleCtr.width.value,
-                height: styleCtr.height.value,
-                editable: widget.customizableText.editable,
-                //NOTE: disable deletable option as there is an error of styling text when deleting
-                deletable: false,
-                onTextBoxDeleted: widget.onTextBoxDeleted,
-                onWidthChange: (v) {
-                  setState(() {
-                    styleCtr.width.value += v;
-                  });
-                },
-                onHeightChange: (v) {
-                  setState(() {
-                    styleCtr.height.value += v;
-                  });
-                },
-                child: Container(
-                  width: styleCtr.width.value,
-                  height: styleCtr.height.value,
-                  color: styleCtr.backgroundColor,
-                  alignment: Alignment.center,
-                  child: Stack(
-                    children: [
-                      GetBuilder<TextStyleController>(tag: 'border_style_${widget.customizableText.id}', builder: (borderCtrl) {
-                        return Container(
-                          padding: EdgeInsets.only(top: 16),
-                          child: AutoSizeText(
-                            widget.customizableText.text,
-                            minFontSize: 20,
-                            maxFontSize: 200,
-                            style: borderCtrl.borderStyle.copyWith(fontSize: 200),
-                          ),
-                        );
-                      }),
-                      GetBuilder<TextStyleController>(tag: widget.customizableText.id, builder: (ctr) {
-                        return Container(
-                          padding: EdgeInsets.only(top: 16),
-                          child: AutoSizeText(
-                              widget.customizableText.text,
-                              minFontSize: 20,
-                              maxFontSize: 200,
-                              style: ctr.style.copyWith(fontSize: 200,)
-                          ),
-                        );
-                      }),
-                    ],
-                  ),
+              onHeightChange: (v) {
+                styleController.height.value += v;
+              },
+              child: Container(
+                width: styleController.width.value,
+                height: styleController.height.value,
+                color: styleController.backgroundColor,
+                alignment: Alignment.center,
+                child: Stack(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(top: 16),
+                      child: AutoSizeText(
+                        customizableText.text,
+                        minFontSize: 20,
+                        maxFontSize: 200,
+                        style:
+                            boderController.borderStyle.copyWith(fontSize: 200),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(top: 16),
+                      child: AutoSizeText(customizableText.text,
+                          minFontSize: 20,
+                          maxFontSize: 200,
+                          style: textController.style.copyWith(
+                            fontSize: 200,
+                          )),
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
         ),
-      ],
-    );
+      ),
+    ]);
   }
 }

@@ -20,7 +20,7 @@ class ColorPicker {
       ),
       content: SingleChildScrollView(
         child: MaterialPicker(
-          pickerColor: Get.find<TextStyleController>().style.color!,
+          pickerColor: Get.find<TextStyleController>(tag: id).style.color!,
           onColorChanged: (Color color) {
             Get.find<TextStyleController>(tag: id).setColor(color);
             Get.back();
@@ -40,7 +40,7 @@ class ColorPicker {
       ),
       content: SingleChildScrollView(
         child: MaterialPicker(
-          pickerColor: Get.find<TextStyleController>().style.shadows![0].color,
+          pickerColor: Get.find<TextStyleController>(tag: id).style.shadows![0].color,
           onColorChanged: (Color color) {
             Get.find<TextStyleController>(tag: id).setShadowColor(color);
             Get.back();
@@ -52,13 +52,8 @@ class ColorPicker {
   }
 
   borderColor(String id) {
-    final TextStyleController textStyleController;
-    if (id.isEmpty) {
-      textStyleController = Get.find<TextStyleController>(tag: 'border_style');
-    } else {
-      textStyleController = Get.find<TextStyleController>(tag: 'border_style_$id');
-    }
-   Get.dialog(AlertDialog(
+    final TextStyleController textStyleController = Get.find<TextStyleController>(tag: 'border_style_$id');
+    Get.dialog(AlertDialog(
       titlePadding: const EdgeInsets.all(0.0),
       contentPadding: const EdgeInsets.all(0.0),
       shape: RoundedRectangleBorder(
@@ -86,7 +81,7 @@ class ColorPicker {
       ),
       content: SingleChildScrollView(
         child: MaterialPicker(
-          pickerColor: Get.find<StyleController>().backgroundColor,
+          pickerColor: Get.find<StyleController>(tag: id).backgroundColor,
           onColorChanged: (Color color) {
             Get.find<StyleController>(tag: id).setBackgroundColor(color);
             Get.back();

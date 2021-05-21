@@ -5,15 +5,15 @@ import '../Component/MongolFonts.dart';
 //import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 class TextStyleController extends GetxController {
-  TextStyle _style = TextStyle(
+  var _style = TextStyle(
       fontSize: 26,
       color: Colors.black,
       fontFamily: MongolFonts.haratig,
       shadows: [
         Shadow(offset: Offset.zero, color: Colors.transparent, blurRadius: 0)
-      ]);
+      ]).obs;
 
-  TextStyle _borderStyle = TextStyle(
+  var _borderStyle = TextStyle(
       fontSize: 26,
       fontFamily: MongolFonts.haratig,
       shadows: [
@@ -23,87 +23,78 @@ class TextStyleController extends GetxController {
         ..style = PaintingStyle.stroke
         ..strokeWidth = 8
         ..color = Colors.transparent
-  );
+  ).obs;
 
-  TextStyle get style => _style;
-  TextStyle get borderStyle => _borderStyle;
+  TextStyle get style => _style.value;
+  TextStyle get borderStyle => _borderStyle.value;
 
   bool textShadowAble = false;
 
   setFontSize(double value) {
-    _style = _style.copyWith(fontSize: value);
-    _borderStyle = _borderStyle.copyWith(fontSize: value);
+    _style.value = _style.value.copyWith(fontSize: value);
+    _borderStyle.value = _borderStyle.value.copyWith(fontSize: value);
     print('update fontsize ${style.fontSize}');
-    update();
   }
 
   increaseFontSize() {
-    _style = _style.copyWith(fontSize: style.fontSize! + 2);
-    _borderStyle = _borderStyle.copyWith(fontSize: style.fontSize! + 2);
+    _style.value = _style.value.copyWith(fontSize: _style.value.fontSize! + 2);
+    _borderStyle.value = _borderStyle.value.copyWith(fontSize: _style.value.fontSize! + 2);
     print('update fontsize ${style.fontSize}');
-    update();
   }
 
   decreaseFontSize() {
-    _style = _style.copyWith(fontSize: style.fontSize! - 2);
-    _borderStyle = _borderStyle.copyWith(fontSize: style.fontSize! - 2);
+    _style.value = _style.value.copyWith(fontSize: _style.value.fontSize! - 2);
+    _borderStyle.value = _borderStyle.value.copyWith(fontSize: _style.value.fontSize! - 2);
     print('update fontsize ${style.fontSize}');
-    update();
   }
 
   setColor(Color value) {
-    _style = _style.copyWith(color: value);
-    update();
+    _style.value = _style.value.copyWith(color: value);
   }
 
   setShadowColor(Color value) {
     var shadow = Shadow(color: value, offset: Offset(2, -2), blurRadius: 3);
-    _style = _style.copyWith(shadows: [shadow]);
-    _borderStyle = _borderStyle.copyWith(shadows: [shadow]);
-    update();
+    _style.value = _style.value.copyWith(shadows: [shadow]);
+    _borderStyle.value = _borderStyle.value.copyWith(shadows: [shadow]);
   }
 
   setBorderColor(Color value) {
-   _borderStyle = _borderStyle.copyWith(
+   _borderStyle.value = _borderStyle.value.copyWith(
       foreground: Paint()
         ..style = PaintingStyle.stroke
         ..strokeWidth = 8
         ..color = value,
     );
-   update();
   }
 
   setFontFamily(String value) {
-    _style = _style.copyWith(fontFamily: value);
-    _borderStyle = _borderStyle.copyWith(fontFamily: value);
-    update();
+    _style.value = _style.value.copyWith(fontFamily: value);
+    _borderStyle.value = _borderStyle.value.copyWith(fontFamily: value);
   }
 
   setTextShadow() {
     textShadowAble = !textShadowAble;
     if (textShadowAble) {
-      _style = _style.copyWith(shadows: [
+      _style.value = _style.value.copyWith(shadows: [
         Shadow(
             color: Colors.black.withOpacity(0.5),
             offset: Offset(2, -2),
             blurRadius: 2)
       ]);
 
-      _borderStyle = _borderStyle.copyWith(shadows: [
+      _borderStyle.value = _borderStyle.value.copyWith(shadows: [
         Shadow(
             color: Colors.black.withOpacity(0.5),
             offset: Offset(2, -2),
             blurRadius: 2)
       ]);
     } else {
-      _style = _style.copyWith(shadows: [
+      _style.value = _style.value.copyWith(shadows: [
         Shadow(color: Colors.transparent, offset: Offset.zero, blurRadius: 0)
       ]);
-      _borderStyle = _borderStyle.copyWith(shadows: [
+      _borderStyle.value = _borderStyle.value.copyWith(shadows: [
         Shadow(color: Colors.transparent, offset: Offset.zero, blurRadius: 0)
       ]);
     }
-
-    update();
   }
 }
