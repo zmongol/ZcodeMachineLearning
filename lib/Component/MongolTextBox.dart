@@ -11,9 +11,18 @@ class MongolTextBox extends StatelessWidget {
   final CustomizableText customizableText;
   final Function onTextBoxTapped;
   final Function onTextBoxDeleted;
+  final Function onCopyButtonPressed;
+  final Function onEditButtonPressed;
 
-  MongolTextBox(this.customizableText,
-      {required this.onTextBoxTapped, required this.onTextBoxDeleted});
+  MongolTextBox(
+      this.customizableText,
+      {
+        required this.onTextBoxTapped,
+        required this.onTextBoxDeleted,
+        required this.onCopyButtonPressed,
+        required this.onEditButtonPressed
+      }
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +54,8 @@ class MongolTextBox extends StatelessWidget {
                         onHeightChange: (v) {
                           styleController.height.value += v;
                         },
+                        onCopyButtonPressed: onCopyButtonPressed,
+                        onEditButtonPressed: onEditButtonPressed,
                         child: Container(
                             width: styleController.width.value,
                             height: styleController.height.value,

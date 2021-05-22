@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:zmongol/Component/CustomizableText.dart';
 import 'package:zmongol/Component/MongolTextBox.dart';
@@ -35,6 +36,11 @@ class _EditImagePageState extends State<EditImagePage> {
   int maxNumberOfTextBoxes = 10;
   String selectedBoxId = '';
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   List<Widget> textBoxesView() {
     if (mongolTextBoxes.isEmpty) {
       return [Container()];
@@ -62,28 +68,56 @@ class _EditImagePageState extends State<EditImagePage> {
       } else {
         element.editable = true;
       }
-      final textBoxView = MongolTextBox(element, onTextBoxTapped: () {
-        setState(() {
-          editable = true;
-          selectedBoxId = element.id;
-        });
-      }, onTextBoxDeleted: () {
-        setState(() {
-          selectedBoxId = '';
-          mongolTextBoxes.removeWhere((customizableText) => customizableText.id == element.id);
-          Get.delete<TextStyleController>(tag: element.id);
-          Get.delete<TextStyleController>(tag: 'border_style_'+ element.id);
-          Get.delete<StyleController>(tag: element.id);
-        });
-      });
+      final textBoxView = MongolTextBox(
+        element,
+        onTextBoxTapped: () {
+          _onTextBoxTapped(element);
+        },
+        onTextBoxDeleted: () {
+          _onTextBoxDeleted(element);
+        },
+        onEditButtonPressed: () {
+          _goToEditPage(element);
+        },
+        onCopyButtonPressed: () {
+          _copyText(element);
+        },
+      );
       widgets.add(textBoxView);
     });
     return widgets;
   }
 
-  @override
-  void initState() {
-    super.initState();
+  _onTextBoxTapped(CustomizableText target) {
+    setState(() {
+      editable = true;
+      selectedBoxId = target.id;
+    });
+  }
+
+  _onTextBoxDeleted(CustomizableText target) {
+    setState(() {
+      selectedBoxId = '';
+      mongolTextBoxes.removeWhere((customizableText) => customizableText.id == target.id);
+      Get.delete<TextStyleController>(tag: target.id);
+      Get.delete<TextStyleController>(tag: 'border_style_'+ target.id);
+      Get.delete<StyleController>(tag: target.id);
+    });
+  }
+
+  _goToEditPage(CustomizableText target) {
+    
+  }
+
+  _copyText(CustomizableText target) {
+    ClipboardData data = new ClipboardData(text: target.text);
+    Clipboard.setData(data);
+    Get.snackbar(
+        'Successfully copied ',
+        'the content is copied to your phone',
+        snackPosition:
+        SnackPosition.BOTTOM
+    );
   }
 
   @override

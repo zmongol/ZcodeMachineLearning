@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:zmongol/Component/AutoSizeText/auto_size_text.dart';
 import 'package:zmongol/Component/DragToResizeBox.dart';
@@ -78,6 +79,19 @@ class _SharePageState extends State<SharePage> {
                 setState(() {
                   styleController.height.value += v;
                 });
+              },
+              onCopyButtonPressed: () {
+                ClipboardData data = new ClipboardData(text: widget.text);
+                Clipboard.setData(data);
+                Get.snackbar(
+                    'Successfully copied ',
+                    'the content is copied to your phone',
+                    snackPosition:
+                    SnackPosition.BOTTOM
+                );
+              },
+              onEditButtonPressed: () {
+
               },
               child: Container(
                 color: Colors.grey.shade200,
