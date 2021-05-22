@@ -7,6 +7,7 @@ import 'package:zmongol/Component/AutoSizeText/auto_size_text.dart';
 import 'package:zmongol/Component/DragToResizeBox.dart';
 import 'package:zmongol/Controller/StyleController.dart';
 import 'package:zmongol/Controller/TextController.dart';
+import 'package:zmongol/StartPage.dart';
 
 import 'Component/ColorPicker.dart';
 import 'Component/FontPicker.dart';
@@ -50,6 +51,12 @@ class _SharePageState extends State<SharePage> {
         backgroundColor: Colors.grey.shade500,
         appBar: AppBar(
           backgroundColor: Colors.indigo,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () {
+              Get.offAll(StartPage());
+            },
+          ),
           title: Text('ᢜᡪᡪᢊᢛᡭᢑᡪᡪᡪᡳ',style: TextStyle(fontFamily: MongolFonts.haratig)),
           centerTitle: true,
           actions: [
