@@ -105,8 +105,14 @@ class _EditImagePageState extends State<EditImagePage> {
     });
   }
 
-  _goToEditPage(CustomizableText target) {
-    
+  _goToEditPage(CustomizableText target) async {
+    String? newText = await Get.to(EditorPage(editWithImage: true, text: target.text));
+    if (newText == null || newText == target.text) {
+      return;
+    }
+    setState(() {
+      target.text = newText;
+    });
   }
 
   _copyText(CustomizableText target) {
@@ -138,6 +144,9 @@ class _EditImagePageState extends State<EditImagePage> {
                 ),
                 onPressed: () async {
                   Get.to(EditorPage(editWithImage: true))?.then((value) {
+                    if (value == null) {
+                      return;
+                    }
                     setState(() {
                       final newMongolTextBox = CustomizableText(id: DateTime.now().toString(), text: value, editable: true);
                       selectedBoxId = newMongolTextBox.id;

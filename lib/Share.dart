@@ -12,6 +12,7 @@ import 'Component/ColorPicker.dart';
 import 'Component/FontPicker.dart';
 import 'Component/MongolFonts.dart';
 import 'Component/MongolToolTip.dart';
+import 'EditorPage.dart';
 import 'Utils/ImageUtil.dart';
 
 class SharePage extends StatefulWidget {
@@ -27,12 +28,14 @@ class _SharePageState extends State<SharePage> {
   late final TextStyleController textController;
   late final TextStyleController borderController;
   late final StyleController styleController;
+  String text = '';
 
   @override
   void initState() {
     textController = Get.put<TextStyleController>(TextStyleController(), tag: tag);
     borderController = Get.put<TextStyleController>(TextStyleController(), tag: 'border_style_' + tag);
     styleController = Get.put<StyleController>(StyleController(), tag: tag);
+    text = widget.text;
     super.initState();
   }
 
@@ -90,8 +93,14 @@ class _SharePageState extends State<SharePage> {
                     SnackPosition.BOTTOM
                 );
               },
-              onEditButtonPressed: () {
-
+              onEditButtonPressed: () async {
+                String? newText = await Get.to(EditorPage(editWithImage: true, text: text));
+                if (newText== null || newText == text) {
+                  return;
+                }
+                setState(() {
+                  text = newText;
+                });
               },
               child: Container(
                 color: Colors.grey.shade200,
@@ -109,7 +118,7 @@ class _SharePageState extends State<SharePage> {
                             Container(
                               padding: EdgeInsets.only(top: 16),
                               child: AutoSizeText(
-                                widget.text,
+                                text,
                                 minFontSize: 20,
                                 maxFontSize: 200,
                                 style: borderController.borderStyle.copyWith(fontSize: 200),
@@ -118,7 +127,7 @@ class _SharePageState extends State<SharePage> {
                             Container(
                               padding: EdgeInsets.only(top: 16),
                               child: AutoSizeText(
-                                  widget.text,
+                                  text,
                                   minFontSize: 20,
                                   maxFontSize: 200,
                                   style: textController.style.copyWith(fontSize: 200,)

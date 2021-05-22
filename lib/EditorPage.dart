@@ -17,7 +17,8 @@ import 'Share.dart';
 ///photoWithText
 class EditorPage extends StatefulWidget {
   final bool editWithImage;
-  EditorPage({required this.editWithImage});
+  final String? text;
+  EditorPage({required this.editWithImage, this.text});
 
   @override
   _EditorPageState createState() => _EditorPageState();
@@ -28,7 +29,6 @@ class _EditorPageState extends State<EditorPage> {
   FocusNode _focusNode = FocusNode();
   int cursorOffset = 0;
   bool editable = true;
-
   int layoutTime = 0;
 
   //double canvasWidth = 300.0;
@@ -80,19 +80,16 @@ class _EditorPageState extends State<EditorPage> {
                               Get.dialog(MongolAlertDialog(
                                 title: MongolText('ᡥᡪᡪᢊᡪᡪᡪᢞᡪᡪᡳ',
                                     // title: Text('Alert',
-                                    style: TextStyle(
-                                        color: Colors.red, fontSize: 32, fontFamily: MongolFonts.haratig)),
+                                    style: TextStyle(color: Colors.red, fontSize: 32, fontFamily: MongolFonts.haratig)),
                                 content: MongolText('ᡴᡭᡬᢋᡭᡧ ᡫ ᡥᡪᢞᢚᡬᡪᡪᡳ ᡭᡳ ᡓ',
                                     // content: Text('Confirm Delete?',
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 20, fontFamily: MongolFonts.haratig)),
+                                    style: TextStyle(color: Colors.black, fontSize: 20, fontFamily: MongolFonts.haratig)),
                                 actions: <Widget>[
                                   TextButton(
                                     child: MongolText(
                                       'ᡴᡭᢚᡪᡰᡨ',
                                       // 'cancel',
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 20, fontFamily: MongolFonts.haratig),
+                                      style: TextStyle(color: Colors.black, fontSize: 20, fontFamily: MongolFonts.haratig),
                                     ),
                                     onPressed: () {
                                       Get.back();
@@ -102,8 +99,7 @@ class _EditorPageState extends State<EditorPage> {
                                     child: MongolText(
                                       'ᡥᡪᢞᢚᡬᡰᡨ',
                                       // 'delete',
-                                      style: TextStyle(
-                                          color: Colors.red, fontSize: 20, fontFamily: MongolFonts.haratig),
+                                      style: TextStyle(color: Colors.red, fontSize: 20, fontFamily: MongolFonts.haratig),
                                     ),
                                     onPressed: () {
                                       ctr.delelteAll();
@@ -124,6 +120,11 @@ class _EditorPageState extends State<EditorPage> {
                       onPressed: ctr.text.isNotEmpty
                           ? () {
                               ctr.setLatin('', isMongol: false);
+                              // NOTE: if we're editing an existing text box, go back to previous screen
+                              if (widget.text != null) {
+                                Get.back(result: ctr.text);
+                                return;
+                              }
                               if (widget.editWithImage) {
                                 Get.back(result: ctr.text);
                               } else {
@@ -152,32 +153,32 @@ class _EditorPageState extends State<EditorPage> {
                                   padding: const EdgeInsets.all(4),
                                   child: GetBuilder<TextStyleController>(
                                     builder: (ctr) {
-                                      print(
-                                          'now fontsize = ${ctr.style.fontSize}');
+                                      print('now fontsize = ${ctr.style.fontSize}');
                                       return GetBuilder<KeyboardController>(
                                         builder: (kbCtr) {
+                                          if (widget.text != null) {
+                                            kbCtr.textEditingController.text = widget.text!;
+                                          } else {
+                                            kbCtr.textEditingController.text = '';
+                                          }
                                           return MongolTextField(
-                                            scrollPadding:
-                                                const EdgeInsets.only(),
+                                            scrollPadding: const EdgeInsets.only(),
                                             autofocus: true,
                                             showCursor: true,
                                             readOnly: true,
                                             focusNode: _focusNode,
                                             expands: true,
                                             maxLines: null,
-                                            controller:
-                                                kbCtr.textEditingController,
+                                            controller: kbCtr.textEditingController,
                                             decoration: InputDecoration(
                                               contentPadding: EdgeInsets.only(),
                                               border: InputBorder.none,
                                             ),
-
                                             // keyboardType: MongolKeyboard.inputType,
                                             textInputAction:
-                                                TextInputAction.newline,
+                                            TextInputAction.newline,
                                             //keyboardType: TextInputType.multiline,
-                                            style: TextStyle(
-                                                fontSize: ctr.style.fontSize, fontFamily: MongolFonts.haratig),
+                                            style: TextStyle(fontSize: ctr.style.fontSize, fontFamily: MongolFonts.haratig),
                                             //像平常一样设置键盘输入类型一样将Step1编写的inputType传递进去
                                           );
                                         },
