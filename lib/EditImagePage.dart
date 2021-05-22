@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:zmongol/Component/CustomizableText.dart';
 import 'package:zmongol/Component/MongolTextBox.dart';
@@ -35,9 +36,14 @@ class _EditImagePageState extends State<EditImagePage> {
   int maxNumberOfTextBoxes = 10;
   String selectedBoxId = '';
 
-  textBoxesView() {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  List<Widget> textBoxesView() {
     if (mongolTextBoxes.isEmpty) {
-      return Container();
+      return [Container()];
     }
     List<Widget> widgets = [];
     widgets.add(
@@ -62,36 +68,66 @@ class _EditImagePageState extends State<EditImagePage> {
       } else {
         element.editable = true;
       }
-      final textBoxView = MongolTextBox(element, onTextBoxTapped: () {
-        setState(() {
-          editable = true;
-          selectedBoxId = element.id;
-        });
-      }, onTextBoxDeleted: () {
-        setState(() {
-          selectedBoxId = '';
-          mongolTextBoxes.removeWhere((customizableText) => customizableText.id == element.id);
-          Get.delete<TextStyleController>(tag: element.id);
-          Get.delete<TextStyleController>(tag: 'border_style_'+ element.id);
-          Get.delete<StyleController>(tag: element.id);
-        });
-      });
+      final textBoxView = MongolTextBox(
+        element,
+        onTextBoxTapped: () {
+          _onTextBoxTapped(element);
+        },
+        onTextBoxDeleted: () {
+          _onTextBoxDeleted(element);
+        },
+        onEditButtonPressed: () {
+          _goToEditPage(element);
+        },
+        onCopyButtonPressed: () {
+          _copyText(element);
+        },
+      );
       widgets.add(textBoxView);
     });
-    return Stack(
-      children: widgets,
+    return widgets;
+  }
+
+  _onTextBoxTapped(CustomizableText target) {
+    setState(() {
+      editable = true;
+      selectedBoxId = target.id;
+    });
+  }
+
+  _onTextBoxDeleted(CustomizableText target) {
+    setState(() {
+      selectedBoxId = '';
+      mongolTextBoxes.removeWhere((customizableText) => customizableText.id == target.id);
+      Get.delete<TextStyleController>(tag: target.id);
+      Get.delete<TextStyleController>(tag: 'border_style_'+ target.id);
+      Get.delete<StyleController>(tag: target.id);
+    });
+  }
+
+  _goToEditPage(CustomizableText target) async {
+    String? newText = await Get.to(EditorPage(editWithImage: true, text: target.text));
+    if (newText == null || newText == target.text) {
+      return;
+    }
+    setState(() {
+      target.text = newText;
+    });
+  }
+
+  _copyText(CustomizableText target) {
+    ClipboardData data = new ClipboardData(text: target.text);
+    Clipboard.setData(data);
+    Get.snackbar(
+        'Successfully copied ',
+        'the content is copied to your phone',
+        snackPosition:
+        SnackPosition.BOTTOM
     );
   }
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-
-
     return SafeArea(
       bottom: true,
       child: Scaffold(
@@ -108,6 +144,9 @@ class _EditImagePageState extends State<EditImagePage> {
                 ),
                 onPressed: () async {
                   Get.to(EditorPage(editWithImage: true))?.then((value) {
+                    if (value == null) {
+                      return;
+                    }
                     setState(() {
                       final newMongolTextBox = CustomizableText(id: DateTime.now().toString(), text: value, editable: true);
                       selectedBoxId = newMongolTextBox.id;
@@ -154,7 +193,7 @@ class _EditImagePageState extends State<EditImagePage> {
                         widget.image,
                         fit: BoxFit.fill,
                       ),
-                      textBoxesView()
+                      ...textBoxesView()
                     ],
                   ),
                 ),

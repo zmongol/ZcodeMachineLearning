@@ -1,22 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:zmongol/Component/AutoSizeText/auto_size_text.dart';
 import 'package:zmongol/Component/DragToResizeBox.dart';
 import 'package:zmongol/Controller/StyleController.dart';
 import 'package:zmongol/Controller/TextController.dart';
+import 'package:zmongol/StartPage.dart';
 
 import 'Component/ColorPicker.dart';
 import 'Component/FontPicker.dart';
 import 'Component/MongolFonts.dart';
 import 'Component/MongolToolTip.dart';
+import 'EditorPage.dart';
 import 'Utils/ImageUtil.dart';
 
 class SharePage extends StatefulWidget {
-  SharePage(
-    this.text,
-  );
+  SharePage(this.text);
   final String text;
 
   @override
@@ -24,18 +25,25 @@ class SharePage extends StatefulWidget {
 }
 
 class _SharePageState extends State<SharePage> {
+  final String tag = DateTime.now().toString();
+  late final TextStyleController textController;
+  late final TextStyleController borderController;
+  late final StyleController styleController;
+  String text = '';
 
   @override
   void initState() {
-    // List<String> wordList = widget.text.split(' ');
-    // wordList = wordList.where((element) => element.isNotEmpty);
-    // wordCount = wordList.length;
+    textController = Get.put<TextStyleController>(TextStyleController(), tag: tag);
+    borderController = Get.put<TextStyleController>(TextStyleController(), tag: 'border_style_' + tag);
+    styleController = Get.put<StyleController>(StyleController(), tag: tag);
+    text = widget.text;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    GlobalKey repaintWidgetKey = GlobalKey(); // 绘图key值
+    GlobalKey repaintWidgetKey = GlobalKey();
+    // 绘图key值
 
     return SafeArea(
       bottom: true,
@@ -43,6 +51,12 @@ class _SharePageState extends State<SharePage> {
         backgroundColor: Colors.grey.shade500,
         appBar: AppBar(
           backgroundColor: Colors.indigo,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () {
+              Get.offAll(StartPage());
+            },
+          ),
           title: Text('ᢜᡪᡪᢊᢛᡭᢑᡪᡪᡪᡳ',style: TextStyle(fontFamily: MongolFonts.haratig)),
           centerTitle: true,
           actions: [
@@ -60,20 +74,39 @@ class _SharePageState extends State<SharePage> {
           ],
         ),
         body: Center(
-          child: GetBuilder<StyleController>(
-            builder: (styleCtr) => DragToResizeBox(
-              width: styleCtr.width.value,
-              height: styleCtr.height.value,
+          child: Obx(
+            () => DragToResizeBox(
+              width: styleController.width.value,
+              height: styleController.height.value,
               editable: true,
               deletable: false,
               onWidthChange: (v) {
                 setState(() {
-                  styleCtr.width.value += v;
+                  styleController.width.value += v;
                 });
               },
               onHeightChange: (v) {
                 setState(() {
-                  styleCtr.height.value += v;
+                  styleController.height.value += v;
+                });
+              },
+              onCopyButtonPressed: () {
+                ClipboardData data = new ClipboardData(text: widget.text);
+                Clipboard.setData(data);
+                Get.snackbar(
+                    'Successfully copied ',
+                    'the content is copied to your phone',
+                    snackPosition:
+                    SnackPosition.BOTTOM
+                );
+              },
+              onEditButtonPressed: () async {
+                String? newText = await Get.to(EditorPage(editWithImage: true, text: text));
+                if (newText== null || newText == text) {
+                  return;
+                }
+                setState(() {
+                  text = newText;
                 });
               },
               child: Container(
@@ -83,44 +116,39 @@ class _SharePageState extends State<SharePage> {
                   child: Stack(
                     children: [
                       Container(
-                        width: styleCtr.width.value,
-                        height: styleCtr.height.value,
-                        color: styleCtr.backgroundColor,
+                        width: styleController.width.value,
+                        height: styleController.height.value,
+                        color: styleController.backgroundColor,
                         alignment: Alignment.center,
                         child: Stack(
                           children: [
-                            GetBuilder<TextStyleController>(tag: 'border_style', builder: (borderCtrl) {
-                              return Container(
-                                padding: EdgeInsets.only(top: 16),
-                                child: AutoSizeText(
-                                  widget.text,
+                            Container(
+                              padding: EdgeInsets.only(top: 16),
+                              child: AutoSizeText(
+                                text,
+                                minFontSize: 20,
+                                maxFontSize: 200,
+                                style: borderController.borderStyle.copyWith(fontSize: 200),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(top: 16),
+                              child: AutoSizeText(
+                                  text,
                                   minFontSize: 20,
                                   maxFontSize: 200,
-                                  style: borderCtrl.borderStyle.copyWith(fontSize: 200),
-                                ),
-                              );
-                            }),
-                            GetBuilder<TextStyleController>(builder: (ctr) {
-                              return Container(
-                                padding: EdgeInsets.only(top: 16),
-                                child: AutoSizeText(
-                                    widget.text,
-                                    minFontSize: 20,
-                                    maxFontSize: 200,
-                                    style: ctr.style.copyWith(fontSize: 200,)
-                                ),
-                              );
-                            }),
+                                  style: textController.style.copyWith(fontSize: 200,)
+                              ),
+                            )
                           ],
                         ),
                       ),
                       Positioned(
                           bottom: 8,
                           right: 8,
-                          child: GetBuilder<TextStyleController>(
-                              builder: (ctr) => Text('Z',
-                                  style: TextStyle(
-                                      fontSize: 14, color: ctr.style.color))))
+                          child: Text(
+                              'Z',
+                              style: TextStyle(fontSize: 14)))
                     ],
                   ),
                 ),
@@ -135,32 +163,6 @@ class _SharePageState extends State<SharePage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              // Tooltip(
-              //   message: 'ᡥᡭᡬᢔᡭᡬᡨ ᡭᡧ ᢜᡪᢊᡪᡨ ᡳᡪᢉᡨ  ',
-              //   textStyle: TextStyle(fontSize: 18, color: Colors.white),
-              //   showDuration: Duration(seconds: 3),
-              //   waitDuration: Duration(milliseconds: 500),
-              //   child: IconButton(
-              //       icon: Stack(
-              //         children: [
-              //           Padding(
-              //             padding: const EdgeInsets.only(right: 8),
-              //             child: Text('A',
-              //                 style: TextStyle(
-              //                     fontSize: 20, fontWeight: FontWeight.w600)),
-              //           ),
-              //           Positioned(
-              //               right: 0,
-              //               bottom: 0,
-              //               child: Text('a',
-              //                   style: TextStyle(
-              //                       fontSize: 16, fontWeight: FontWeight.w600)))
-              //         ],
-              //       ),
-              //       onPressed: () {
-              //         FontsPicker().fontSize();
-              //       }),
-              // ),
               MongolTooltip(
                 message: 'ᡥᡭᡬᢔᡭᡬᡨ ᡭᡧ ᢘᡬᡬᡨ ',
                 textStyle: TextStyle(fontSize: 18, color: Colors.white, fontFamily: MongolFonts.haratig),
@@ -169,7 +171,7 @@ class _SharePageState extends State<SharePage> {
                 child: IconButton(
                     icon: Icon(Icons.text_fields),
                     onPressed: () {
-                      FontsPicker().fontFamily('');
+                      FontsPicker().fontFamily(tag);
                     }),
               ),
               MongolTooltip(
@@ -180,7 +182,7 @@ class _SharePageState extends State<SharePage> {
                   child: IconButton(
                       icon: Icon(Icons.color_lens_outlined),
                       onPressed: () {
-                        ColorPicker().font('');
+                        ColorPicker().font(tag);
                       })),
               MongolTooltip(
                 message: 'ᢘᡪᢑᢊᡪᢚᡧ ᡬᡬᡧ ᡥᡭᡬᡪᢊᢊᡪᡨ ',
@@ -190,7 +192,7 @@ class _SharePageState extends State<SharePage> {
                 child: IconButton(
                     icon: Icon(Icons.format_color_fill),
                     onPressed: () {
-                      ColorPicker().background('');
+                      ColorPicker().background(tag);
                     }),
               ),
               MongolTooltip(
@@ -219,7 +221,7 @@ class _SharePageState extends State<SharePage> {
                             fontWeight: FontWeight.bold),
                       ),
                       onPressed: () {
-                        ColorPicker().shadow('');
+                        ColorPicker().shadow(tag);
                       }),
                 ),
               ),
@@ -249,7 +251,7 @@ class _SharePageState extends State<SharePage> {
                             fontWeight: FontWeight.bold),
                       ),
                       onPressed: () {
-                        ColorPicker().borderColor('');
+                        ColorPicker().borderColor(tag);
                       }),
                 ),
               ),
