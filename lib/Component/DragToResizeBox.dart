@@ -10,7 +10,7 @@ class DragToResizeBox extends StatelessWidget {
     required this.editable,
     required this.deletable,
     this.onTextBoxDeleted,
-    required this.onCopyButtonPressed,
+    this.onCopyButtonPressed,
     required this.onEditButtonPressed
   });
   final double width;
@@ -23,7 +23,7 @@ class DragToResizeBox extends StatelessWidget {
   final bool editable;
   final bool deletable;
   final Function? onTextBoxDeleted;
-  final Function onCopyButtonPressed;
+  final Function? onCopyButtonPressed;
   final Function onEditButtonPressed;
 
   @override
@@ -101,13 +101,13 @@ class DragToResizeBox extends StatelessWidget {
                 ),
               ))
               : SizedBox(),
-          editable
+          editable && onCopyButtonPressed != null
               ? Positioned(
               left: -2,
               bottom: -2,
               child: GestureDetector(
                 onTap: () {
-                  onCopyButtonPressed();
+                  onCopyButtonPressed!();
                 },
                 child: Container(
                   width: 32,

@@ -29,6 +29,13 @@ class MongolTextBox extends StatelessWidget {
     final textController = Get.put<TextStyleController>(TextStyleController(), tag: customizableText.id);
     final borderController = Get.put<TextStyleController>(TextStyleController(), tag: 'border_style_' + customizableText.id);
     final styleController = Get.put<StyleController>(StyleController(), tag: customizableText.id);
+
+    if (customizableText.copyFromId != null) {
+      textController.copyValueFrom(customizableText.copyFromId!);
+      borderController.copyValueFrom(customizableText.copyFromId!);
+      styleController.copyValueFrom(customizableText.copyFromId!);
+      customizableText.copyFromId = null;
+    }
     return Positioned(
         top: customizableText.dy,
         left: customizableText.dx,

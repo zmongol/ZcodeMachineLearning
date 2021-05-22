@@ -90,16 +90,6 @@ class _SharePageState extends State<SharePage> {
                   styleController.height.value += v;
                 });
               },
-              onCopyButtonPressed: () {
-                ClipboardData data = new ClipboardData(text: widget.text);
-                Clipboard.setData(data);
-                Get.snackbar(
-                    'Successfully copied ',
-                    'the content is copied to your phone',
-                    snackPosition:
-                    SnackPosition.BOTTOM
-                );
-              },
               onEditButtonPressed: () async {
                 String? newText = await Get.to(EditorPage(editWithImage: true, text: text));
                 if (newText== null || newText == text) {

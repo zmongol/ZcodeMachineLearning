@@ -30,6 +30,11 @@ class TextStyleController extends GetxController {
 
   bool textShadowAble = false;
 
+  copyValueFrom(String tag) {
+    _style.value = Get.find<TextStyleController>(tag: tag).style;
+    _borderStyle.value = Get.find<TextStyleController>(tag: 'border_style_$tag').borderStyle;
+  }
+
   setFontSize(double value) {
     _style.value = _style.value.copyWith(fontSize: value);
     _borderStyle.value = _borderStyle.value.copyWith(fontSize: value);

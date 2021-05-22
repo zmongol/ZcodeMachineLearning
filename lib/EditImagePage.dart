@@ -80,7 +80,7 @@ class _EditImagePageState extends State<EditImagePage> {
           _goToEditPage(element);
         },
         onCopyButtonPressed: () {
-          _copyText(element);
+          _copyTextBox(element);
         },
       );
       widgets.add(textBoxView);
@@ -115,15 +115,12 @@ class _EditImagePageState extends State<EditImagePage> {
     });
   }
 
-  _copyText(CustomizableText target) {
-    ClipboardData data = new ClipboardData(text: target.text);
-    Clipboard.setData(data);
-    Get.snackbar(
-        'Successfully copied ',
-        'the content is copied to your phone',
-        snackPosition:
-        SnackPosition.BOTTOM
-    );
+  _copyTextBox(CustomizableText target) {
+    CustomizableText customizableText = CustomizableText(id: DateTime.now().toString(), text: target.text, editable: true, copyFromId: target.id);
+    mongolTextBoxes.add(customizableText);
+    setState(() {
+
+    });
   }
 
   @override
