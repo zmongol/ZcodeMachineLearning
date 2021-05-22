@@ -35,9 +35,9 @@ class _EditImagePageState extends State<EditImagePage> {
   int maxNumberOfTextBoxes = 10;
   String selectedBoxId = '';
 
-  textBoxesView() {
+  List<Widget> textBoxesView() {
     if (mongolTextBoxes.isEmpty) {
-      return Container();
+      return [Container()];
     }
     List<Widget> widgets = [];
     widgets.add(
@@ -78,9 +78,7 @@ class _EditImagePageState extends State<EditImagePage> {
       });
       widgets.add(textBoxView);
     });
-    return Stack(
-      children: widgets,
-    );
+    return widgets;
   }
 
   @override
@@ -90,8 +88,6 @@ class _EditImagePageState extends State<EditImagePage> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return SafeArea(
       bottom: true,
       child: Scaffold(
@@ -154,7 +150,7 @@ class _EditImagePageState extends State<EditImagePage> {
                         widget.image,
                         fit: BoxFit.fill,
                       ),
-                      textBoxesView()
+                      ...textBoxesView()
                     ],
                   ),
                 ),
