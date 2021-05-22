@@ -80,13 +80,15 @@ class _StartPageState extends State<StartPage> {
                             color: Theme.of(context).backgroundColor,
                             borderRadius: BorderRadius.circular(4)),
                         child: Container(
+                          height: 150,
                           margin: EdgeInsets.fromLTRB(0, 8, 0, 8),
                           child: RotatedBox(
                             quarterTurns: 1,
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                  'Select Photo'
+                                'ᡬᡬᢞᡭᢇ ᢔᡭᡪᢊᡱᡱᡭᡪᡪᡳ',
+                                style: TextStyle(fontSize: 24)
                               ),
                             ),
                           ),
@@ -105,13 +107,15 @@ class _StartPageState extends State<StartPage> {
                             color: Theme.of(context).backgroundColor,
                             borderRadius: BorderRadius.circular(4)),
                         child: Container(
+                          height: 150,
                           margin: EdgeInsets.fromLTRB(0, 8, 0, 8),
                           child: RotatedBox(
                             quarterTurns: 1,
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                  'Plank page'
+                                'ᡥᡭᡬᢔᡭᡬᡨ ᡳᡬᢚᡬᢋᡭ',
+                                style: TextStyle(fontSize: 24)
                               ),
                             ),
                           ),
