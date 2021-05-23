@@ -1,6 +1,6 @@
 
 class CustomizableText {
-  String? imageId;
+  int? imageId;
   String tag;
   String text;
   bool editable;
@@ -18,7 +18,7 @@ class CustomizableText {
     this.dy = 16.0
   });
 
-  setImageId(String imageId) {
+  setImageId(int imageId) {
     this.imageId = imageId;
   }
 

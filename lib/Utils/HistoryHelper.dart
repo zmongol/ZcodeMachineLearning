@@ -1,4 +1,8 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:zmongol/Component/CustomizableText.dart';
 import 'package:zmongol/Component/HistoryImage.dart';
@@ -58,5 +62,25 @@ class HistoryHelper {
         dateTime: maps[i]['dateTime'],
       );
     });
+  }
+
+  saveToHistory(String fileExtension, Uint8List imageData, List<CustomizableText> texts) async {
+    Directory appDocumentsDirectory = await getApplicationDocumentsDirectory();
+    String appDocumentsPath = appDocumentsDirectory.path;
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    String filePath = '$appDocumentsPath/$fileName$fileExtension';
+    File file = File(filePath);
+    file.writeAsBytesSync(imageData);
+
+    HistoryImage historyImage = new HistoryImage(filePath: filePath, dateTime: DateTime.now().toString());
+    try {
+      int imageId = await insertImage(historyImage);
+      texts.forEach((text) {
+        text.setImageId(imageId);
+        insertCustomizableText(text);
+      });
+    } catch (error) {
+      print('An error has occurred: ${error.toString()}');
+    }
   }
 }
