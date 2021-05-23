@@ -1,17 +1,17 @@
 
 class CustomizableText {
-  String id;
+  String tag;
   String text;
   bool editable;
-  String? copyFromId;
+  String? copyFromTag;
   double dx;
   double dy;
 
   CustomizableText({
-    required this.id,
+    required this.tag,
     required this.text,
     required this.editable,
-    this.copyFromId,
+    this.copyFromTag,
     this.dx = 16.0,
     this.dy = 16.0
   });

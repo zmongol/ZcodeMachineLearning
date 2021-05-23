@@ -34,7 +34,7 @@ class _EditImagePageState extends State<EditImagePage> {
   bool editable = true;
   List<CustomizableText> mongolTextBoxes = [];
   int maxNumberOfTextBoxes = 10;
-  String selectedBoxId = '';
+  String selectedBoxTag = '';
 
   @override
   void initState() {
@@ -63,7 +63,7 @@ class _EditImagePageState extends State<EditImagePage> {
     );
 
     mongolTextBoxes.forEach((element) {
-      if (element.id != selectedBoxId) {
+      if (element.tag != selectedBoxTag) {
         element.editable = false;
       } else {
         element.editable = true;
@@ -91,17 +91,17 @@ class _EditImagePageState extends State<EditImagePage> {
   _onTextBoxTapped(CustomizableText target) {
     setState(() {
       editable = true;
-      selectedBoxId = target.id;
+      selectedBoxTag = target.tag;
     });
   }
 
   _onTextBoxDeleted(CustomizableText target) {
     setState(() {
-      selectedBoxId = '';
-      mongolTextBoxes.removeWhere((customizableText) => customizableText.id == target.id);
-      Get.delete<TextStyleController>(tag: target.id);
-      Get.delete<TextStyleController>(tag: 'border_style_'+ target.id);
-      Get.delete<StyleController>(tag: target.id);
+      selectedBoxTag = '';
+      mongolTextBoxes.removeWhere((customizableText) => customizableText.tag == target.tag);
+      Get.delete<TextStyleController>(tag: target.tag);
+      Get.delete<TextStyleController>(tag: 'border_style_'+ target.tag);
+      Get.delete<StyleController>(tag: target.tag);
     });
   }
 
@@ -116,7 +116,7 @@ class _EditImagePageState extends State<EditImagePage> {
   }
 
   _copyTextBox(CustomizableText target) {
-    CustomizableText customizableText = CustomizableText(id: DateTime.now().toString(), text: target.text, editable: true, copyFromId: target.id);
+    CustomizableText customizableText = CustomizableText(tag: DateTime.now().toString(), text: target.text, editable: true, copyFromTag: target.tag);
     mongolTextBoxes.add(customizableText);
     setState(() {
 
@@ -145,8 +145,8 @@ class _EditImagePageState extends State<EditImagePage> {
                       return;
                     }
                     setState(() {
-                      final newMongolTextBox = CustomizableText(id: DateTime.now().toString(), text: value, editable: true);
-                      selectedBoxId = newMongolTextBox.id;
+                      final newMongolTextBox = CustomizableText(tag: DateTime.now().toString(), text: value, editable: true);
+                      selectedBoxTag = newMongolTextBox.tag;
                       mongolTextBoxes.add(newMongolTextBox);
                     });
                   });
@@ -158,7 +158,7 @@ class _EditImagePageState extends State<EditImagePage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    selectedBoxId = '';
+                    selectedBoxTag = '';
                     editable = false;
                   });
                 })
@@ -213,7 +213,7 @@ class _EditImagePageState extends State<EditImagePage> {
                 child: IconButton(
                     icon: Icon(Icons.text_fields),
                     onPressed: () {
-                      FontsPicker().fontFamily(selectedBoxId);
+                      FontsPicker().fontFamily(selectedBoxTag);
                     }),
               ),
               MongolTooltip(
@@ -224,7 +224,7 @@ class _EditImagePageState extends State<EditImagePage> {
                   child: IconButton(
                       icon: Icon(Icons.color_lens_outlined),
                       onPressed: () {
-                        ColorPicker().font(selectedBoxId);
+                        ColorPicker().font(selectedBoxTag);
                       })),
               MongolTooltip(
                 message: 'ᢘᡪᢑᢊᡪᢚᡧ ᡬᡬᡧ ᡥᡭᡬᡪᢊᢊᡪᡨ ',
@@ -234,7 +234,7 @@ class _EditImagePageState extends State<EditImagePage> {
                 child: IconButton(
                     icon: Icon(Icons.format_color_fill),
                     onPressed: () {
-                      ColorPicker().background(selectedBoxId);
+                      ColorPicker().background(selectedBoxTag);
                     }),
               ),
               MongolTooltip(
@@ -263,7 +263,7 @@ class _EditImagePageState extends State<EditImagePage> {
                             fontWeight: FontWeight.bold),
                       ),
                       onPressed: () {
-                        ColorPicker().shadow(selectedBoxId);
+                        ColorPicker().shadow(selectedBoxTag);
                       }),
                 ),
               ),
@@ -293,7 +293,7 @@ class _EditImagePageState extends State<EditImagePage> {
                             fontWeight: FontWeight.bold),
                       ),
                       onPressed: () {
-                        ColorPicker().borderColor(selectedBoxId);
+                        ColorPicker().borderColor(selectedBoxTag);
                       }),
                 ),
               ),
