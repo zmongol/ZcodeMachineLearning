@@ -8,6 +8,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:zmongol/Controller/StyleController.dart';
 import 'package:zmongol/Controller/TextController.dart';
 import 'package:zmongol/StartPage.dart';
+import 'package:zmongol/Utils/HistoryHelper.dart';
 
 import 'Component/MongolFonts.dart';
 import 'Controller/KeyboardController.dart';
@@ -29,6 +30,7 @@ void main() {
 
   Get.put<TextStyleController>(TextStyleController());
   Get.put<TextStyleController>(TextStyleController(), tag: 'border_style');
+  HistoryHelper.instance.open();
   runApp(MyApp());
 }
 
