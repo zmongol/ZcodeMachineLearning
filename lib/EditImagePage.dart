@@ -1,13 +1,16 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:zmongol/Component/CustomizableText.dart';
+import 'package:zmongol/Component/HistoryImage.dart';
 import 'package:zmongol/Component/MongolTextBox.dart';
 import 'package:zmongol/Controller/TextController.dart';
+import 'package:zmongol/Utils/HistoryHelper.dart';
 
 import 'Component/ColorPicker.dart';
 import 'Component/FontPicker.dart';
@@ -16,10 +19,12 @@ import 'Component/MongolToolTip.dart';
 import 'Controller/StyleController.dart';
 import 'EditorPage.dart';
 import 'Utils/ImageUtil.dart';
+import 'package:path/path.dart' as path;
 
 class EditImagePage extends StatefulWidget {
-  EditImagePage(this.image);
+  EditImagePage(this.image, {this.historyTexts});
   final File image;
+  final List<CustomizableText>? historyTexts;
 
   @override
   _EditImagePageState createState() => _EditImagePageState();
@@ -35,10 +40,21 @@ class _EditImagePageState extends State<EditImagePage> {
   List<CustomizableText> mongolTextBoxes = [];
   int maxNumberOfTextBoxes = 10;
   String selectedBoxTag = '';
+  late Uint8List imageData;
+  String fileExtension = '.png';
+  late File t;
 
   @override
   void initState() {
     super.initState();
+    imageData = widget.image.readAsBytesSync();
+    fileExtension = path.extension(widget.image.path);
+    if (widget.historyTexts != null) {
+      mongolTextBoxes = widget.historyTexts!;
+      setState(() {
+
+      });
+    }
   }
 
   List<Widget> textBoxesView() {
@@ -123,6 +139,10 @@ class _EditImagePageState extends State<EditImagePage> {
     });
   }
 
+  saveToHistory() async {
+    await HistoryHelper.instance.saveToHistory(fileExtension, imageData, mongolTextBoxes);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -168,6 +188,7 @@ class _EditImagePageState extends State<EditImagePage> {
                       icon: Icon(Icons.save),
                       onPressed: () {
                         saveToGallery(repaintWidgetKey);
+                        saveToHistory();
                       }),
                   IconButton(
                       icon: Icon(Icons.share),

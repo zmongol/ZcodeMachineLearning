@@ -2,10 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mongol/mongol.dart';
 import 'package:zmongol/Component/CustomizableText.dart';
 import 'package:zmongol/Component/HistoryImage.dart';
+import 'package:zmongol/EditImagePage.dart';
 
 class HistoryItem extends StatefulWidget {
   final HistoryImage historyImage;
@@ -33,7 +35,7 @@ class _HistoryItemState extends State<HistoryItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        //Todo: edit the selected image
+        Get.to(EditImagePage(imageFile, historyTexts: widget.texts));
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 24),
