@@ -6,9 +6,11 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:zmongol/Component/CustomizableText.dart';
 import 'package:zmongol/Component/HistoryImage.dart';
+import 'package:zmongol/Component/MongolTextBoxStyle.dart';
 
 const String IMAGE_TABLE = 'images';
 const String CUSTOM_TEXT_TABLE = 'customizableText';
+const String STYLE_TABLE = 'style';
 
 class HistoryHelper {
   final dbName = 'history.db';
@@ -29,7 +31,12 @@ class HistoryHelper {
           'CREATE TABLE $IMAGE_TABLE(id INTEGER PRIMARY KEY AUTOINCREMENT, filePath TEXT, dateTime TEXT)'
         );
         db.execute(
-            'CREATE TABLE $CUSTOM_TEXT_TABLE(id INTEGER PRIMARY KEY AUTOINCREMENT, imageId INTEGER, tag TEXT, text TEXT, dx REAL, dy REAL)'
+            'CREATE TABLE $CUSTOM_TEXT_TABLE(id INTEGER PRIMARY KEY AUTOINCREMENT, imageId INTEGER, text TEXT, dx REAL, dy REAL)'
+        );
+        db.execute(
+            'CREATE TABLE $STYLE_TABLE('
+                'id INTEGER PRIMARY KEY AUTOINCREMENT, textId INTEGER, width REAL, height REAL,'
+                'backgroundColor TEXT, fontSize REAL, textColor TEXT, fontFamily TEXT, shadowColor TEXT, borderColor TEXT)'
         );
       },
       version: 1,
@@ -53,6 +60,14 @@ class HistoryHelper {
     );
   }
 
+  insertTextStyle(MongolTextBoxStyle mongolTextBoxStyle) async {
+    await db.insert(
+      STYLE_TABLE,
+      mongolTextBoxStyle.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
   Future<List<HistoryImage>> getImages() async {
     final List<Map<String, dynamic>> maps = await db.query(IMAGE_TABLE, orderBy: 'dateTime DESC');
     return List.generate(maps.length, (i) {
@@ -68,13 +83,35 @@ class HistoryHelper {
     final List<Map<String, dynamic>> maps = await db.query(CUSTOM_TEXT_TABLE, where: 'imageId == $imageId');
     return List.generate(maps.length, (i) {
       return CustomizableText(
-          tag: maps[i]['tag'],
+          id: maps[i]['id'],
+          tag: DateTime.now().millisecondsSinceEpoch.toString(),
           text: maps[i]['text'],
           editable: false,
           dx: maps[i]['dx'],
-          dy: maps[i]['dy']
+          dy: maps[i]['dy'],
+          isHistoryItem: 1
       );
     });
+  }
+
+  Future<MongolTextBoxStyle?> getMongolTextBoxStyleByTextId(int id) async {
+    final List<Map<String, dynamic>> maps = await db.query(STYLE_TABLE, where: 'textId == $id');
+    if (maps.isEmpty) {
+      return null;
+    }
+
+    return MongolTextBoxStyle(
+        id: maps[0]['id'],
+        textId: maps[0]['textId'],
+        width: maps[0]['width'],
+        height: maps[0]['height'],
+        backgroundColor: maps[0]['backgroundColor'],
+        fontSize: maps[0]['fontSize'],
+        textColor: maps[0]['textColor'],
+        fontFamily: maps[0]['fontFamily'],
+        shadowColor: maps[0]['shadowColor'],
+        borderColor: maps[0]['borderColor']
+    );
   }
 
   saveToHistory(String fileExtension, Uint8List imageData, List<CustomizableText> texts) async {
@@ -86,14 +123,13 @@ class HistoryHelper {
     file.writeAsBytesSync(imageData);
 
     HistoryImage historyImage = new HistoryImage(filePath: filePath, dateTime: DateTime.now().toString());
-    try {
-      int imageId = await insertImage(historyImage);
-      texts.forEach((text) {
-        text.setImageId(imageId);
-        insertCustomizableText(text);
-      });
-    } catch (error) {
-      print('An error has occurred: ${error.toString()}');
-    }
+    int imageId = await insertImage(historyImage);
+    texts.forEach((text) async {
+      text.setImageId(imageId);
+      int textId = await insertCustomizableText(text);
+      text.setId(textId);
+      MongolTextBoxStyle mongolTextBoxStyle = MongolTextBoxStyle.getMongolTextBoxStyle(text);
+      insertTextStyle(mongolTextBoxStyle);
+    });
   }
 }

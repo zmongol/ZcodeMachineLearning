@@ -5,9 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:zmongol/Component/CustomizableText.dart';
-import 'package:zmongol/Component/HistoryImage.dart';
 import 'package:zmongol/Component/MongolTextBox.dart';
 import 'package:zmongol/Controller/TextController.dart';
 import 'package:zmongol/Utils/HistoryHelper.dart';
@@ -132,7 +130,7 @@ class _EditImagePageState extends State<EditImagePage> {
   }
 
   _copyTextBox(CustomizableText target) {
-    CustomizableText customizableText = CustomizableText(tag: DateTime.now().toString(), text: target.text, editable: true, copyFromTag: target.tag);
+    CustomizableText customizableText = CustomizableText(tag: DateTime.now().millisecondsSinceEpoch.toString(), text: target.text, editable: true, copyFromTag: target.tag);
     mongolTextBoxes.add(customizableText);
     setState(() {
 
@@ -165,7 +163,7 @@ class _EditImagePageState extends State<EditImagePage> {
                       return;
                     }
                     setState(() {
-                      final newMongolTextBox = CustomizableText(tag: DateTime.now().toString(), text: value, editable: true);
+                      final newMongolTextBox = CustomizableText(tag: DateTime.now().millisecondsSinceEpoch.toString(), text: value, editable: true);
                       selectedBoxTag = newMongolTextBox.tag;
                       mongolTextBoxes.add(newMongolTextBox);
                     });
