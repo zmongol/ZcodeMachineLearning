@@ -131,7 +131,7 @@ class _StartPageState extends State<StartPage> {
   historyView() {
     List<Widget> widgets = [];
     historyImages.forEach((element) {
-      HistoryItem item = HistoryItem(element, []);
+      HistoryItem item = HistoryItem(element);
       widgets.add(item);
     });
 

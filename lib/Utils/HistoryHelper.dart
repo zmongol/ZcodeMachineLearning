@@ -64,6 +64,19 @@ class HistoryHelper {
     });
   }
 
+  Future<List<CustomizableText>> getTextsByImageId(int imageId) async {
+    final List<Map<String, dynamic>> maps = await db.query(CUSTOM_TEXT_TABLE, where: 'imageId == $imageId');
+    return List.generate(maps.length, (i) {
+      return CustomizableText(
+          tag: maps[i]['tag'],
+          text: maps[i]['text'],
+          editable: false,
+          dx: maps[i]['dx'],
+          dy: maps[i]['dy']
+      );
+    });
+  }
+
   saveToHistory(String fileExtension, Uint8List imageData, List<CustomizableText> texts) async {
     Directory appDocumentsDirectory = await getApplicationDocumentsDirectory();
     String appDocumentsPath = appDocumentsDirectory.path;

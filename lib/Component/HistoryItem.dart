@@ -8,12 +8,12 @@ import 'package:mongol/mongol.dart';
 import 'package:zmongol/Component/CustomizableText.dart';
 import 'package:zmongol/Component/HistoryImage.dart';
 import 'package:zmongol/EditImagePage.dart';
+import 'package:zmongol/Utils/HistoryHelper.dart';
 
 class HistoryItem extends StatefulWidget {
   final HistoryImage historyImage;
-  final List<CustomizableText> texts;
 
-  const HistoryItem(this.historyImage, this.texts);
+  const HistoryItem(this.historyImage);
 
   @override
   _HistoryItemState createState() => _HistoryItemState();
@@ -22,20 +22,28 @@ class HistoryItem extends StatefulWidget {
 class _HistoryItemState extends State<HistoryItem> {
   late File imageFile;
   late DateTime date;
+  late List<CustomizableText> texts;
 
   @override
   void initState() {
     imageFile = File(widget.historyImage.filePath);
     date = DateTime.parse(widget.historyImage.dateTime);
-
+    getHistoryTexts();
     super.initState();
+  }
+
+  getHistoryTexts() async {
+    texts = await HistoryHelper.instance.getTextsByImageId(widget.historyImage.id!);
+    setState(() {
+
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(EditImagePage(imageFile, historyTexts: widget.texts));
+        Get.to(EditImagePage(imageFile, historyTexts: texts));
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 24),
