@@ -30,7 +30,6 @@ void main() {
 
   Get.put<TextStyleController>(TextStyleController());
   Get.put<TextStyleController>(TextStyleController(), tag: 'border_style');
-  HistoryHelper.instance.open();
   runApp(MyApp());
 }
 

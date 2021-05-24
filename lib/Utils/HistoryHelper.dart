@@ -54,7 +54,7 @@ class HistoryHelper {
   }
 
   Future<List<HistoryImage>> getImages() async {
-    final List<Map<String, dynamic>> maps = await db.query(IMAGE_TABLE);
+    final List<Map<String, dynamic>> maps = await db.query(IMAGE_TABLE, orderBy: 'dateTime DESC');
     return List.generate(maps.length, (i) {
       return HistoryImage(
         id: maps[i]['id'],
