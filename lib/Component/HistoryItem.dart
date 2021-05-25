@@ -26,7 +26,7 @@ class _HistoryItemState extends State<HistoryItem> {
   }
 
   getImageData() {
-    File imageFile = File(widget.historyImage.filePath);
+    File imageFile = File(widget.historyImage.previewFilePath ?? widget.historyImage.filePath);
     return imageFile.readAsBytesSync();
   }
 

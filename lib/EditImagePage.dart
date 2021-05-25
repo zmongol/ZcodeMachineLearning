@@ -137,8 +137,8 @@ class _EditImagePageState extends State<EditImagePage> {
     });
   }
 
-  saveToHistory() async {
-    await HistoryHelper.instance.saveToHistory(fileExtension, imageData, mongolTextBoxes);
+  saveToHistory(Uint8List? previewImageData) async {
+    await HistoryHelper.instance.saveToHistory(fileExtension, imageData, previewImageData, mongolTextBoxes);
   }
 
   @override
@@ -184,9 +184,9 @@ class _EditImagePageState extends State<EditImagePage> {
               : [
                   IconButton(
                       icon: Icon(Icons.save),
-                      onPressed: () {
-                        saveToGallery(repaintWidgetKey);
-                        saveToHistory();
+                      onPressed: () async {
+                        final Uint8List? bytes = await saveToGallery(repaintWidgetKey);
+                        saveToHistory(bytes);
                       }),
                   IconButton(
                       icon: Icon(Icons.share),

@@ -28,7 +28,7 @@ class HistoryHelper {
       onCreate: (db, version) {
         // Run the CREATE TABLE statement on the database.
         db.execute(
-          'CREATE TABLE $IMAGE_TABLE(id INTEGER PRIMARY KEY AUTOINCREMENT, filePath TEXT, dateTime TEXT)'
+          'CREATE TABLE $IMAGE_TABLE(id INTEGER PRIMARY KEY AUTOINCREMENT, filePath TEXT, previewFilePath TEXT, dateTime TEXT)'
         );
         db.execute(
             'CREATE TABLE $CUSTOM_TEXT_TABLE(id INTEGER PRIMARY KEY AUTOINCREMENT, imageId INTEGER, text TEXT, dx REAL, dy REAL)'
@@ -74,6 +74,7 @@ class HistoryHelper {
       return HistoryImage(
         id: maps[i]['id'],
         filePath: maps[i]['filePath'] ?? '',
+        previewFilePath: maps[i]['previewFilePath'],
         dateTime: maps[i]['dateTime'],
       );
     });
@@ -114,15 +115,24 @@ class HistoryHelper {
     );
   }
 
-  saveToHistory(String fileExtension, Uint8List imageData, List<CustomizableText> texts) async {
+  saveToHistory(String fileExtension, Uint8List imageData, Uint8List? previewImageData, List<CustomizableText> texts) async {
     Directory appDocumentsDirectory = await getApplicationDocumentsDirectory();
     String appDocumentsPath = appDocumentsDirectory.path;
     String fileName = DateTime.now().microsecondsSinceEpoch.toString();
     String filePath = '$appDocumentsPath/$fileName$fileExtension';
     File file = File(filePath);
     file.writeAsBytesSync(imageData);
-
     HistoryImage historyImage = new HistoryImage(filePath: filePath, dateTime: DateTime.now().toString());
+
+    if (previewImageData != null) {
+      // NOTE: preview file
+      String previewFileName = 'preview_' +DateTime.now().microsecondsSinceEpoch.toString();
+      String previewFilePath = '$appDocumentsPath/$previewFileName$fileExtension';
+      File previewFile = File(previewFilePath);
+      previewFile.writeAsBytesSync(previewImageData);
+      historyImage.previewFilePath = previewFilePath;
+    }
+
     int imageId = await insertImage(historyImage);
     texts.forEach((text) async {
       text.setImageId(imageId);

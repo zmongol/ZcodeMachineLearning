@@ -3,11 +3,13 @@ import 'dart:typed_data';
 class HistoryImage {
   int? id;
   String filePath;
+  String? previewFilePath;
   String dateTime;
 
   HistoryImage({
     this.id,
     required this.filePath,
+    this.previewFilePath,
     required this.dateTime
   });
 
@@ -18,6 +20,7 @@ class HistoryImage {
   Map<String, dynamic> toMap() {
     return {
       'filePath': filePath,
+      'previewFilePath': previewFilePath,
       'dateTime': dateTime
     };
   }
