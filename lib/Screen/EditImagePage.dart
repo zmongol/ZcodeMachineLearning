@@ -85,16 +85,16 @@ class _EditImagePageState extends State<EditImagePage> {
       final textBoxView = MongolTextBox(
         element,
         onTextBoxTapped: () {
-          _onTextBoxTapped(element);
+          onTextBoxTapped(element);
         },
         onTextBoxDeleted: () {
-          _onTextBoxDeleted(element);
+          onTextBoxDeleted(element);
         },
         onEditButtonPressed: () {
-          _goToEditPage(element);
+          goToEditPage(element);
         },
         onCopyButtonPressed: () {
-          _copyTextBox(element);
+          copyTextBox(element);
         },
       );
       widgets.add(textBoxView);
@@ -102,14 +102,14 @@ class _EditImagePageState extends State<EditImagePage> {
     return widgets;
   }
 
-  _onTextBoxTapped(CustomizableText target) {
+  onTextBoxTapped(CustomizableText target) {
     setState(() {
       editable = true;
       selectedBoxTag = target.tag;
     });
   }
 
-  _onTextBoxDeleted(CustomizableText target) {
+  onTextBoxDeleted(CustomizableText target) {
     setState(() {
       selectedBoxTag = '';
       mongolTextBoxes.removeWhere((customizableText) => customizableText.tag == target.tag);
@@ -119,7 +119,7 @@ class _EditImagePageState extends State<EditImagePage> {
     });
   }
 
-  _goToEditPage(CustomizableText target) async {
+  goToEditPage(CustomizableText target) async {
     String? newText = await Get.to(EditorPage(editWithImage: true, text: target.text));
     if (newText == null || newText == target.text) {
       return;
@@ -129,7 +129,7 @@ class _EditImagePageState extends State<EditImagePage> {
     });
   }
 
-  _copyTextBox(CustomizableText target) {
+  copyTextBox(CustomizableText target) {
     CustomizableText customizableText = CustomizableText(tag: DateTime.now().microsecondsSinceEpoch.toString(), text: target.text, editable: true, copyFromTag: target.tag);
     mongolTextBoxes.add(customizableText);
     setState(() {

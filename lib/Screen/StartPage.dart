@@ -52,7 +52,7 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
     setState(() {isLoading = false;});
   }
 
-  _selectPhoto() async {
+  selectPhoto() async {
     File image;
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -101,7 +101,7 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
       children: [
         GestureDetector(
           onTap: () {
-            _selectPhoto();
+            selectPhoto();
           },
           child: Container(
             margin: EdgeInsets.all(4),

@@ -94,11 +94,13 @@ class _HistoryItemState extends State<HistoryItem> {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: Colors.red),
+                    color: Colors.red
+                ),
                 child: MongolText(
                     'ᡥᡪᢞᢚᡬᡰᡨ',
                     style: TextStyle(fontSize: 16, color: Colors.white)
-                )),
+                )
+            ),
           ),
         ],
         child: GestureDetector(
@@ -113,10 +115,10 @@ class _HistoryItemState extends State<HistoryItem> {
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                    color: Colors.grey[300]!,
-                    blurRadius: 12.0,
-                    spreadRadius: 2.0,
-                    offset: Offset(0, 5)),
+                  color: Colors.grey.withOpacity(0.5),
+                  blurRadius: 5,
+                  offset: Offset(0, 3)
+                ),
               ],
             ),
             child: Row(
