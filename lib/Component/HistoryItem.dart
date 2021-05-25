@@ -2,13 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mongol/mongol.dart';
 import 'package:zmongol/Component/CustomizableText.dart';
 import 'package:zmongol/Component/HistoryImage.dart';
-import 'package:zmongol/EditImagePage.dart';
-import 'package:zmongol/Utils/HistoryHelper.dart';
 
 class HistoryItem extends StatefulWidget {
   final HistoryImage historyImage;
@@ -21,15 +18,16 @@ class HistoryItem extends StatefulWidget {
 }
 
 class _HistoryItemState extends State<HistoryItem> {
-  late File imageFile;
-  late DateTime date;
   late List<CustomizableText> texts;
 
   @override
   void initState() {
-    imageFile = File(widget.historyImage.filePath);
-    date = DateTime.parse(widget.historyImage.dateTime);
     super.initState();
+  }
+
+  getImageData() {
+    File imageFile = File(widget.historyImage.filePath);
+    return imageFile.readAsBytesSync();
   }
 
   @override
@@ -55,16 +53,20 @@ class _HistoryItemState extends State<HistoryItem> {
         ),
         child: Row(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(8.0),
-                bottomLeft: Radius.circular(8.0),
+            Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(8), bottomLeft: Radius.circular(8)),
+                image: DecorationImage(
+                  image: MemoryImage(getImageData()),
+                  fit: BoxFit.fill,
+                ),
               ),
-              child: Image.file(imageFile, fit: BoxFit.contain),
             ),
             SizedBox(width: 32),
             MongolText(
-                DateFormat('yyyy-MM-dd').format(date)
+                DateFormat('yyyy-MM-dd').format(DateTime.parse(widget.historyImage.dateTime))
             )
           ],
         ),
