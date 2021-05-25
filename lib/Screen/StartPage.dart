@@ -105,10 +105,10 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
           },
           child: Container(
             margin: EdgeInsets.all(4),
-            width: 40,
+            width: 50,
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.white),
-                color: Theme.of(context).backgroundColor,
+                color: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.circular(4)),
             child: Container(
               height: 150,
@@ -116,10 +116,10 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
               child: RotatedBox(
                 quarterTurns: 1,
                 child: Align(
-                  alignment: Alignment.centerLeft,
+                  alignment: Alignment.center,
                   child: Text(
                       'ᡬᡬᢞᡭᢇ ᢔᡭᡪᢊᡱᡱᡭᡪᡪᡳ',
-                      style: TextStyle(fontSize: 24)
+                      style: TextStyle(fontSize: 24, color: Colors.white)
                   ),
                 ),
               ),
@@ -132,10 +132,10 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
           },
           child: Container(
             margin: EdgeInsets.all(4),
-            width: 40,
+            width: 50,
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.white),
-                color: Theme.of(context).backgroundColor,
+                color: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.circular(4)),
             child: Container(
               height: 150,
@@ -143,10 +143,10 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
               child: RotatedBox(
                 quarterTurns: 1,
                 child: Align(
-                  alignment: Alignment.centerLeft,
+                  alignment: Alignment.center,
                   child: Text(
                       'ᡥᡭᡬᢔᡭᡬᡨ ᡳᡬᢚᡬᢋᡭ',
-                      style: TextStyle(fontSize: 24)
+                      style: TextStyle(fontSize: 24, color: Colors.white)
                   ),
                 ),
               ),
