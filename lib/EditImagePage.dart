@@ -130,7 +130,7 @@ class _EditImagePageState extends State<EditImagePage> {
   }
 
   _copyTextBox(CustomizableText target) {
-    CustomizableText customizableText = CustomizableText(tag: DateTime.now().millisecondsSinceEpoch.toString(), text: target.text, editable: true, copyFromTag: target.tag);
+    CustomizableText customizableText = CustomizableText(tag: DateTime.now().microsecondsSinceEpoch.toString(), text: target.text, editable: true, copyFromTag: target.tag);
     mongolTextBoxes.add(customizableText);
     setState(() {
 
@@ -163,7 +163,7 @@ class _EditImagePageState extends State<EditImagePage> {
                       return;
                     }
                     setState(() {
-                      final newMongolTextBox = CustomizableText(tag: DateTime.now().millisecondsSinceEpoch.toString(), text: value, editable: true);
+                      final newMongolTextBox = CustomizableText(tag: DateTime.now().microsecondsSinceEpoch.toString(), text: value, editable: true);
                       selectedBoxTag = newMongolTextBox.tag;
                       mongolTextBoxes.add(newMongolTextBox);
                     });

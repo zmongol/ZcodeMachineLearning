@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
+import 'package:zmongol/Component/CustomizableText.dart';
 import 'package:zmongol/Component/HistoryImage.dart';
 import 'package:zmongol/Component/HistoryItem.dart';
 import 'package:zmongol/EditorPage.dart';import 'Component/MongolFonts.dart';
@@ -15,13 +16,29 @@ class StartPage extends StatefulWidget {
   _StartPageState createState() => _StartPageState();
 }
 
-class _StartPageState extends State<StartPage> {
+class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
   List<HistoryImage> historyImages = [];
 
   @override
   void initState() {
     getHistory();
     super.initState();
+  }
+
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    setState(() {
+      if (state == AppLifecycleState.resumed) {
+        getHistory();
+      }
+    });
   }
 
   _selectPhoto() async {
@@ -51,7 +68,8 @@ class _StartPageState extends State<StartPage> {
             minimumAspectRatio: 1.0,
           ));
       if (croppedFile != null) {
-        Get.to(() => EditImagePage(croppedFile));
+        await Get.to(() => EditImagePage(croppedFile));
+        getHistory();
       }
     } else {
       print('No image selected.');
@@ -60,6 +78,7 @@ class _StartPageState extends State<StartPage> {
 
   getHistory() async {
     await HistoryHelper.instance.open();
+    historyImages = [];
     historyImages = await HistoryHelper.instance.getImages();
     setState(() {
 
@@ -131,7 +150,11 @@ class _StartPageState extends State<StartPage> {
   historyView() {
     List<Widget> widgets = [];
     historyImages.forEach((element) {
-      HistoryItem item = HistoryItem(element);
+      HistoryItem item = HistoryItem(element, () async {
+        List<CustomizableText> texts = await HistoryHelper.instance.getTextsByImageId(element.id!);
+        await Get.to(() => EditImagePage(File(element.filePath), historyTexts: texts));
+        getHistory();
+      });
       widgets.add(item);
     });
 

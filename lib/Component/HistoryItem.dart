@@ -12,8 +12,9 @@ import 'package:zmongol/Utils/HistoryHelper.dart';
 
 class HistoryItem extends StatefulWidget {
   final HistoryImage historyImage;
+  final Function onItemPressed;
 
-  const HistoryItem(this.historyImage);
+  const HistoryItem(this.historyImage, this.onItemPressed);
 
   @override
   _HistoryItemState createState() => _HistoryItemState();
@@ -28,22 +29,14 @@ class _HistoryItemState extends State<HistoryItem> {
   void initState() {
     imageFile = File(widget.historyImage.filePath);
     date = DateTime.parse(widget.historyImage.dateTime);
-    getHistoryTexts();
     super.initState();
-  }
-
-  getHistoryTexts() async {
-    texts = await HistoryHelper.instance.getTextsByImageId(widget.historyImage.id!);
-    setState(() {
-
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(EditImagePage(imageFile, historyTexts: texts));
+        widget.onItemPressed();
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 24),

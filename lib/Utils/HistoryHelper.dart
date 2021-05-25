@@ -84,7 +84,7 @@ class HistoryHelper {
     return List.generate(maps.length, (i) {
       return CustomizableText(
           id: maps[i]['id'],
-          tag: DateTime.now().millisecondsSinceEpoch.toString(),
+          tag: DateTime.now().microsecondsSinceEpoch.toString(),
           text: maps[i]['text'],
           editable: false,
           dx: maps[i]['dx'],
@@ -117,7 +117,7 @@ class HistoryHelper {
   saveToHistory(String fileExtension, Uint8List imageData, List<CustomizableText> texts) async {
     Directory appDocumentsDirectory = await getApplicationDocumentsDirectory();
     String appDocumentsPath = appDocumentsDirectory.path;
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    String fileName = DateTime.now().microsecondsSinceEpoch.toString();
     String filePath = '$appDocumentsPath/$fileName$fileExtension';
     File file = File(filePath);
     file.writeAsBytesSync(imageData);

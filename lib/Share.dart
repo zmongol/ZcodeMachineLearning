@@ -25,7 +25,7 @@ class SharePage extends StatefulWidget {
 }
 
 class _SharePageState extends State<SharePage> {
-  final String tag = DateTime.now().millisecondsSinceEpoch.toString();
+  final String tag = DateTime.now().microsecondsSinceEpoch.toString();
   late final TextStyleController textController;
   late final TextStyleController borderController;
   late final StyleController styleController;
