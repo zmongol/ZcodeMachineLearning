@@ -52,6 +52,9 @@ class _EditImagePageState extends State<EditImagePage> {
       setState(() {
 
       });
+    } else {
+      // NOTE: if image is from photo gallery, delete the file to release memory device
+      widget.image.delete();
     }
   }
 
@@ -205,10 +208,7 @@ class _EditImagePageState extends State<EditImagePage> {
                   key: repaintWidgetKey,
                   child: Stack(
                     children: [
-                      Image.file(
-                        widget.image,
-                        fit: BoxFit.fill,
-                      ),
+                      Image.memory(imageData, fit: BoxFit.fill),
                       ...textBoxesView()
                     ],
                   ),
