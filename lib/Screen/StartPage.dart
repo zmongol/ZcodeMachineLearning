@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
@@ -149,12 +150,23 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
 
   historyView() {
     List<Widget> widgets = [];
+    SlidableController slidableController = SlidableController();
     historyImages.forEach((element) {
-      HistoryItem item = HistoryItem(element, () async {
+      HistoryItem item = HistoryItem(
+        element,
+        slidableController,
+        onItemPressed: () async {
         List<CustomizableText> texts = await HistoryHelper.instance.getTextsByImageId(element.id!);
         await Get.to(() => EditImagePage(File(element.filePath), historyTexts: texts));
         getHistory();
-      });
+        },
+        onItemDeleted: () async {
+          await HistoryHelper.instance.deleteImage(element);
+          setState(() {
+            getHistory();
+          });
+        }
+      );
       widgets.add(item);
     });
 

@@ -68,6 +68,24 @@ class HistoryHelper {
     );
   }
 
+  deleteImage(HistoryImage historyImage) async {
+    List<CustomizableText> texts = await HistoryHelper.instance.getTextsByImageId(historyImage.id!);
+    int rs = await db.delete(IMAGE_TABLE, where: 'id = ${historyImage.id}');
+    if (rs > 0) {
+      File imageFile = File(historyImage.filePath);
+      imageFile.delete();
+      if (historyImage.previewFilePath != null) {
+        File previewImageFile = File(historyImage.previewFilePath!);
+        previewImageFile.delete();
+      }
+    }
+
+    texts.forEach((element) {
+      db.delete(STYLE_TABLE, where: 'textId = ${element.id}');
+      db.delete(CUSTOM_TEXT_TABLE, where: 'id = ${element.id}');
+    });
+  }
+
   Future<List<HistoryImage>> getImages() async {
     final List<Map<String, dynamic>> maps = await db.query(IMAGE_TABLE, orderBy: 'dateTime DESC');
     return List.generate(maps.length, (i) {
