@@ -5,6 +5,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
+import 'package:zmongol/Component/LoadingIndicator.dart';
 import 'package:zmongol/Model/CustomizableText.dart';
 import 'package:zmongol/Model/HistoryImage.dart';
 import 'package:zmongol/Component/HistoryItem.dart';
@@ -19,6 +20,7 @@ class StartPage extends StatefulWidget {
 
 class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
   List<HistoryImage> historyImages = [];
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -40,6 +42,14 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
         getHistory();
       }
     });
+  }
+
+  showLoadingView() {
+    setState(() {isLoading = true;});
+  }
+
+  hideLoadingView() {
+    setState(() {isLoading = false;});
   }
 
   _selectPhoto() async {
@@ -78,12 +88,11 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
   }
 
   getHistory() async {
+    showLoadingView();
     await HistoryHelper.instance.open();
     historyImages = [];
     historyImages = await HistoryHelper.instance.getImages();
-    setState(() {
-
-    });
+    hideLoadingView();
   }
 
   optionButtons() {
@@ -156,9 +165,11 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
         element,
         slidableController,
         onItemPressed: () async {
-        List<CustomizableText> texts = await HistoryHelper.instance.getTextsByImageId(element.id!);
-        await Get.to(() => EditImagePage(File(element.filePath), historyTexts: texts));
-        getHistory();
+          showLoadingView();
+          List<CustomizableText> texts = await HistoryHelper.instance.getTextsByImageId(element.id!);
+          hideLoadingView();
+          await Get.to(() => EditImagePage(File(element.filePath), historyTexts: texts));
+          getHistory();
         },
         onItemDeleted: () async {
           await HistoryHelper.instance.deleteImage(element);
@@ -171,8 +182,13 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
     });
 
     return Expanded(
-      child: ListView(
-        children: widgets
+      child: Stack(
+        children: [
+          ListView(
+              children: widgets
+          ),
+          isLoading ? LoadingIndicator() : Container()
+        ],
       ),
     );
   }
