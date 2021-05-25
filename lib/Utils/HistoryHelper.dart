@@ -134,6 +134,11 @@ class HistoryHelper {
   }
 
   saveToHistory(String fileExtension, Uint8List imageData, Uint8List? previewImageData, List<CustomizableText> texts) async {
+    // NOTE: max 50 images in history
+    int c = await count();
+    if (c >= 50) {
+      return;
+    }
     Directory appDocumentsDirectory = await getApplicationDocumentsDirectory();
     String appDocumentsPath = appDocumentsDirectory.path;
     String fileName = DateTime.now().microsecondsSinceEpoch.toString();
@@ -159,5 +164,10 @@ class HistoryHelper {
       MongolTextBoxStyle mongolTextBoxStyle = MongolTextBoxStyle.getMongolTextBoxStyle(text);
       insertTextStyle(mongolTextBoxStyle);
     });
+  }
+
+  count() async {
+    final List<Map<String, dynamic>> rs = await db.rawQuery('SELECT COUNT(*) FROM $IMAGE_TABLE');
+    return rs[0]['COUNT(*)'];
   }
 }
