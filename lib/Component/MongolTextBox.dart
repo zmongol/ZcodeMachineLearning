@@ -57,6 +57,7 @@ class _MongolTextBoxState extends State<MongolTextBox> {
       textController.setShadowColor(getColorFromString(mongolTextBoxStyle!.shadowColor));
       textController.setFontSize(mongolTextBoxStyle!.fontSize);
       borderController.setBorderColor(getColorFromString(mongolTextBoxStyle!.borderColor));
+      borderController.setFontFamily(mongolTextBoxStyle!.fontFamily);
       styleController.height.value = mongolTextBoxStyle!.height;
       styleController.width.value = mongolTextBoxStyle!.width;
       styleController.setBackgroundColor(getColorFromString(mongolTextBoxStyle!.backgroundColor));
