@@ -9,6 +9,8 @@ import 'package:mongol/mongol.dart';
 import 'package:zmongol/Model/CustomizableText.dart';
 import 'package:zmongol/Model/HistoryImage.dart';
 
+import 'MongolFonts.dart';
+
 class HistoryItem extends StatefulWidget {
   final HistoryImage historyImage;
   final Function onItemPressed;
@@ -41,19 +43,38 @@ class _HistoryItemState extends State<HistoryItem> {
   }
 
   deleteItem() async {
-    Get.dialog(
-      AlertDialog(
-        title: Text('Delete item'),
-        content: Text('Do you want to delete this image?'),
-        actions: [
-          TextButton(onPressed: () => Get.back(), child: Text('Cancel')),
-          TextButton(onPressed: () {
+    Get.dialog(MongolAlertDialog(
+      title: MongolText(
+          'ᡥᡪᡪᢊᡪᡪᡪᢞᡪᡪᡳ',
+          style: TextStyle(color: Colors.red, fontSize: 32, fontFamily: MongolFonts.haratig)
+      ),
+      content: MongolText('ᡴᡭᡬᢋᡭᡧ ᡫ ᡥᡪᢞᢚᡬᡪᡪᡳ ᡭᡳ ᡓ',
+          style: TextStyle(color: Colors.black, fontSize: 20, fontFamily: MongolFonts.haratig)
+      ),
+      actions: <Widget>[
+        // NOTE: cancel button
+        TextButton(
+          child: MongolText(
+            'ᡴᡭᢚᡪᡰᡨ',
+            style: TextStyle(color: Colors.black, fontSize: 20, fontFamily: MongolFonts.haratig),
+          ),
+          onPressed: () {
+            Get.back();
+          },
+        ),
+        //NOTE: delete button
+        TextButton(
+          child: MongolText(
+            'ᡥᡪᢞᢚᡬᡰᡨ',
+            style: TextStyle(color: Colors.red, fontSize: 20, fontFamily: MongolFonts.haratig),
+          ),
+          onPressed: () {
             widget.onItemDeleted();
             Get.back();
-          }, child: Text('Delete')),
-        ],
-      )
-    );
+          },
+        ),
+      ],
+    ));
   }
 
   @override
@@ -74,9 +95,8 @@ class _HistoryItemState extends State<HistoryItem> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: Colors.red),
-                child: Text(
-                    'Delete',
-                    textAlign: TextAlign.center,
+                child: MongolText(
+                    'ᡥᡪᢞᢚᡬᡰᡨ',
                     style: TextStyle(fontSize: 16, color: Colors.white)
                 )),
           ),
