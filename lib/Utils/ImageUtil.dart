@@ -42,27 +42,26 @@ Future<Null> shareUiImage(key) async {
 }
 
 //todo保存图片到相册
-saveToGallery(key) async {
+Future<Uint8List?> saveToGallery(key) async {
+  // return;
   ByteData? sourceByteData = await _capturePngToByteData(key);
   if (sourceByteData != null) {
     Uint8List sourceBytes = sourceByteData.buffer.asUint8List();
     if (Platform.isIOS) {
       var status = await Permission.photos.status;
       if (status.isBlank!) {
-        Map<Permission, PermissionStatus> statuses = await [
-          Permission.photos,
-        ].request();
+        Map<Permission, PermissionStatus> statuses = await [Permission.photos,].request();
         saveToGallery(key);
       }
       if (status.isGranted || status.isLimited) {
-        final result = await ImageGallerySaver.saveImage(sourceBytes,
-            quality: 60, name: "hello");
+        final result = await ImageGallerySaver.saveImage(sourceBytes, quality: 60, name: "hello");
         if (result!=null) {
+          return sourceBytes;
           print('ok');
- Get.snackbar('successfully', 'saved');
+          Get.snackbar('successfully', 'saved');
         } else {
           print('error');
-Get.snackbar('faild','');
+          Get.snackbar('failed','');
         }
       }
       if (status.isDenied) {
@@ -71,23 +70,18 @@ Get.snackbar('faild','');
     } else if (Platform.isAndroid) {
       var status = await Permission.storage.status;
       if (status.isBlank!) {
-        Map<Permission, PermissionStatus> statuses = await [
-          Permission.storage,
-        ].request();
+        Map<Permission, PermissionStatus> statuses = await [Permission.storage].request();
         saveToGallery(key);
       }
       if (status.isGranted) {
         print("Android已授权");
-        final result =
-            await ImageGallerySaver.saveImage(sourceBytes, quality: 60);
+        final result = await ImageGallerySaver.saveImage(sourceBytes, quality: 60);
         if (result != null) {
+          return sourceBytes;
           print('ok');
-          Get.snackbar('save to gallery success', 'save to gallery success',
-              snackPosition: SnackPosition.BOTTOM);
-// toast("保存成功", wring: false);
+          Get.snackbar('save to gallery success', 'save to gallery success', snackPosition: SnackPosition.BOTTOM);
         } else {
           print('error');
-// toast("保存失败");
         }
       }
       if (status.isDenied) {
