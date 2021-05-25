@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
-import 'package:zmongol/Component/CustomizableText.dart';
-import 'package:zmongol/Component/HistoryImage.dart';
+import 'package:zmongol/Model/CustomizableText.dart';
+import 'package:zmongol/Model/HistoryImage.dart';
 import 'package:zmongol/Component/HistoryItem.dart';
-import 'package:zmongol/EditorPage.dart';import 'Component/MongolFonts.dart';
+import 'package:zmongol/Screen/EditorPage.dart';import '../Component/MongolFonts.dart';
 import 'EditImagePage.dart';
-import 'Utils/HistoryHelper.dart';
+import '../Utils/HistoryHelper.dart';
 
 class StartPage extends StatefulWidget {
   @override

@@ -4,9 +4,9 @@ import 'dart:typed_data';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:zmongol/Component/CustomizableText.dart';
-import 'package:zmongol/Component/HistoryImage.dart';
-import 'package:zmongol/Component/MongolTextBoxStyle.dart';
+import 'package:zmongol/Model/CustomizableText.dart';
+import 'package:zmongol/Model/HistoryImage.dart';
+import 'package:zmongol/Model/MongolTextBoxStyle.dart';
 
 const String IMAGE_TABLE = 'images';
 const String CUSTOM_TEXT_TABLE = 'customizableText';

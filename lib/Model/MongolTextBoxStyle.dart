@@ -1,4 +1,4 @@
-import 'package:zmongol/Component/CustomizableText.dart';
+import 'package:zmongol/Model/CustomizableText.dart';
 import 'package:zmongol/Controller/StyleController.dart';
 import 'package:zmongol/Controller/TextController.dart';
 import 'package:get/get.dart';

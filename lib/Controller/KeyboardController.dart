@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zmongol/Utils/SqliteHelper.dart';
-import 'package:zmongol/WordLogic.dart';
-import 'package:zmongol/ZcodeLogic.dart';
+import 'package:zmongol/Utils/WordLogic.dart';
+import 'package:zmongol/Utils/ZcodeLogic.dart';
 //import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 class KeyboardController extends GetxController {

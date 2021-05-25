@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mongol/mongol.dart';
-import 'package:zmongol/Component/CustomizableText.dart';
-import 'package:zmongol/Component/HistoryImage.dart';
+import 'package:zmongol/Model/CustomizableText.dart';
+import 'package:zmongol/Model/HistoryImage.dart';
 
 class HistoryItem extends StatefulWidget {
   final HistoryImage historyImage;

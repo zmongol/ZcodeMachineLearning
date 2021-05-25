@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:zmongol/Component/CustomizableText.dart';
-import 'package:zmongol/Component/MongolTextBoxStyle.dart';
+import 'package:zmongol/Model/CustomizableText.dart';
+import 'package:zmongol/Model/MongolTextBoxStyle.dart';
 import 'package:zmongol/Controller/TextController.dart';
 import 'package:get/get.dart';
 import 'package:zmongol/Component/AutoSizeText/auto_size_text.dart';
