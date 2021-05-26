@@ -8,9 +8,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mongol/mongol.dart';
 import 'package:transparent_image/transparent_image.dart';
-import 'package:zmongol/Model/CustomizableText.dart';
 import 'package:zmongol/Model/HistoryImage.dart';
-import 'package:zmongol/Utils/HistoryHelper.dart';
 
 import 'MongolFonts.dart';
 

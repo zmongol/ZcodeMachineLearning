@@ -8,7 +8,6 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:zmongol/Controller/StyleController.dart';
 import 'package:zmongol/Controller/TextController.dart';
 import 'package:zmongol/Screen/StartPage.dart';
-import 'package:zmongol/Utils/HistoryHelper.dart';
 
 import 'Component/MongolFonts.dart';
 import 'Controller/KeyboardController.dart';
