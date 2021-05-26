@@ -1,9 +1,14 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'dart:ui';
 
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mongol/mongol.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:zmongol/Component/MongolFonts.dart';
 import 'package:zmongol/Model/CustomizableText.dart';
 import 'package:zmongol/Model/HistoryImage.dart';
 import 'package:zmongol/Model/MongolTextBoxStyle.dart';
@@ -139,6 +144,23 @@ class HistoryHelper {
     // NOTE: max 50 images in history
     int c = await count();
     if (c >= 50) {
+      Get.dialog(MongolAlertDialog(
+        content: MongolText(
+            'Enter your text here',
+            style: TextStyle(color: Colors.black, fontSize: 32, fontFamily: MongolFonts.haratig)
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: MongolText(
+              'OK',
+              style: TextStyle(color: Colors.black, fontSize: 20, fontFamily: MongolFonts.haratig),
+            ),
+            onPressed: () {
+              Get.back();
+            }
+          )
+        ],
+      ));
       return;
     }
 
