@@ -12,6 +12,7 @@ import 'package:zmongol/Component/MongolFonts.dart';
 import 'package:zmongol/Model/CustomizableText.dart';
 import 'package:zmongol/Model/HistoryImage.dart';
 import 'package:zmongol/Model/MongolTextBoxStyle.dart';
+import 'package:zmongol/Screen/StartPage.dart';
 
 const String IMAGE_TABLE = 'images';
 const String CUSTOM_TEXT_TABLE = 'customizableText';
@@ -156,7 +157,7 @@ class HistoryHelper {
               style: TextStyle(color: Colors.black, fontSize: 20, fontFamily: MongolFonts.haratig),
             ),
             onPressed: () {
-              Get.back();
+              Get.offAll(StartPage());
             }
           )
         ],
