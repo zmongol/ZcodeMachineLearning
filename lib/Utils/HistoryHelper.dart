@@ -72,8 +72,10 @@ class HistoryHelper {
     List<CustomizableText> texts = await HistoryHelper.instance.getTextsByImageId(historyImage.id!);
     int rs = await db.delete(IMAGE_TABLE, where: 'id = ${historyImage.id}');
     if (rs > 0) {
-      File imageFile = File(historyImage.filePath);
-      imageFile.delete();
+      if (historyImage.filePath != null) {
+        File imageFile = File(historyImage.filePath!);
+        imageFile.delete();
+      }
       if (historyImage.previewFilePath != null) {
         File previewImageFile = File(historyImage.previewFilePath!);
         previewImageFile.delete();
@@ -133,19 +135,24 @@ class HistoryHelper {
     );
   }
 
-  saveToHistory(String fileExtension, Uint8List imageData, Uint8List? previewImageData, List<CustomizableText> texts) async {
+  saveToHistory(String fileExtension, Uint8List? imageData, Uint8List? previewImageData, List<CustomizableText> texts) async {
     // NOTE: max 50 images in history
     int c = await count();
     if (c >= 50) {
       return;
     }
+
+    HistoryImage historyImage = new HistoryImage(dateTime: DateTime.now().toString());
+
     Directory appDocumentsDirectory = await getApplicationDocumentsDirectory();
     String appDocumentsPath = appDocumentsDirectory.path;
-    String fileName = DateTime.now().microsecondsSinceEpoch.toString();
-    String filePath = '$appDocumentsPath/$fileName$fileExtension';
-    File file = File(filePath);
-    file.writeAsBytesSync(imageData);
-    HistoryImage historyImage = new HistoryImage(filePath: filePath, dateTime: DateTime.now().toString());
+    if (imageData != null) {
+      String fileName = DateTime.now().microsecondsSinceEpoch.toString();
+      String filePath = '$appDocumentsPath/$fileName$fileExtension';
+      File file = File(filePath);
+      file.writeAsBytesSync(imageData);
+      historyImage.filePath = filePath;
+    }
 
     if (previewImageData != null) {
       // NOTE: preview file

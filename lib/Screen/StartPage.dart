@@ -9,9 +9,11 @@ import 'package:zmongol/Component/LoadingIndicator.dart';
 import 'package:zmongol/Model/CustomizableText.dart';
 import 'package:zmongol/Model/HistoryImage.dart';
 import 'package:zmongol/Component/HistoryItem.dart';
-import 'package:zmongol/Screen/EditorPage.dart';import '../Component/MongolFonts.dart';
+import 'package:zmongol/Screen/EditorPage.dart';
+import '../Component/MongolFonts.dart';
 import 'EditImagePage.dart';
 import '../Utils/HistoryHelper.dart';
+import 'Share.dart';
 
 class StartPage extends StatefulWidget {
   @override
@@ -168,8 +170,13 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
           showLoadingView();
           List<CustomizableText> texts = await HistoryHelper.instance.getTextsByImageId(element.id!);
           hideLoadingView();
-          await Get.to(() => EditImagePage(File(element.filePath), historyTexts: texts));
-          getHistory();
+          if (element.filePath != null && element.filePath!.isNotEmpty) {
+            await Get.to(() => EditImagePage(File(element.filePath!), historyTexts: texts));
+            getHistory();
+          } else {
+            await Get.to(() => SharePage(texts[0]));
+            getHistory();
+          }
         },
         onItemDeleted: () async {
           await HistoryHelper.instance.deleteImage(element);

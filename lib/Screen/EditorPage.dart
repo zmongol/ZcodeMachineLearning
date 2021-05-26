@@ -8,6 +8,7 @@ import 'package:mongol/mongol.dart';
 import 'package:zmongol/Component/MongolToolTip.dart';
 import 'package:zmongol/Controller/KeyboardController.dart';
 import 'package:zmongol/Controller/StyleController.dart';
+import 'package:zmongol/Model/CustomizableText.dart';
 
 import '../Component/MongolFonts.dart';
 import '../Controller/TextController.dart';
@@ -128,7 +129,8 @@ class _EditorPageState extends State<EditorPage> {
                               if (widget.editWithImage) {
                                 Get.back(result: ctr.text);
                               } else {
-                                Get.to(SharePage(ctr.text));
+                                CustomizableText text = CustomizableText(tag: DateTime.now().microsecondsSinceEpoch.toString(), text: ctr.text, editable: true);
+                                Get.to(SharePage(text));
                               }
                             }
                           : null),

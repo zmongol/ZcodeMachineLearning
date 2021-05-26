@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +7,10 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mongol/mongol.dart';
+import 'package:transparent_image/transparent_image.dart';
 import 'package:zmongol/Model/CustomizableText.dart';
 import 'package:zmongol/Model/HistoryImage.dart';
+import 'package:zmongol/Utils/HistoryHelper.dart';
 
 import 'MongolFonts.dart';
 
@@ -30,16 +33,25 @@ class HistoryItem extends StatefulWidget {
 }
 
 class _HistoryItemState extends State<HistoryItem> {
-  late List<CustomizableText> texts;
+  bool isPlankImage = false;
 
   @override
   void initState() {
     super.initState();
+    isPlankImage = widget.historyImage.filePath == null;
   }
 
-  getImageData() {
-    File imageFile = File(widget.historyImage.previewFilePath ?? widget.historyImage.filePath);
-    return imageFile.readAsBytesSync();
+  Uint8List getImageData() {
+    if (!isPlankImage) {
+      File imageFile = File((widget.historyImage.previewFilePath ?? widget.historyImage.filePath!));
+      return imageFile.readAsBytesSync();
+    }
+    if (widget.historyImage.previewFilePath != null) {
+      File imageFile = File((widget.historyImage.previewFilePath!));
+      return imageFile.readAsBytesSync();
+    } else {
+      return kTransparentImage;
+    }
   }
 
   deleteItem() async {

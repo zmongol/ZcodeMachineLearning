@@ -1,13 +1,16 @@
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:zmongol/Component/AutoSizeText/auto_size_text.dart';
 import 'package:zmongol/Component/DragToResizeBox.dart';
 import 'package:zmongol/Controller/StyleController.dart';
 import 'package:zmongol/Controller/TextController.dart';
+import 'package:zmongol/Model/CustomizableText.dart';
 import 'package:zmongol/Screen/StartPage.dart';
+import 'package:zmongol/Utils/HistoryHelper.dart';
 
 import '../Component/ColorPicker.dart';
 import '../Component/FontPicker.dart';
@@ -17,27 +20,62 @@ import 'EditorPage.dart';
 import '../Utils/ImageUtil.dart';
 
 class SharePage extends StatefulWidget {
-  SharePage(this.text);
-  final String text;
+  SharePage(this.customizableText);
+  final CustomizableText customizableText;
 
   @override
   _SharePageState createState() => _SharePageState();
 }
 
 class _SharePageState extends State<SharePage> {
-  final String tag = DateTime.now().microsecondsSinceEpoch.toString();
+  late final String tag;
   late final TextStyleController textController;
   late final TextStyleController borderController;
   late final StyleController styleController;
   String text = '';
+  bool isFromHistory = false;
 
   @override
   void initState() {
+    tag = widget.customizableText.tag;
     textController = Get.put<TextStyleController>(TextStyleController(), tag: tag);
     borderController = Get.put<TextStyleController>(TextStyleController(), tag: 'border_style_' + tag);
     styleController = Get.put<StyleController>(StyleController(), tag: tag);
-    text = widget.text;
+    text = widget.customizableText.text;
+    loadHistoryStyle();
     super.initState();
+  }
+
+  Color getColorFromString(String s) {
+    return Color(int.parse('0x$s'));
+  }
+
+  loadHistoryStyle() async {
+    if (widget.customizableText.isHistoryItem == 0) {
+      return;
+    }
+    var mongolTextBoxStyle = await HistoryHelper.instance.getMongolTextBoxStyleByTextId(widget.customizableText.id!);
+    if (mongolTextBoxStyle != null) {
+      textController.setColor(getColorFromString(mongolTextBoxStyle.textColor));
+      textController.setBorderColor(getColorFromString(mongolTextBoxStyle.borderColor));
+      textController.setFontFamily(mongolTextBoxStyle.fontFamily);
+      textController.setShadowColor(getColorFromString(mongolTextBoxStyle.shadowColor));
+      textController.setFontSize(mongolTextBoxStyle.fontSize);
+      borderController.setBorderColor(getColorFromString(mongolTextBoxStyle.borderColor));
+      borderController.setFontFamily(mongolTextBoxStyle.fontFamily);
+      styleController.height.value = mongolTextBoxStyle.height;
+      styleController.width.value = mongolTextBoxStyle.width;
+      styleController.setBackgroundColor(getColorFromString(mongolTextBoxStyle.backgroundColor));
+      mongolTextBoxStyle = null;
+      widget.customizableText.isHistoryItem = 0;
+      setState(() {});
+    }
+
+  }
+
+  saveToHistory(Uint8List? previewImageData) async {
+    final customizableText = CustomizableText(tag: tag, text: text, editable: false, dx: 0, dy: 0);
+    await HistoryHelper.instance.saveToHistory('.png', null, previewImageData, [customizableText]);
   }
 
   @override
@@ -62,8 +100,9 @@ class _SharePageState extends State<SharePage> {
           actions: [
             IconButton(
                 icon: Icon(Icons.save),
-                onPressed: () {
-                  saveToGallery(repaintWidgetKey);
+                onPressed: () async {
+                  final Uint8List? bytes = await saveToGallery(repaintWidgetKey);
+                  saveToHistory(bytes);
                 }),
             IconButton(
                 icon: Icon(Icons.share),
