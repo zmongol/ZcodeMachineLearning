@@ -5,6 +5,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
+import 'package:mongol/mongol.dart';
 import 'package:zmongol/Component/LoadingIndicator.dart';
 import 'package:zmongol/Model/CustomizableText.dart';
 import 'package:zmongol/Model/HistoryImage.dart';
@@ -107,7 +108,7 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
           },
           child: Container(
             margin: EdgeInsets.all(4),
-            width: 50,
+            width: 80,
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.white),
                 color: Theme.of(context).primaryColor,
@@ -116,11 +117,11 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
               height: 150,
               margin: EdgeInsets.fromLTRB(0, 8, 0, 8),
               child: RotatedBox(
-                quarterTurns: 1,
+                quarterTurns: 0,
                 child: Align(
                   alignment: Alignment.center,
-                  child: Text(
-                      'ᡬᡬᢞᡭᢇ ᢔᡭᡪᢊᡱᡱᡭᡪᡪᡳ',
+                  child: MongolText(
+                      'ᡬᡬᢞᡭᢇ ᢘᡪᢊᡪᢝᡨ ᡥᡭᢑᡪᡧ ᢜᡪᡪᢊᢛᡳ ᡳᡪᢝ ᡳᡬᢚᡬᢋᡭ',
                       style: TextStyle(fontSize: 24, color: Colors.white)
                   ),
                 ),
@@ -134,7 +135,7 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
           },
           child: Container(
             margin: EdgeInsets.all(4),
-            width: 50,
+            width: 80,
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.white),
                 color: Theme.of(context).primaryColor,
@@ -143,11 +144,11 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
               height: 150,
               margin: EdgeInsets.fromLTRB(0, 8, 0, 8),
               child: RotatedBox(
-                quarterTurns: 1,
+                quarterTurns: 0,
                 child: Align(
                   alignment: Alignment.center,
-                  child: Text(
-                      'ᡥᡭᡬᢔᡭᡬᡨ ᡳᡬᢚᡬᢋᡭ',
+                  child: MongolText(
+                      'ᡬᡭᡬᡳᢊᡪᡧ ᡥᡭᡬᢔᡭᡬᡨ ᡳᡬᢚᡬᢋᡭ',
                       style: TextStyle(fontSize: 24, color: Colors.white)
                   ),
                 ),
