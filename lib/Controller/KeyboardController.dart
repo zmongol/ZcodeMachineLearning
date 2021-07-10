@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zmongol/Utils/ZcodeLogic.dart';
@@ -102,7 +104,8 @@ class KeyboardController extends GetxController {
     } else {
       v = v.trim();
       String value = v + ' ';
-      final cursorPosition = textEditingController.selection.base.offset;
+      final cursorPosition =
+          max(0, textEditingController.selection.base.offset);
       // Right text of cursor position
       String suffixText = textEditingController.text.substring(cursorPosition);
 
@@ -151,7 +154,9 @@ class KeyboardController extends GetxController {
     }
 
     // The cursor is at the beginning.
-    if (textSelection.start == 0) {
+    if (textSelection.start < 0) {
+      cands.clear();
+      update(['cands']);
       return;
     }
 

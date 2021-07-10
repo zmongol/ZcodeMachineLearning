@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +8,7 @@ import 'package:zmongol/Component/MongolToolTip.dart';
 import 'package:zmongol/Controller/KeyboardController.dart';
 import 'package:zmongol/Controller/StyleController.dart';
 import 'package:zmongol/Model/CustomizableText.dart';
+import 'package:zmongol/widgets/word_suggestions_section.dart';
 
 import '../Component/MongolFonts.dart';
 import '../Controller/TextController.dart';
@@ -34,7 +34,7 @@ class _EditorPageState extends State<EditorPage> {
 
   //double canvasWidth = 300.0;
   //   double canvasHeight = 480.0;
-  List teinIlgalCands = [
+  List<String> teinIlgalCands = [
     'ᡭᡧ',
     'ᡬᡬᡧ',
     'ᡳ',
@@ -67,7 +67,7 @@ class _EditorPageState extends State<EditorPage> {
               title: Text(
                 'Z ᢌᡭᡪᢊᡱᡱᡭᢐ',
                 style: TextStyle(fontFamily: MongolFonts.haratig),
-                ),
+              ),
               centerTitle: true,
               backgroundColor: Colors.indigo,
               actions: [
@@ -81,16 +81,25 @@ class _EditorPageState extends State<EditorPage> {
                               Get.dialog(MongolAlertDialog(
                                 title: MongolText('ᡥᡪᡪᢊᡪᡪᡪᢞᡪᡪᡳ',
                                     // title: Text('Alert',
-                                    style: TextStyle(color: Colors.red, fontSize: 32, fontFamily: MongolFonts.haratig)),
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 32,
+                                        fontFamily: MongolFonts.haratig)),
                                 content: MongolText('ᡴᡭᡬᢋᡭᡧ ᡫ ᡥᡪᢞᢚᡬᡪᡪᡳ ᡭᡳ ᡓ',
                                     // content: Text('Confirm Delete?',
-                                    style: TextStyle(color: Colors.black, fontSize: 20, fontFamily: MongolFonts.haratig)),
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontFamily: MongolFonts.haratig)),
                                 actions: <Widget>[
                                   TextButton(
                                     child: MongolText(
                                       'ᡴᡭᢚᡪᡰᡨ',
                                       // 'cancel',
-                                      style: TextStyle(color: Colors.black, fontSize: 20, fontFamily: MongolFonts.haratig),
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                          fontFamily: MongolFonts.haratig),
                                     ),
                                     onPressed: () {
                                       Get.back();
@@ -100,7 +109,10 @@ class _EditorPageState extends State<EditorPage> {
                                     child: MongolText(
                                       'ᡥᡪᢞᢚᡬᡰᡨ',
                                       // 'delete',
-                                      style: TextStyle(color: Colors.red, fontSize: 20, fontFamily: MongolFonts.haratig),
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 20,
+                                          fontFamily: MongolFonts.haratig),
                                     ),
                                     onPressed: () {
                                       ctr.delelteAll();
@@ -129,7 +141,12 @@ class _EditorPageState extends State<EditorPage> {
                               if (widget.editWithImage) {
                                 Get.back(result: ctr.text);
                               } else {
-                                CustomizableText text = CustomizableText(tag: DateTime.now().microsecondsSinceEpoch.toString(), text: ctr.text, editable: true);
+                                CustomizableText text = CustomizableText(
+                                    tag: DateTime.now()
+                                        .microsecondsSinceEpoch
+                                        .toString(),
+                                    text: ctr.text,
+                                    editable: true);
                                 Get.to(SharePage(text));
                               }
                             }
@@ -155,32 +172,40 @@ class _EditorPageState extends State<EditorPage> {
                                   padding: const EdgeInsets.all(4),
                                   child: GetBuilder<TextStyleController>(
                                     builder: (ctr) {
-                                      print('now fontsize = ${ctr.style.fontSize}');
+                                      print(
+                                          'now fontsize = ${ctr.style.fontSize}');
                                       return GetBuilder<KeyboardController>(
                                         builder: (kbCtr) {
                                           if (widget.text != null) {
-                                            kbCtr.textEditingController.text = widget.text!;
+                                            kbCtr.textEditingController.text =
+                                                widget.text!;
                                           } else {
-                                            kbCtr.textEditingController.text = '';
+                                            kbCtr.textEditingController.text =
+                                                '';
                                           }
                                           return MongolTextField(
-                                            scrollPadding: const EdgeInsets.only(),
+                                            scrollPadding:
+                                                const EdgeInsets.only(),
                                             autofocus: true,
                                             showCursor: true,
                                             readOnly: true,
                                             focusNode: _focusNode,
                                             expands: true,
                                             maxLines: null,
-                                            controller: kbCtr.textEditingController,
+                                            controller:
+                                                kbCtr.textEditingController,
                                             decoration: InputDecoration(
                                               contentPadding: EdgeInsets.only(),
                                               border: InputBorder.none,
                                             ),
                                             // keyboardType: MongolKeyboard.inputType,
                                             textInputAction:
-                                            TextInputAction.newline,
+                                                TextInputAction.newline,
                                             //keyboardType: TextInputType.multiline,
-                                            style: TextStyle(fontSize: ctr.style.fontSize, fontFamily: MongolFonts.haratig),
+                                            style: TextStyle(
+                                                fontSize: ctr.style.fontSize,
+                                                fontFamily:
+                                                    MongolFonts.haratig),
                                             //像平常一样设置键盘输入类型一样将Step1编写的inputType传递进去
                                           );
                                         },
@@ -330,100 +355,43 @@ class _EditorPageState extends State<EditorPage> {
                             }
                             return Container(
                               width: MediaQuery.of(context).size.width,
-                              height: candsHeight,
-                              // color: Colors.grey.shade100,
-                              child: ctr.latin.value.isEmpty
-                                  ? Stack(
-                                      children: [
-                                        Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 8.0),
-                                            child: ListView.builder(
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                itemCount:
-                                                    teinIlgalCands.length,
-                                                itemBuilder: (context, int i) {
-                                                  var e = teinIlgalCands[i];
-                                                  return InkWell(
-                                                    onTap: () {
-                                                      ctr.enterAction(e);
-                                                    },
-                                                    child: Container(
-                                                      height: 100,
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .symmetric(
-                                                                horizontal: 4),
-                                                        child: MongolText(
-                                                          e,
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'haratig',
-                                                              fontSize: 24),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                })),
-                                      ],
-                                    )
-                                  : Stack(
-                                      children: [
-                                        Container(
-                                          width:
-                                              MediaQuery.of(context).size.width,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  ctr.cands.isNotEmpty
+                                      ? Container(
                                           height: candsHeight,
-                                          child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 8.0),
-                                              child: ListView.builder(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  itemCount: ctr.cands.length,
-                                                  itemBuilder:
-                                                      (context, int i) {
-                                                    var e = ctr.cands[i];
-                                                    return InkWell(
-                                                      onTap: () {
-                                                        ctr.enterAction(e);
-                                                      },
-                                                      child: Container(
-                                                        height: candsHeight,
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .symmetric(
-                                                                  horizontal:
-                                                                      4),
-                                                          child: MongolText(
-                                                            e,
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    'haratig',
-                                                                fontSize: 24),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    );
-                                                  })),
-                                        ),
-                                        Positioned(
-                                            bottom: 0,
-                                            left: 150,
-                                            child: Container(
-                                              padding: EdgeInsets.all(2),
-                                              // color: Colors.white,
-                                              child: Text(
-                                                ctr.latin.value,
-                                                style: TextStyle(
-                                                    fontSize: 22,
-                                                    color: Colors.black),
-                                              ),
-                                            )),
-                                      ],
+                                          child: WordSuggestionsSection(
+                                            height: candsHeight,
+                                            words: ctr.cands,
+                                            onWordTap: (word) {
+                                              ctr.enterAction(word);
+                                            },
+                                          ),
+                                        )
+                                      : Container(),
+                                  Flexible(
+                                    child: WordSuggestionsSection(
+                                      height: 40,
+                                      words: teinIlgalCands,
+                                      onWordTap: (word) {
+                                        ctr.enterAction(word);
+                                      },
                                     ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(2),
+                                    // color: Colors.white,
+                                    child: Text(
+                                      ctr.latin.value,
+                                      style: TextStyle(
+                                        fontSize: 22,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             );
                           },
                         ),
