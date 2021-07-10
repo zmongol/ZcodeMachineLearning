@@ -245,7 +245,7 @@ class KeyboardController extends GetxController {
     var result = <String>[];
     for (var word in words) {
       if (word.isNotEmpty) {
-        print("Getting autocomplete for $word");
+        // print("Getting autocomplete for $word");
         Set<String> suggestions = await mlAutocomplete.runCustomModel(word);
 
         if (isSentence) {
@@ -271,7 +271,7 @@ class KeyboardController extends GetxController {
     var end = DateTime.now().millisecondsSinceEpoch;
     print('total time taken for ML: ${end - start}ms');
 
-    print("Autocomplete result: $result");
+    // print("Autocomplete result: $result");
     return result.sublist(0);
   }
 
