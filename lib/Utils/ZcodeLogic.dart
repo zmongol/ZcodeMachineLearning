@@ -1,37 +1,42 @@
 var dagbr = {
-  "yin": "ᡬᡬᡧ ",
-  "on": "ᡭᡧ ",
-  "o": "ᡳ ",
-  "ban": "ᡳᡪᡧ ",
-  "iyan": "ᡬᡬᡪᡧ ",
-  "bar": "ᡳᡪᢝ ",
-  "iyar": "ᡬᡬᡪᢝ ",
+  "yin": "ᡬᡬᡧ ", "in": "ᡬᡬᡧ ", "jin": "ᡬᡬᡧ ",
+  "i": "ᡥᡫ ",
+  "on": "ᡭᡧ ", "vn": "ᡭᡧ ",
+  "o": "ᡳ ", "no": "ᡳ ",
+  "yen": "ᡬᡬᡪᡧ ",
+  "yer": "ᡬᡬᡪᢝ ",
+  "iyen": "ᡬᡬᡪᡧ ", "iyan": "ᡬᡬᡪᡧ ", "eyen": "ᡬᡬᡪᡧ ", "eyan": "ᡬᡬᡪᡧ ",
+  "iyar": "ᡬᡬᡪᢝ ", "iyer": "ᡬᡬᡪᢝ ", "eyar": "ᡬᡬᡪᢝ ", "eyer": "ᡬᡬᡪᢝ ",
   "yi": "ᡬᡫ ",
-  "i": "ᡫ ",
-  "to": "ᢘᡳ ",
-  "do": "ᢙᡳ ",
-  "tor": "ᢘᡭᢝ ",
-  "dor": "ᢙᡭᢝ ",
-  "tahi": "ᢘᡪᢊᡬᡦ ",
-  "dahi": "ᢙᡪᢊᡬᡦ ",
-  "toni": "ᢘᡭᡱᡫ ",
-  "doni": "ᢙᡭᡱᡫ ",
-  "tai": "ᢘᡪᡫ ",
-  "loga": "ᢏᡭᢉᡨ ",
-  "luge": "ᢏᡭᢊᡪᡨ ",
-  "aca": "ᡥᢚᡧ ",
-  "dagan": "ᢙᡪᡱᡱᡪᡧ ",
-  "degen": "ᢙᡪᢊᡪᡧ ",
-  "tagan": "ᢘᡪᡱᡱᡪᡧ ",
-  "tegen": "ᢘᡪᢊᡪᡧ ",
-  "nogod": "ᡯᡭᡱᡱᡭᡭᡧ ",
-  "nugud": "ᡯᡭᢋᡭᡭᡧ ",
-  "vd": "ᡭᡭᡧ ",
-  "vv": "ᡭᡳ ",
-  "nar": "ᡯᡪᢝ ",
-  "mini": "ᢌᡬᡱᡫ ",
-  "cini": "ᢚᡬᡱᡫ ",
-  "ni": "ᡯᡫ "
+  "vd": "ᡭᡭᡧ ", "od": "ᡭᡭᡧ ",
+  "vv": "ᡭᡳ ", "uu": "ᡭᡳ ", "oo": "ᡭᡳ ",
+  "kino": "ᢤᡬᡱᡭ ",
+  "radio": "ᢞᡪᢙᡬᡭ ",
+  "america": "ᡥᡪᢎᢟᢞᡬᢤᡪᡨ ",
+  "europe": "ᡥᢟᡭᡬᢞᡭᡶᡪᡨ ",
+  "su": "ᢔᡭᡦ ",
+  "ch": "ᡭᡭ ", "chi": "ᡭᡭᡫ ",
+  "cino": "ᢚᡬᡱᡳᡨ ",
+  "a": "ᡨ ", "e": "ᡨ ",
+  "kod": "ᢥᡭᢙᡦ ",
+  "tatar": "ᢘᡪᢘᡪᢝ ",
+  "buu": "ᡴᡭᡳ ", "boo": "ᡴᡭᡳ ",
+  "mh": "ᢌᡭᡪᢊᡱᡱᡭᢐ ᢋᡭᡬᢎᡭᡧ ",
+  "mo": "ᢌᡭᡪᢊᡱᡱᡭᢐ ᡥᡭᢑᡭᢓ ",
+  "mm": "ᢌᡭᡪᢊᡱᡱᡭᢐ ᢌᡭᢞᡫ ",
+  "hb": "ᢋᡭᡬᢑᡭᡧ ᡴᡭᡬᡬᢝ ",
+  "um": "ᡥᡭᡬᡴᡭᢝ ᢌᡭᡪᢊᡱᡱᡭᢐ ",
+  "unicode": "ᢜᡭᡬᡱᡬᢥᡭᢙᡦ ",
+
+  //
+  // databases["hebei"] = "ᡥᢨᢟᡳᢟᡫ";
+  // databases["sh"] = "ᢗ";
+  // databases["shi"] = "ᢗᡫ";
+  // databases["zh"] = "ᢨ";
+  // databases["zhi"] = "ᢨᡫ";
+  // databases["english"] = "ᡥᡪᡪᢊᢊᢑᡫ";
+  // databases["england"] = "ᡥᡪᡪᢊᢊᢑᡫ";
+  // databases["tere"] = "ᢘᡪᢞᡧ";
 };
 
 var aArr = ["ᡥᡧ", "", "", "ᡥᡪ", "ᡪᡪ", "", "ᡪ", "ᡪᡪ", "", "ᡧ", "ᡪᡨ", "ᡨ"];
@@ -49,7 +54,7 @@ var lArr = ["ᢏ", "", "", "ᢏ", "", "", "ᢑ", "", "", "ᢐ", "", ""];
 var sArr = ["ᢔ", "", "", "ᢔ", "", "", "ᢔ", "", "", "ᢓ", "", ""];
 var xArr = ["ᢗ", "", "", "ᢗ", "", "", "ᢗ", "", "", "ᢖ", "", ""];
 var tArr = ["ᢘ", "", "", "ᢘ", "", "", "ᢙ", "ᢘ", "", "ᢘᡦ", "", ""];
-var dArr = ["ᢙ", "", "", "ᢘ", "", "", "ᡭᡪ", "ᢙ", "", "ᡭᡧ", "ᢙᡦ", ""];
+var dArr = ["ᢙ", "", "", "ᢙ", "", "", "ᡭᡪ", "ᢙ", "", "ᡭᡧ", "ᢙᡦ", "ᡦ"];
 var cArr = ["ᢚ", "", "", "ᢚ", "", "", "ᢚ", "", "", "ᢚᡦ", "", ""];
 var jArr = ["ᡬ", "", "", "ᡬ", "", "", "ᢛ", "", "", "ᢛᡦ", "", ""];
 var yArr = ["ᢜ", "", "", "ᢜ", "", "", "ᢜ", "", "", "ᡫ", "", ""];
@@ -57,14 +62,28 @@ var rArr = ["ᢞ", "", "", "ᢞ", "", "", "ᢞ", "", "", "ᢝ", "", ""];
 var wArr = ["ᢟ", "", "", "ᢟ", "", "", "ᢟ", "", "", "ᢟᡦ", "", ""];
 var fArr = ["ᢡ", "", "", "ᢡ", "ᢢ", "", "ᢡ", "ᢢ", "", "ᢠ", "", ""];
 var kArr = ["ᢤ", "", "", "ᢤ", "ᢥ", "", "ᢤ", "ᢥ", "", "ᢣ", "", ""];
-var qArr = ["ᢚ", "", "", "ᢚ", "", "", "ᢚ", "", "", "ᢚᡦ", "", ""];
+var qArr = ["ᢦ", "", "", "ᢦ", "", "", "ᢦ", "", "", "ᢦᡦ", "", ""];
 var zArr = ["ᢧ", "", "", "ᢧ", "", "", "ᢧ", "", "", "ᢧᡦ", "", ""];
-var vArr = ["ᡥᡭ", "ᡥᡭ", "", "ᡥᡭ", "", "", "ᡭ", "ᡪᡭ", "", "ᡳ", "ᡭ", ""];
+var vArr = ["ᡭ", "ᡭ", "", "ᡭ", "", "", "ᡭ", "ᡪᡭ", "", "ᡳ", "ᡭ", ""];
+
 var AArr = ["ᡥᡧ", "", "", "ᡪᡪ", "", "", "ᡪᡪ", "", "", "ᡧ", "", ""];
 var EArr = ["ᢟ", "", "", "ᢟ", "", "", "ᢟ", "", "", "ᢟᡦ", "", ""];
 var IArr = ["ᡫ", "", "", "ᡥᡬ", "", "", "ᡬ", "ᡬᡬ", "ᡪᡬ", "ᡫ", "ᡬᡦ", ""];
-var OArr = ["ᡥᡭ", "ᡥᡭ", "", "ᡥᡭ", "", "", "ᡭ", "ᡪᡭ", "", "ᡭ", "ᡭ", ""]; //2021.3.13
-var UArr = ["ᡥᡭᡦ", "", "", "ᡥᡭᡬ", "", "", "ᡭᡬ", "", "", "ᡭᡦ", "", ""]; //2021.3.9
+var OArr = ["ᡥᡭ", "ᡥᡭ", "", "ᡥᡭ", "", "", "ᡭ", "ᡪᡭ", "", "ᡳ", "ᡭ", ""];
+var UArr = [
+  "ᡥᡭᡦ",
+  "",
+  "",
+  "ᡥᡭᡬ",
+  "",
+  "",
+  "ᡭᡬ",
+  "",
+  "",
+  "ᡭᡦ",
+  "",
+  ""
+]; //2021.3.9
 var NArr = ["ᡯ", "", "", "ᡯ", "", "", "ᡱ", "ᡪ", "", "ᡧ", "ᡰ", ""]; //2021.3.9
 var BArr = ["ᡳ", "", "", "ᡳ", "ᡴ", "", "ᡳ", "ᡴ", "", "ᡲ", "", ""];
 var PArr = ["ᡶ", "", "", "ᡶ", "ᡷ", "", "ᡶ", "ᡷ", "", "ᡵ", "", ""];
@@ -83,97 +102,14 @@ var RArr = ["ᢞ", "", "", "ᢞ", "", "", "ᢞ", "", "", "ᢝ", "", ""];
 var WArr = ["ᢟ", "", "", "ᢟ", "", "", "ᢟ", "", "", "ᢟᡦ", "", ""];
 var FArr = ["ᢡ", "", "", "ᢡ", "ᢢ", "", "ᢡ", "ᢢ", "", "ᢠ", "", ""];
 var KArr = ["ᢤ", "", "", "ᢤ", "ᢥ", "", "ᢤ", "ᢥ", "", "ᢣ", "", ""];
-var QArr = ["ᢦ", "", "", "ᢦ", "", "", "", "", "", "ᢦᡦ", "", ""];
+var QArr = ["ᢦ", "", "", "ᢦ", "", "", "ᢦ", "", "", "ᢦᡦ", "", ""];
 var ZArr = ["ᢨ", "", "", "ᢨ", "", "", "ᢨ", "", "", "ᢨᡦ", "", ""];
 var VArr = ["ᡭ", "ᡭ", "", "ᡭ", "", "", "ᡭ", "ᡪᡭ", "", "ᡳ", "ᡭ", ""];
 
 class ZCode {
-  var qArray = [];
-  var vArray = [];
-  var teinIlgal = new Map();
-  var databases = new Map();
   var wordMap = new Map();
 
-  var m_tein1 = [];
-  var m_tein2 = [];
-  var m_tein3 = [];
-  var m_tein4 = [];
-  var m_tein5 = [];
-  var m_tein6 = [];
-
   ZCode() {
-    qArray.add("ᡳᡪᢝ");
-    qArray.add("ᡳᡪᢝ");
-    qArray.add("ᡬᡬᡪᢝ");
-    qArray.add("ᢘᡪᡫ");
-    qArray.add("ᡳᡪᡧ");
-    qArray.add("ᡬᡬᡪᡧ");
-    qArray.add("ᡭᡭᡧ");
-    qArray.add("ᢘᡪᡱᡱᡪᡧ");
-    qArray.add("ᢘᡪᢊᡪᡧ");
-    qArray.add("ᢙᡪᡱᡱᡪᡧ");
-    qArray.add("ᢙᡪᢊᡪᡧ");
-
-    vArray.add("ᡬᡬᡧ");
-    vArray.add("ᡭᡧ");
-    vArray.add("ᡳ");
-    vArray.add("ᢘᡳ");
-    vArray.add("ᢙᡳ");
-    vArray.add("ᡬᡫ");
-    vArray.add("ᡫ");
-    vArray.add("ᡥᢚᡧ");
-
-    teinIlgal["q"] = qArray;
-    teinIlgal["v"] = vArray;
-
-    databases["aav"] = "ᡥᡪᡴᡭ";
-    databases["america"] = "ᡥᡪᢎᢟᢞᡬᢤᡪᡨ";
-    databases["ch"] = "ᡭᡭ";
-    databases["chi"] = "ᡭᡭᡫ";
-    databases["cihola"] = "ᢚᡬᡪᡪᡭᢑᡧ";
-    databases["cino"] = "ᢚᡬᡱᡳᡨ";
-    databases["do"] = "ᢙᡳ";
-    databases["du"] = "ᢙᡳ";
-    databases["eej"] = "ᡥᢛᡫ";
-    databases["eyer"] = "ᡬᡬᡪᢝ";
-    databases["europe"] = "ᡥᢟᡭᡬᢞᡭᡶᡪᡨ";
-    databases["eyen"] = "ᡬᡬᡪᡧ";
-    databases["gowa"] = "ᢈᡭᡳᡨ";
-    databases["hebei"] = "ᡥᢨᢟᡳᢟᡫ";
-    databases["in"] = "ᡬᡬᡧ";
-    databases["kino"] = "ᢤᡬᡱᡭ";
-    databases["kod"] = "ᢥᡭᢙᡦ";
-    databases["mongo"] = "ᢌᡭᡪᢊᡱᡱᡭᢐ";
-    databases["no"] = "ᡳ";
-    databases["on"] = "ᡭᡧ";
-    databases["oo"] = "ᡭᡳ";
-    databases["radio"] = "ᢞᡪᢙᡬᡭ";
-    databases["sh"] = "ᢗ";
-    databases["shi"] = "ᢗᡫ";
-    databases["su"] = "ᢔᡭᡦ";
-    databases["tatar"] = "ᢘᡪᢘᡪᢝ";
-    databases["yunikod"] = "ᢜᡭᡬᡱᡬᢥᡭᢙᡦ";
-    databases["zh"] = "ᢨ";
-    databases["zhi"] = "ᢨᡫ";
-    databases["english"] = "ᡥᡪᡪᢊᢊᢑᡫ";
-    databases["england"] = "ᡥᡪᡪᢊᢊᢑᡫ";
-    databases["degen"] = "ᢙᡪᢊᡪᡧ";
-    databases["deng"] = "ᢙᢟᡪᡬᡨ";
-    databases["dan"] = "ᢙᡪᡧ";
-    databases["den"] = "ᢙᡪᡧ";
-    databases["din"] = "ᢙᡬᡧ";
-    databases["o"] = "ᡥᡭ";
-    databases["u"] = "ᡥᡭᡬ";
-    databases["i"] = "ᡥᡫ";
-    databases["naima"] = "ᡯᡪᡬᢎᡧ";
-    databases["dung"] = "ᢙᡭᡬᡪᡬᡨ";
-    databases["don"] = "ᢙᡭᡧ";
-    databases["dungsigor"] = "ᢙᡭᡬᡪᢊᢔᡬᡱᡱᡭᢝ";
-    databases["agola"] = "ᡥᡪᡱᡱᡭᢑᡧ";
-    databases["sig"] = "ᢔᡬᢇ";
-    databases["tig"] = "ᢘᡬᢇ";
-    databases["tere"] = "ᢘᡪᢞᡧ";
-
     wordMap["a"] = aArr;
     wordMap["e"] = eArr;
     wordMap["i"] = iArr;
@@ -202,81 +138,31 @@ class ZCode {
     wordMap["v"] = vArr;
 
     wordMap["A"] = AArr;
-    wordMap["E"] = eArr;
-    wordMap["I"] = iArr;
+    wordMap["E"] = EArr;
+    wordMap["I"] = IArr;
     wordMap["O"] = OArr; //2021.3.13
     wordMap["U"] = UArr;
-    wordMap["N"] = nArr;
-    wordMap["B"] = bArr;
-    wordMap["P"] = pArr;
-    wordMap["H"] = hArr;
-    wordMap["G"] = gArr;
-    wordMap["M"] = mArr;
+    wordMap["N"] = NArr;
+    wordMap["B"] = BArr;
+    wordMap["P"] = PArr;
+    wordMap["H"] = HArr;
+    wordMap["G"] = GArr;
+    wordMap["M"] = MArr;
     wordMap["L"] = LArr;
-    wordMap["S"] = sArr;
-    wordMap["X"] = xArr;
+    wordMap["S"] = SArr;
+    wordMap["X"] = XArr;
     wordMap["T"] = TArr;
     wordMap["D"] = DArr;
     wordMap["C"] = CArr;
-    wordMap["J"] = jArr;
-    wordMap["Y"] = yArr;
-    wordMap["R"] = rArr;
-    wordMap["W"] = wArr;
-    wordMap["F"] = fArr;
-    wordMap["K"] = kArr;
-    wordMap["Q"] = qArr;
+    wordMap["J"] = JArr;
+    wordMap["Y"] = YArr;
+    wordMap["R"] = RArr;
+    wordMap["W"] = WArr;
+    wordMap["F"] = FArr;
+    wordMap["K"] = KArr;
+    wordMap["Q"] = QArr;
     wordMap["Z"] = ZArr;
-    wordMap["V"] = vArr;
-
-    m_tein1.add(dagbr['yin']);
-    m_tein1.add(dagbr['yi']);
-    m_tein1.add(dagbr['bar']);
-    m_tein1.add(dagbr['ban']);
-    m_tein1.add(dagbr['do']);
-    m_tein1.add(dagbr['dor']);
-    m_tein1.add(dagbr['aca']);
-    m_tein1.add(dagbr['tai']);
-    m_tein1.add(dagbr['dagan']);
-    m_tein1.add(dagbr['loga']);
-
-    m_tein2.add(dagbr['yin']);
-    m_tein2.add(dagbr['yi']);
-    m_tein2.add(dagbr['bar']);
-    m_tein2.add(dagbr['iyan']);
-    m_tein2.add(dagbr['do']);
-    m_tein2.add(dagbr['dor']);
-    m_tein2.add(dagbr['aca']);
-    m_tein2.add(dagbr['tai']);
-    m_tein2.add(dagbr['dagan']);
-    m_tein2.add(dagbr['luge']);
-
-    m_tein3.add(dagbr['on']);
-    m_tein3.add(dagbr['i']);
-    m_tein3.add(dagbr['iyar']);
-    m_tein3.add(dagbr['aca']);
-    m_tein3.add(dagbr['tai']);
-
-    m_tein4.add(dagbr['o']);
-    m_tein4.add(dagbr['do']);
-    m_tein4.add(dagbr['dor']);
-    m_tein4.add(dagbr['aca']);
-    m_tein4.add(dagbr['tai']);
-
-    m_tein5.add(dagbr['on']);
-    m_tein5.add(dagbr['i']);
-    m_tein5.add(dagbr['iyar']);
-    m_tein5.add(dagbr['do']);
-    m_tein5.add(dagbr['dor']);
-    m_tein5.add(dagbr['aca']);
-    m_tein5.add(dagbr['tai']);
-
-    m_tein6.add(dagbr['o']);
-    m_tein6.add(dagbr['i']);
-    m_tein6.add(dagbr['iyar']);
-    m_tein6.add(dagbr['to']);
-    m_tein6.add(dagbr['tor']);
-    m_tein6.add(dagbr['aca']);
-    m_tein6.add(dagbr['tai']);
+    wordMap["V"] = VArr;
   }
 
   void PrintHello() {
@@ -323,7 +209,6 @@ class ZCode {
       if (wordMap.containsKey(lastStr)) {
         String pTemp = wordMap[lastStr][9];
         if (pTemp.length > 0) {
-          //resultLast = pTemp;
           resultLast.add(pTemp);
         }
       }
@@ -332,8 +217,6 @@ class ZCode {
       if (x == "b" || x == "p" || x == "k" || x == "f") {
         String y = lastStr;
         if (y == "a") {
-          //resultLast = wordMap[y][10];
-
           if (resultLast.length > 0) {
             resultLast.clear();
           }
@@ -344,46 +227,56 @@ class ZCode {
       if (x == "h" || x == "g") {
         String y = lastStr;
         if (y == "e") {
-          //resultLast = wordMap[y][9];
           if (resultLast.length > 0) {
             resultLast.clear();
           }
           resultLast.add(wordMap[y][9]);
         }
       }
+
       // solving i after b,p,k,f,h,g
-      if (x == "b" || x == "p" || x == "k" || x == "f" || x == "h" || x == "g") {
+      if (x == "b" ||
+          x == "p" ||
+          x == "k" ||
+          x == "f" ||
+          x == "h" ||
+          x == "g") {
         String y = lastStr;
         if (y == "i") {
-          //resultLast = wordMap[y][10];
           if (resultLast.length > 0) {
             resultLast.clear();
           }
           resultLast.add(wordMap[y][10]);
         }
       }
+
       // solving o after b,p,k,f
       if (x == "b" || x == "p" || x == "k" || x == "f") {
         String y = lastStr;
         if (y == "o" || y == "v") {
-          //resultLast = wordMap[y][10];
           if (resultLast.length > 0) {
             resultLast.clear();
           }
           resultLast.add(wordMap[y][10]);
         }
       }
+
       // solving u after b,p,k,f,h,g
-      if (x == "b" || x == "p" || x == "k" || x == "f" || x == "h" || x == "g") {
+      if (x == "b" ||
+          x == "p" ||
+          x == "k" ||
+          x == "f" ||
+          x == "h" ||
+          x == "g") {
         String y = lastStr;
         if (y == "u") {
-          //resultLast = wordMap[y][10];
           if (resultLast.length > 0) {
             resultLast.clear();
           }
           resultLast.add(wordMap[y][10]);
         }
       }
+
       // solving g after i,e,u, U
       if (x == "i" || x == "e" || x == "u" || x == "U") {
         String y = lastStr;
@@ -394,7 +287,6 @@ class ZCode {
               String z =
                   latin.substring(latin.length - 2 - j, latin.length - 1 - j);
               if (z == "a" || z == "o" || z == "v") {
-                //resultLast = wordMap[y][9];
                 temp = wordMap[y][9];
               }
             }
@@ -403,7 +295,6 @@ class ZCode {
             }
             resultLast.add(wordMap[y][9]);
           } else {
-            //resultLast = wordMap[y][11];
             if (resultLast.length > 0) {
               resultLast.clear();
             }
@@ -416,7 +307,6 @@ class ZCode {
       if (x == "n") {
         String y = lastStr;
         if (y == "g") {
-          //resultLast = wordMap[y][11];
           if (resultLast.length > 0) {
             resultLast.clear();
           }
@@ -427,7 +317,6 @@ class ZCode {
       if (x == "n" || x == "m" || x == "l" || x == "y" || x == "r") {
         String y = lastStr;
         if (y == "a" || y == "e") {
-          //resultLast = wordMap[y][11];
           if (resultLast.length > 0) {
             resultLast.clear();
           }
@@ -438,7 +327,6 @@ class ZCode {
       if (x == "c" || x == "v" || x == "z" || x == "q" || x == "d") {
         String y = lastStr;
         if (y == "e") {
-          //resultLast = wordMap[y][10];
           if (resultLast.length > 0) {
             resultLast.clear();
           }
@@ -449,7 +337,6 @@ class ZCode {
       if (x == "h" || x == "g") {
         String y = lastStr;
         if (y == "a") {
-          //resultLast = wordMap[y][11];
           if (resultLast.length > 0) {
             resultLast.clear();
           }
@@ -461,7 +348,6 @@ class ZCode {
         String y = lastStr;
         if (y == "a") {
           if (2 == latin.length) {
-            //resultLast = wordMap[y][9];
             if (resultLast.length > 0) {
               resultLast.clear();
             }
@@ -477,49 +363,28 @@ class ZCode {
     return ret;
   }
 
-  String Middle(String str) {
+  List<String> Middle(String str, bool isForML) {
     String resultMid = "";
+    String nMinusTwo = "";
     String m = "";
-    for (int i = 1; i < str.length - 1; i++) {
+
+    var maxLength = isForML ? str.length : str.length - 1;
+    for (int i = 1; i < maxLength; i++) {
       String x = str.substring(i, i + 1);
       if (wordMap.containsKey(x)) {
         m = wordMap[x][6];
 
-        //solving g after a or o
+        //solving g debisger after a or o
         String yy = str.substring(i - 1, i);
         if (yy == "a" || yy == "o" || yy == "v") {
           if (x == "g") {
             m = wordMap[x][2];
           }
         }
+
         //solving g not after a or o
         if (yy != "a" && yy != "o" && yy != "v") {
-          if (x == "g") {
-            m = wordMap[x][7];
-          }
-        }
-
-        //solving g before a or o
-        if (x == "g") {
-          String y = str.substring(i + 1, i + 2);
-          if (y == "a" || y == "o" || y == "v") {
-            m = wordMap[x][6];
-          }
-        }
-
-        //2021.3.9
-        //solving n,d before egshig    a,e,i,o,u, U, A, E,
-        if (x == "n" || x == "d") {
-          String y = str.substring(i + 1, i + 2);
-          if (y == "a" ||
-              y == "e" ||
-              y == "i" ||
-              y == "o" ||
-              y == "v" ||
-              y == "u" ||
-              y == "A" ||
-              y == "E" ||
-              y == "U") {
+          if (x == "g" || x == "h") {
             m = wordMap[x][7];
           }
         }
@@ -528,31 +393,6 @@ class ZCode {
         //solving N,T before egshig    a,e,i,o,u, U, A, E,
         if (x == "N" || x == "T" || x == "D") {
           m = wordMap[x][7];
-        }
-
-        //2021.3.13
-        // solving b,p,k,f  before o,u
-        if (x == "b" || x == "p" || x == "k" || x == "f") {
-          String y = str.substring(i + 1, i + 2);
-          if (y == "o" || y == "u" || y == "v" || y == "U") {
-            m = wordMap[x][7];
-          }
-        }
-
-        //solving h, g before e, i, w
-        if (x == "h" || x == "g") {
-          String y = str.substring(i + 1, i + 2);
-          if (y == "e" || y == "i" || y == "w") {
-            m = wordMap[x][7];
-          }
-        }
-
-        //solving h, g before u
-        if (x == "h" || x == "g") {
-          String y = str.substring(i + 1, i + 2);
-          if (y == "u") {
-            m = wordMap[x][8];
-          }
         }
 
         //solving u for second position,    test bumbur  bum
@@ -568,153 +408,117 @@ class ZCode {
           }
         }
 
-        //solving g after Positive or Negative i traceback and  not before a,e,i, o, u      test yabogsan uggugsen jarlig jerlig baigal
-        if (x == "g") {
-          String y = str.substring(i - 1, i);
-          String w = str.substring(i + 1, i + 2);
-          if (y == "i") {
-            if (w != "a" &&
-                w != "e" &&
-                w != "i" &&
-                w != "o" &&
-                y != "v" &&
-                w != "u") {
-              for (int j = 1; j <= (i); j++) {
-                String z = str.substring(i + 1 - j, i + 2 - j);
-                if (z == "a" || z == "o" || z == "v" || z == "A") {
-                  m = wordMap[x][2];
+        if (i != str.length - 1) {
+          //2021.3.13
+          // solving b,p,k,f  before o,u
+          if (x == "b" || x == "p" || x == "k" || x == "f") {
+            String y = str.substring(i + 1, i + 2);
+            if (y == "o" || y == "u" || y == "v" || y == "U") {
+              m = wordMap[x][7];
+            }
+          }
+
+          //2021.3.9
+          //solving n,d before egshig    a,e,i,o,u, U, A, E,
+          if (x == "n" || x == "d") {
+            String y = str.substring(i + 1, i + 2);
+            if (y == "a" ||
+                y == "e" ||
+                y == "i" ||
+                y == "o" ||
+                y == "v" ||
+                y == "u" ||
+                y == "A" ||
+                y == "E" ||
+                y == "U") {
+              m = wordMap[x][7];
+            }
+          }
+
+          //solving g before a or o
+          if (x == "g") {
+            String y = str.substring(i + 1, i + 2);
+            if (y == "a" || y == "o" || y == "v") {
+              m = wordMap[x][6];
+            }
+          }
+
+          //solving h, g before e, i, w
+          if (x == "h" || x == "g") {
+            String y = str.substring(i + 1, i + 2);
+            if (y == "e" || y == "i" || y == "w") {
+              m = wordMap[x][7];
+            }
+          }
+
+          //solving h, g before u
+          if (x == "h" || x == "g") {
+            String y = str.substring(i + 1, i + 2);
+            if (y == "u") {
+              m = wordMap[x][8];
+            }
+          }
+
+          //solving g after Positive or Negative i traceback and  not before a,e,i, o, u      test yabogsan uggugsen jarlig jerlig baigal
+          if (x == "g") {
+            String y = str.substring(i - 1, i);
+            String w = str.substring(i + 1, i + 2);
+            if (y == "i") {
+              if (w != "a" &&
+                  w != "e" &&
+                  w != "i" &&
+                  w != "o" &&
+                  y != "v" &&
+                  w != "u") {
+                for (int j = 1; j <= (i); j++) {
+                  String z = str.substring(i + 1 - j, i + 2 - j);
+                  if (z == "a" || z == "o" || z == "v" || z == "A") {
+                    m = wordMap[x][2];
+                  }
+                }
+              }
+            }
+          }
+
+          // The following logic is not used when generating word for ML
+          if (!isForML) {
+            //h, g before a , for second last letter
+            if (x == "h" || x == "g") {
+              String y = str.substring(i + 1, i + 2);
+              if (y == "a") {
+                if (i == str.length - 2) {
+                  m = wordMap[x][10];
+                }
+              }
+            }
+
+            //n before a, e, for second last letter      test yabona
+            if (x == "n") {
+              String y = str.substring(i + 1, i + 2);
+              if (y == "a" || y == "e") {
+                if (i == str.length - 2) {
+                  m = wordMap[x][10];
+                }
+              }
+            }
+
+            //m, L, y, r before a, e
+            if (x == "m" || x == "l" || x == "y" || x == "r") {
+              String y = str.substring(i + 1, i + 2);
+              if (y == "a" || y == "e") {
+                if (i == str.length - 2) {
+                  m = wordMap[x][9];
                 }
               }
             }
           }
         }
 
-        //h, g before a , for second last letter
-        if (x == "h" || x == "g") {
-          String y = str.substring(i + 1, i + 2);
-          if (y == "a") {
-            if (i == str.length - 2) {
-              m = wordMap[x][10];
-            }
-          }
-        }
-
-        //n before a, e, for second last letter      test yabona
-        if (x == "n") {
-          String y = str.substring(i + 1, i + 2);
-          if (y == "a" || y == "e") {
-            if (i == str.length - 2) {
-              m = wordMap[x][10];
-            }
-          }
-        }
-
-        //m, L, y, r before a, e
-        if (x == "m" || x == "l" || x == "y" || x == "r") {
-          String y = str.substring(i + 1, i + 2);
-          if (y == "a" || y == "e") {
-            if (i == str.length - 2) {
-              m = wordMap[x][9];
-            }
-          }
-        }
-
+        nMinusTwo = resultMid;
         resultMid = resultMid + m;
       }
     }
-    return resultMid;
-  }
-
-  int GetTeinClass(String latin) {
-    int iRet = 0;
-
-    String word = latin;
-
-    while (true && word.length > 1) {
-      int cLast = word.codeUnitAt(word.length - 1);
-      int cPreLast = word.codeUnitAt(word.length - 2);
-
-      if ((cPreLast >= 'a'.codeUnits.first &&
-              cPreLast <= 'z'.codeUnits.first) ||
-          (cPreLast >= 'A'.codeUnits.first &&
-              cPreLast <= 'Z'.codeUnits.first)) {
-        if (cLast == 'a'.codeUnits.first ||
-            cLast == 'o'.codeUnits.first ||
-            cLast == 'v'.codeUnits.first) {
-          iRet = 1;
-          break;
-        } else if (cLast == 'e'.codeUnits.first ||
-            cLast == 'i'.codeUnits.first ||
-            cLast == 'u'.codeUnits.first) {
-          iRet = 2;
-          break;
-        } else if (cLast == 'p'.codeUnits.first ||
-            cLast == 'h'.codeUnits.first ||
-            cLast == 'x'.codeUnits.first ||
-            cLast == 't'.codeUnits.first ||
-            cLast == 'c'.codeUnits.first ||
-            cLast == 'j'.codeUnits.first ||
-            cLast == 'y'.codeUnits.first ||
-            cLast == 'w'.codeUnits.first ||
-            cLast == 'f'.codeUnits.first ||
-            cLast == 'k'.codeUnits.first ||
-            cLast == 'q'.codeUnits.first ||
-            cLast == 'z'.codeUnits.first) {
-          iRet = 3;
-          break;
-        } else if (cLast == 'n'.codeUnits.first) {
-          iRet = 4;
-          break;
-        } else if (cLast == 'n'.codeUnits.first &&
-            cPreLast == 'g'.codeUnits.first) {
-          iRet = 5;
-          break;
-        } else if (cLast == 'b'.codeUnits.first ||
-            cLast == 'g'.codeUnits.first ||
-            cLast == 'r'.codeUnits.first ||
-            cLast == 'r'.codeUnits.first ||
-            cLast == 's'.codeUnits.first ||
-            cLast == 'd'.codeUnits.first) {
-          iRet = 6;
-          break;
-        } else {
-          break;
-        }
-      }
-
-      break;
-    }
-
-    return iRet;
-  }
-
-  List ExeutePhrase(String preWordLatin) {
-    var ret = [];
-    int iTeinClass = GetTeinClass(preWordLatin);
-    switch (iTeinClass) {
-      case 1:
-        ret = m_tein1;
-        break;
-      case 2:
-        ret = m_tein2;
-        break;
-      case 3:
-        ret = m_tein3;
-        break;
-      case 4:
-        ret = m_tein4;
-        break;
-      case 5:
-        ret = m_tein5;
-        break;
-      case 6:
-        ret = m_tein6;
-        break;
-      default:
-        break;
-    }
-
-    return ret;
+    return [resultMid, nMinusTwo];
   }
 
   List GetEndsClass(String word) {
@@ -731,10 +535,10 @@ class ZCode {
       //u
       newWords.add(eArr[3] + uArr[9]);
       newWords.add(uArr[3]);
-    } else if (word.length > 2) {
-      //wchar_t cLast = word.c_str()[word.length - 1];
-      //	wchar_t cPreLast = word.c_str()[word.length - 2];
+    }
 
+    // if lastcharacter = gArr[9],  lastcharacter +=gArr[11]
+    else if (word.length > 2) {
       String scLast = word.substring(word.length - 1, word.length);
       String sPreLast = word.substring(word.length - 2, word.length - 1);
       String subWordPre = word.substring(0, word.length - 2);
@@ -765,6 +569,11 @@ class ZCode {
         subWordPre += oArr[9] + aArr[11];
         iRet = 6;
       }
+      // ending g debisger
+      else if (scLast == gArr[9]) {
+        subWordPre += iArr[6] + gArr[11];
+        iRet = 7;
+      }
 
       if (iRet != 0) {
         newWords.add(subWordPre);
@@ -778,7 +587,7 @@ class ZCode {
     var result = [];
     int wordLength = latin.length;
     String resultFirst = "";
-    String resultMid = "";
+    var arrMid = [];
     var resultLast = [];
     if (wordLength == 1 && wordMap.containsKey(latin)) {
       resultFirst = wordMap[latin][0];
@@ -786,16 +595,56 @@ class ZCode {
       var firstlast = FirstAndLast(latin);
       resultFirst = firstlast['first'];
       resultLast = firstlast['last'];
+      arrMid = Middle(latin, false);
     } else {
       var firstlast = FirstAndLast(latin);
       resultFirst = firstlast['first'];
       resultLast = firstlast['last'];
-      resultMid = Middle(latin);
+      arrMid = Middle(latin, false);
     }
 
     if (resultLast.length > 0) {
       for (int i = 0; i < resultLast.length; i++) {
-        result.add(resultFirst + resultMid + resultLast[i]);
+        result.add(resultFirst + arrMid[0] + resultLast[i]);
+      }
+    } else {
+      result.add(resultFirst);
+    }
+
+    return result;
+  }
+
+  // Returns mongolian word without the tail (ending)
+  List ExcuteForML(String latin) {
+    var result = [];
+    int wordLength = latin.length;
+    String resultFirst = "";
+    var arrMid = [];
+    var resultLast = [];
+
+    /// 1st logic (AI)
+    if (wordLength == 1 && wordMap.containsKey(latin)) {
+      resultFirst = wordMap[latin][0];
+    } else {
+      var firstlast = FirstAndLast(latin);
+      resultFirst = firstlast['first'];
+      resultLast = firstlast['last'];
+      arrMid = Middle(latin, true);
+    }
+
+    if (resultLast.length > 0) {
+      for (int i = 0; i < resultLast.length; i++) {
+        // var lastChar = latin.substring(latin.length - 1);
+        // var secondLastChar =
+        //     latin.substring(latin.length - 2, latin.length - 1);
+        // var midOfLastChar = wordMap[lastChar][6];
+        // var midOfSecondLastChar = wordMap[secondLastChar][6];
+
+        if (latin.length > 2) {
+          result.add(resultFirst + arrMid[0]);
+        } else {
+          result.add(resultFirst + arrMid[0]);
+        }
       }
     } else {
       result.add(resultFirst);
@@ -807,7 +656,7 @@ class ZCode {
   //2021.3.9
   List ExcuteEx(String latin) {
     var result = [];
-    var resWords = Excute(latin);
+    var resWords = Excute(latin) + ExcuteForML(latin);
     for (int i = 0; i < resWords.length; i++) {
       if (resWords[i].length > 0) {
         result.add(resWords[i]);
