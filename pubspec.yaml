@@ -73,7 +73,6 @@ flutter:
   uses-material-design: true
   assets:
 #    - assets/image/image.jpg
-    - assets/z52words03.db
     - assets/machine_learning/zmodel.pt
     - assets/machine_learning/new_char_to_token.json
 #    - assets/words52_20200821.db
