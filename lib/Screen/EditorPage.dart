@@ -28,6 +28,7 @@ class EditorPage extends StatefulWidget {
 
 class _EditorPageState extends State<EditorPage> {
   final containerKey = GlobalKey();
+  final tfKey = GlobalKey();
   bool overlayOffsetIsInitialed = false;
   FocusNode _focusNode = FocusNode();
   int cursorOffset = 0;
@@ -165,62 +166,57 @@ class _EditorPageState extends State<EditorPage> {
                       child: Container(
                         child: Row(
                           children: [
+                            GetBuilder<StyleController>(
+                              builder: (styleCtr) => Container(
+                                color: Colors.white,
+                                padding: const EdgeInsets.all(4),
+                                child: GetBuilder<TextStyleController>(
+                                  builder: (ctr) {
+                                    print(
+                                        'now fontsize = ${ctr.style.fontSize}');
+                                    return GetBuilder<KeyboardController>(
+                                      builder: (kbCtr) {
+                                        if (widget.text != null) {
+                                          kbCtr.textEditingController.text =
+                                              widget.text!;
+                                        } else {
+                                          kbCtr.textEditingController.text = '';
+                                        }
+                                        return MongolTextField(
+                                          key: tfKey,
+                                          scrollPadding:
+                                              const EdgeInsets.only(),
+                                          autofocus: true,
+                                          showCursor: true,
+                                          readOnly: true,
+                                          focusNode: _focusNode,
+                                          // expands: true,
+                                          maxLines: 100,
+                                          minLines: 1,
+                                          controller:
+                                              kbCtr.textEditingController,
+                                          decoration: InputDecoration(
+                                            contentPadding: EdgeInsets.only(),
+                                            border: InputBorder.none,
+                                          ),
+                                          // keyboardType: MongolKeyboard.inputType,
+                                          textInputAction:
+                                              TextInputAction.newline,
+                                          //keyboardType: TextInputType.multiline,
+                                          style: TextStyle(
+                                              fontSize: ctr.style.fontSize,
+                                              fontFamily: MongolFonts.haratig),
+                                          //像平常一样设置键盘输入类型一样将Step1编写的inputType传递进去
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
                             Expanded(
                               child: Container(
-                                //padding: EdgeInsets.only(left: 8),
-                                color: Colors.grey.shade400,
-                                child: Center(
-                                  child: GetBuilder<StyleController>(
-                                    builder: (styleCtr) => Container(
-                                      color: Colors.white,
-                                      padding: const EdgeInsets.all(4),
-                                      child: GetBuilder<TextStyleController>(
-                                        builder: (ctr) {
-                                          print(
-                                              'now fontsize = ${ctr.style.fontSize}');
-                                          return GetBuilder<KeyboardController>(
-                                            builder: (kbCtr) {
-                                              if (widget.text != null) {
-                                                kbCtr.textEditingController
-                                                    .text = widget.text!;
-                                              } else {
-                                                kbCtr.textEditingController
-                                                    .text = '';
-                                              }
-                                              return MongolTextField(
-                                                scrollPadding:
-                                                    const EdgeInsets.only(),
-                                                autofocus: true,
-                                                showCursor: true,
-                                                readOnly: true,
-                                                focusNode: _focusNode,
-                                                expands: true,
-                                                maxLines: null,
-                                                controller:
-                                                    kbCtr.textEditingController,
-                                                decoration: InputDecoration(
-                                                  contentPadding:
-                                                      EdgeInsets.only(),
-                                                  border: InputBorder.none,
-                                                ),
-                                                // keyboardType: MongolKeyboard.inputType,
-                                                textInputAction:
-                                                    TextInputAction.newline,
-                                                //keyboardType: TextInputType.multiline,
-                                                style: TextStyle(
-                                                    fontSize:
-                                                        ctr.style.fontSize,
-                                                    fontFamily:
-                                                        MongolFonts.haratig),
-                                                //像平常一样设置键盘输入类型一样将Step1编写的inputType传递进去
-                                              );
-                                            },
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                color: Colors.white,
                               ),
                             ),
                             Container(
@@ -403,7 +399,7 @@ class _EditorPageState extends State<EditorPage> {
                   builder: (ctr) => ctr.cands.isNotEmpty
                       ? Positioned(
                           top: containerKey.globalPaintBounds!.top - 220,
-                          left: containerKey.globalPaintBounds!.left + 40,
+                          left: tfKey.globalPaintBounds!.right + 20,
                           child: Container(
                             // height: 100,
                             width: 175,
