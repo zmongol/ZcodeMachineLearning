@@ -29,9 +29,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
 
   cupertino_icons: ^0.1.3
-  mongol:
-    git:
-      url: https://github.com/suragch/mongol.git
+  mongol: ^2.0.0
   get: ^4.1.4
   flutter_icons: any
   flutter_screenutil: 5.0.0-nullsafety.11
@@ -54,6 +52,10 @@ dependencies:
   intl: ^0.17.0
   flutter_slidable: ^0.6.0
   transparent_image: ^2.0.0
+  pytorch_mobile:
+    git:
+      url: https://github.com/leovinsen/pytorch_mobile_clone.git
+
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +74,8 @@ flutter:
   assets:
 #    - assets/image/image.jpg
     - assets/z52words03.db
+    - assets/machine_learning/zmodel.pt
+    - assets/machine_learning/new_char_to_token.json
 #    - assets/words52_20200821.db
   # To add assets to your application, add an assets section, like this:
   # assets:

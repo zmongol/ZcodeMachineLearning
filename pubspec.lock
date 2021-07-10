@@ -7,7 +7,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.5.0"
+    version: "2.6.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -217,12 +217,10 @@ packages:
   mongol:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "93c3df73e18563e463e38b11961b123ef912f769"
-      url: "https://github.com/suragch/mongol.git"
-    source: git
-    version: "1.1.0"
+      name: mongol
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   path:
     dependency: "direct main"
     description:
@@ -236,7 +234,7 @@ packages:
       name: path_provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.1"
+    version: "2.0.2"
   path_provider_linux:
     dependency: transitive
     description:
@@ -307,6 +305,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.1"
+  pytorch_mobile:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: ef7d26cb3dd511e7ac07a3c85b78249548b1b306
+      url: "https://github.com/leovinsen/pytorch_mobile_clone.git"
+    source: git
+    version: "0.2.1"
   share:
     dependency: "direct main"
     description:
@@ -325,7 +332,7 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.0"
+    version: "1.8.1"
   sqflite:
     dependency: "direct main"
     description:
@@ -381,7 +388,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.19"
+    version: "0.3.0"
   transparent_image:
     dependency: "direct main"
     description:
