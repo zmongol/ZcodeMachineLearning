@@ -27,7 +27,7 @@ class EditorPage extends StatefulWidget {
 }
 
 class _EditorPageState extends State<EditorPage> {
-  static const suggestionsWidth = 225;
+  static const predefinedSectionHeight = 45.0;
 
   final containerKey = GlobalKey();
   final sidebarKey = GlobalKey();
@@ -362,7 +362,8 @@ class _EditorPageState extends State<EditorPage> {
                                   Container(),
                                   Flexible(
                                     child: WordSuggestionsSection(
-                                      height: 40,
+                                      height: ScreenUtil()
+                                          .setHeight(predefinedSectionHeight),
                                       words: teinIlgalCands,
                                       onWordTap: (word) {
                                         ctr.enterAction(word);
@@ -474,10 +475,10 @@ class _EditorPageState extends State<EditorPage> {
     );
   }
 
+  ///Allows the Suggestions box to shrink when a new line is added
+  ///
   ///Subtracts the left coordinates of Sidebar
   ///with the right bound of TextField
-  ///
-  ///Allows the Suggestions box to shrink when a new line is added
   double _calculateSuggestionsWidth() {
     var rightOffsetTextField = tfKey.globalPaintBounds!.right;
     var leftOffsetSidebar = sidebarKey.globalPaintBounds!.left;
