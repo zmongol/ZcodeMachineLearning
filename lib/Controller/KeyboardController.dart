@@ -81,11 +81,11 @@ class KeyboardController extends GetxController {
   }
 
   cursorMoveUp() {
-    setCursorPositon(cursorPosition - 1);
+    setCursorPositon(textEditingController.selection.start - 1);
   }
 
   cursorMoveDown() {
-    setCursorPositon(cursorPosition + 1);
+    setCursorPositon(textEditingController.selection.start + 1);
   }
 
   void enterAction(String? v) async {
