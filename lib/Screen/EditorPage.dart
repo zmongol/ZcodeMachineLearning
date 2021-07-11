@@ -27,7 +27,10 @@ class EditorPage extends StatefulWidget {
 }
 
 class _EditorPageState extends State<EditorPage> {
+  static const suggestionsWidth = 225;
+
   final containerKey = GlobalKey();
+  final sidebarKey = GlobalKey();
   final tfKey = GlobalKey();
   bool overlayOffsetIsInitialed = false;
   FocusNode _focusNode = FocusNode();
@@ -229,6 +232,7 @@ class _EditorPageState extends State<EditorPage> {
                                                   .devicePixelRatio))),
                             ),
                             Container(
+                              key: sidebarKey,
                               width: 50,
                               child: Column(
                                 children: [
@@ -385,19 +389,20 @@ class _EditorPageState extends State<EditorPage> {
                           left: tfKey.globalPaintBounds!.right + 20,
                           child: Container(
                             // height: 100,
-                            width: 175,
+                            width: ScreenUtil()
+                                .setWidth(_calculateSuggestionsWidth()),
                             constraints: BoxConstraints(
                               maxHeight: 300,
                               minHeight: 100,
                             ),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 1.0,
-                                  color: Colors.grey,
-                                ),
-                              ],
+                              // boxShadow: [
+                              //   BoxShadow(
+                              //     blurRadius: 1.0,
+                              //     color: Colors.grey,
+                              //   ),
+                              // ],
                             ),
                             child: ListView(
                               shrinkWrap: true,
@@ -451,7 +456,7 @@ class _EditorPageState extends State<EditorPage> {
                                     separatorBuilder: (_, index) =>
                                         VerticalDivider(
                                       width: 1.0,
-                                      color: Colors.grey,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
@@ -467,6 +472,19 @@ class _EditorPageState extends State<EditorPage> {
         ],
       ),
     );
+  }
+
+  ///Subtracts the left coordinates of Sidebar
+  ///with the right bound of TextField
+  ///
+  ///Allows the Suggestions box to shrink when a new line is added
+  double _calculateSuggestionsWidth() {
+    var rightOffsetTextField = tfKey.globalPaintBounds!.right;
+    var leftOffsetSidebar = sidebarKey.globalPaintBounds!.left;
+
+    return leftOffsetSidebar -
+        rightOffsetTextField -
+        ScreenUtil().setHeight(50.0);
   }
 
   /// Calculates offset from top of screen for suggestions section
