@@ -209,10 +209,8 @@ class MongolMLAutocomplete {
   Future<Set<String>> runCustomModel(String input) async {
     // refresh the old auto completions
 
-    List tokenizedContext = input
-        .split('')
-        .map((ch) => (charToTokenMapping[ch] as int) ?? 0)
-        .toList();
+    List tokenizedContext =
+        input.split('').map((ch) => charToTokenMapping[ch] ?? 0).toList();
     tokenizedContext =
         tokenizedContext.map((i) => (i.toDouble() as double)).toList();
 
