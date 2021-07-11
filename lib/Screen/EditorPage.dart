@@ -346,48 +346,31 @@ class _EditorPageState extends State<EditorPage> {
                     GetBuilder<KeyboardController>(
                         id: 'cands',
                         builder: (ctr) {
-                          print('teinIlgalCands :${teinIlgalCands.length}');
-                          print(
-                              'latin.value.length :${ctr.latin.value.length}');
                           return Material(
                             color: Colors.grey.shade100,
                             elevation: 3,
-                            child: Obx(
-                              () {
-                                late double candsHeight;
-
-                                if (ctr.latin.value.length >= 7) {
-                                  var len = ctr.latin.value.length;
-                                  candsHeight =
-                                      len * ScreenUtil().setHeight(6.0) + 75;
-                                  print('candsHeight $candsHeight');
-                                } else if (ctr.latin.value.length < 7) {
-                                  candsHeight = ScreenUtil().setHeight(90.0);
-                                }
-                                return Container(
-                                  key: containerKey,
-                                  width: MediaQuery.of(context).size.width,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Container(),
-                                      Flexible(
-                                        child: WordSuggestionsSection(
-                                          height: 40,
-                                          words: teinIlgalCands,
-                                          onWordTap: (word) {
-                                            ctr.enterAction(word);
-                                          },
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.all(2),
-                                        // color: Colors.white,
-                                      ),
-                                    ],
+                            child: Container(
+                              key: containerKey,
+                              width: MediaQuery.of(context).size.width,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(),
+                                  Flexible(
+                                    child: WordSuggestionsSection(
+                                      height: 40,
+                                      words: teinIlgalCands,
+                                      onWordTap: (word) {
+                                        ctr.enterAction(word);
+                                      },
+                                    ),
                                   ),
-                                );
-                              },
+                                  Container(
+                                    padding: EdgeInsets.all(2),
+                                    // color: Colors.white,
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         }),
@@ -398,7 +381,7 @@ class _EditorPageState extends State<EditorPage> {
                   id: 'cands',
                   builder: (ctr) => ctr.cands.isNotEmpty
                       ? Positioned(
-                          top: containerKey.globalPaintBounds!.top - 220,
+                          top: _calculateOffsetForSuggestions(ctr.latin.value),
                           left: tfKey.globalPaintBounds!.right + 20,
                           child: Container(
                             // height: 100,
@@ -439,7 +422,8 @@ class _EditorPageState extends State<EditorPage> {
                                   color: Colors.grey,
                                 ),
                                 Container(
-                                  height: 100.0,
+                                  height:
+                                      _calculateCandsHeight(ctr.latin.value),
                                   child: ListView.separated(
                                     scrollDirection: Axis.horizontal,
                                     itemCount: ctr.cands.length,
@@ -458,7 +442,7 @@ class _EditorPageState extends State<EditorPage> {
                                             word,
                                             style: TextStyle(
                                               fontFamily: 'haratig',
-                                              fontSize: 24,
+                                              fontSize: ScreenUtil().setSp(24),
                                             ),
                                           ),
                                         ),
@@ -484,4 +468,18 @@ class _EditorPageState extends State<EditorPage> {
       ),
     );
   }
+
+  /// Calculates offset from top of screen for suggestions section
+  /// Takes into account the current height to prevent the section
+  /// from overflowing into bottom of the screen
+  double _calculateOffsetForSuggestions(String latin) =>
+      containerKey.globalPaintBounds!.top -
+      ScreenUtil().setHeight(120) -
+      _calculateCandsHeight(latin);
+
+  ///Calculates height for suggestions section
+  ///Based on length of current latin input
+  double _calculateCandsHeight(String latin) => latin.length >= 7
+      ? latin.length * ScreenUtil().setHeight(6.0) + ScreenUtil().setHeight(60)
+      : ScreenUtil().setHeight(90.0);
 }
