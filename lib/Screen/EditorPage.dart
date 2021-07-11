@@ -427,37 +427,34 @@ class _EditorPageState extends State<EditorPage> {
                                   height: 1.0,
                                   color: Colors.grey,
                                 ),
-                                Container(
-                                  height:
-                                      _calculateCandsHeight(ctr.latin.value),
-                                  child: ListView.separated(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: ctr.cands.length,
-                                    itemBuilder: (_, index) {
-                                      var word = ctr.cands[index];
-                                      return GestureDetector(
-                                        onTap: () {
-                                          ctr.enterAction(word);
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            vertical: 8.0,
-                                            horizontal: 6.0,
-                                          ),
-                                          child: MongolText(
-                                            word,
-                                            style: TextStyle(
-                                              fontFamily: 'haratig',
-                                              fontSize: ScreenUtil().setSp(24),
+                                GetBuilder<TextStyleController>(
+                                  builder: (styleCtr) => Container(
+                                    height:
+                                        _calculateCandsHeight(ctr.latin.value),
+                                    child: ListView.separated(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: ctr.cands.length,
+                                      itemBuilder: (_, index) {
+                                        var word = ctr.cands[index];
+                                        return GestureDetector(
+                                          onTap: () {
+                                            ctr.enterAction(word);
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              vertical: 8.0,
+                                              horizontal: 6.0,
                                             ),
+                                            child: MongolText(word,
+                                                style: styleCtr.style),
                                           ),
-                                        ),
-                                      );
-                                    },
-                                    separatorBuilder: (_, index) =>
-                                        VerticalDivider(
-                                      width: 1.0,
-                                      color: Colors.white,
+                                        );
+                                      },
+                                      separatorBuilder: (_, index) =>
+                                          VerticalDivider(
+                                        width: 1.0,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 ),
