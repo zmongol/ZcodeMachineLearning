@@ -370,7 +370,7 @@ class ZCode {
 
         //solving g not after a or o
         if (yy != "a" && yy != "o" && yy != "v") {
-          if (x == "g" || x == "h") {
+          if (x == "g" ) {
             m = wordMap[x][7];
           }
         }
