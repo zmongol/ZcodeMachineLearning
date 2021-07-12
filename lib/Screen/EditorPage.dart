@@ -387,7 +387,7 @@ class _EditorPageState extends State<EditorPage> {
                   builder: (ctr) => ctr.cands.isNotEmpty
                       ? Positioned(
                           top: _calculateOffsetForSuggestions(ctr.latin.value),
-                          left: tfKey.globalPaintBounds!.right + 20,
+                          left: _calculateLeftOffsetForSuggestions(),
                           child: Container(
                             // height: 100,
                             width: ScreenUtil()
@@ -472,6 +472,22 @@ class _EditorPageState extends State<EditorPage> {
     );
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+
+    // Clear the list of suggestions after page is closed.
+
+    // We do not want the suggestions list to be displayed during built time
+    // because all the GlobalKeys used for calculating its dimensions are not
+    // yet given size.
+
+    // This will throw an error if controller.cands is not empty
+    // during build time.
+    KeyboardController controller = Get.find();
+    controller.cands.clear();
+  }
+
   ///Allows the Suggestions box to shrink when a new line is added
   ///
   ///Subtracts the left coordinates of Sidebar
@@ -492,6 +508,9 @@ class _EditorPageState extends State<EditorPage> {
       containerKey.globalPaintBounds!.top -
       ScreenUtil().setHeight(120) -
       _calculateCandsHeight(latin);
+
+  double _calculateLeftOffsetForSuggestions() =>
+      tfKey.globalPaintBounds!.right + 20;
 
   ///Calculates height for suggestions section
   ///Based on length of current latin input
