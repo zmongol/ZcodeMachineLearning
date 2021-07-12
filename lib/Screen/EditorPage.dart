@@ -386,7 +386,8 @@ class _EditorPageState extends State<EditorPage> {
                   id: 'cands',
                   builder: (ctr) => ctr.cands.isNotEmpty
                       ? Positioned(
-                          top: _calculateOffsetForSuggestions(ctr.latin.value),
+                          top: _calculateTopOffsetForSuggestions(
+                              ctr.latin.value),
                           left: _calculateLeftOffsetForSuggestions(),
                           child: Container(
                             // height: 100,
@@ -504,11 +505,13 @@ class _EditorPageState extends State<EditorPage> {
   /// Calculates offset from top of screen for suggestions section
   /// Takes into account the current height to prevent the section
   /// from overflowing into bottom of the screen
-  double _calculateOffsetForSuggestions(String latin) =>
+  double _calculateTopOffsetForSuggestions(String latin) =>
       containerKey.globalPaintBounds!.top -
       ScreenUtil().setHeight(120) -
       _calculateCandsHeight(latin);
 
+  /// Calculates offset from left of screen for suggestions section
+  /// Is calculated as textfield right coordinates + a constant value of 20
   double _calculateLeftOffsetForSuggestions() =>
       tfKey.globalPaintBounds!.right + 20;
 
