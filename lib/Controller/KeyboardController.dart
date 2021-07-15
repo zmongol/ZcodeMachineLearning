@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class KeyboardController extends GetxController {
   get text => textEditingController.text;
   final TextEditingController textEditingController =
       TextEditingController(); //用于控制键盘输出的Controller
+  final scrollController = ScrollController();
   int cursorPosition = 0;
 
   bool onShift = false;
@@ -80,6 +82,10 @@ class KeyboardController extends GetxController {
     cursorPosition = position;
   }
 
+  scrollToEnd() {
+    scrollController.jumpTo(scrollController.position.maxScrollExtent);
+  }
+
   cursorMoveUp() {
     setCursorPositon(textEditingController.selection.start - 1);
   }
@@ -120,11 +126,20 @@ class KeyboardController extends GetxController {
       textEditingController.text = prefixText + value + suffixText;
 
       // Cursor move to end of added text
+      final newCursorPosition = cursorPosition + length;
       textEditingController.selection = TextSelection(
-        baseOffset: cursorPosition + length,
-        extentOffset: cursorPosition + length,
+        baseOffset: newCursorPosition,
+        extentOffset: newCursorPosition,
       );
       setCursorPositon(cursorPosition + length);
+
+      ///Scroll to end of textfield only if user is at the end of their sentence
+      if (newCursorPosition > textEditingController.text.trim().length - 1) {
+        Timer(
+          Duration(milliseconds: 100),
+          () => scrollToEnd(),
+        );
+      }
     }
 
     latin.value = '';

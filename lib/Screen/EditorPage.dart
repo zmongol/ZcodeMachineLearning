@@ -185,31 +185,41 @@ class _EditorPageState extends State<EditorPage> {
                                         } else {
                                           kbCtr.textEditingController.text = '';
                                         }
-                                        return MongolTextField(
-                                          key: tfKey,
-                                          scrollPadding:
-                                              const EdgeInsets.only(),
-                                          autofocus: true,
-                                          showCursor: true,
-                                          readOnly: true,
-                                          focusNode: _focusNode,
-                                          // expands: true,
-                                          maxLines: 100,
-                                          minLines: 1,
-                                          controller:
-                                              kbCtr.textEditingController,
-                                          decoration: InputDecoration(
-                                            contentPadding: EdgeInsets.only(),
-                                            border: InputBorder.none,
+                                        return Container(
+                                          constraints: BoxConstraints(
+                                            minWidth: 10.0,
+                                            maxWidth:
+                                                ScreenUtil().setWidth(100.0),
                                           ),
-                                          // keyboardType: MongolKeyboard.inputType,
-                                          textInputAction:
-                                              TextInputAction.newline,
-                                          //keyboardType: TextInputType.multiline,
-                                          style: TextStyle(
-                                              fontSize: ctr.style.fontSize,
-                                              fontFamily: MongolFonts.haratig),
-                                          //像平常一样设置键盘输入类型一样将Step1编写的inputType传递进去
+                                          child: MongolTextField(
+                                            key: tfKey,
+                                            scrollPadding:
+                                                const EdgeInsets.only(),
+                                            autofocus: true,
+                                            showCursor: true,
+                                            readOnly: true,
+                                            focusNode: _focusNode,
+                                            expands: true,
+                                            maxLines: null,
+                                            minLines: null,
+                                            controller:
+                                                kbCtr.textEditingController,
+                                            scrollController:
+                                                kbCtr.scrollController,
+                                            decoration: InputDecoration(
+                                              contentPadding: EdgeInsets.only(),
+                                              border: InputBorder.none,
+                                            ),
+                                            // keyboardType: MongolKeyboard.inputType,
+                                            textInputAction:
+                                                TextInputAction.newline,
+                                            //keyboardType: TextInputType.multiline,
+                                            style: TextStyle(
+                                                fontSize: ctr.style.fontSize,
+                                                fontFamily:
+                                                    MongolFonts.haratig),
+                                            //像平常一样设置键盘输入类型一样将Step1编写的inputType传递进去
+                                          ),
                                         );
                                       },
                                     );
