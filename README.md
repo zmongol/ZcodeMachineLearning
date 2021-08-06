@@ -4,7 +4,7 @@ To support mongolian script development, the source code is publicly available n
 
 ## Getting Started
 
-Sincere thanks to Doctor Narisu for the volunteer support to make ML available for Mongolian script. 
+Sincere thanks to Doctor Narisu for the volunteer support and make ML available for Mongolian script. 
 
 A few resources to get you started if this is your first Flutter project:
 
