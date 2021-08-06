@@ -1,6 +1,8 @@
-# zmongol
+# zmongol app source code and related machine learning auto sugguestion demo
 
-A new Flutter project.
+To support mongolian script development, the source code is publicly available now. The Flutter project combined dart and Pytorch machine learning model into one. ML model is based on Zcode conversion basded on Qinggis.net database. 
+Sincere thanks to Doctor Narisu for the volunteer support. 
+Hope, the young generations of mongolian developer will continue and further flourish the mongolian script, App source code, and ML model. Bayarlalaa.  
 
 ## Getting Started
 
