@@ -4,14 +4,11 @@ To support mongolian script development, the source code is publicly available n
 
 ## Getting Started
 
-Sincere thanks to Doctor Narisu for the volunteer support and make ML available for Mongolian script. 
-
 ML model is based on Zcode52 conversion basded on Qinggis.net database.
+Sincere thanks to Doctor Narisu for the volunteer support and greate contribution to the Mongolian script ML auto suggestion model. 
+
 
 - [https://install.zcodetech.com/](https://install.zcodetech.com/)
+- [http://39.104.23.152/#/home/mgl/product](http://39.104.23.152/#/home/mgl/product)
 
-
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Drafed by Zmongol on 5th Aug 2021. 
