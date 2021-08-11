@@ -11,4 +11,4 @@ Sincere thanks to Doctor Narisu for the volunteer support and greate contributio
 - [https://install.zcodetech.com/](https://install.zcodetech.com/)
 - [http://39.104.23.152/#/home/mgl/product](http://39.104.23.152/#/home/mgl/product)
 
-Drafed by Zmongol on 5th Aug 2021. 
+Drafted by Zmongol on 5th Aug 2021. 
